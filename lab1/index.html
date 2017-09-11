@@ -13,6 +13,7 @@
 			border-collapse: collapse; /* - пустые промежутки между ячейками*/
 			border: 20px solid #c83030;  
 		}
+
 		th, td {
 			padding: 1ex;
 		}
@@ -33,12 +34,31 @@
 			color: #FFFFFF;
 			font-size: 1.5em;
 			transition: 3s;
-			=-webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
+			N-webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
 
 		}
 		.butt {
-			width: 3em;
+			width: 7em;
+			height: 7em;
+			outline: none;
+			padding: 2em;
+			font-weight: 700;
+			color: white;
+			border-radius: 3px;
+			background: #B94040;
+			box-shadow: 1px 1px #A24040;
+			transition: 0.25s;
+			font-size: 12px;
+			border-color: transparent;
 		}
+		.butt:hover{
+			background: #A94040;
+
+		}
+		.butt:active{
+			background: #994040;
+		}
+
 		#wrapper {
 			width: 100%;
 		}
