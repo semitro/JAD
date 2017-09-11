@@ -8,6 +8,7 @@
 			background-color: #333;
 			color: #eee;
 			height: 100%;
+			font-weight: 700; /*It is something like bold*/
 		}
 		table {
 			border-collapse: collapse; /* - пустые промежутки между ячейками*/
@@ -37,19 +38,26 @@
 			N-webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
 
 		}
+
+		input{
+			border-radius: 3px;
+			color: white;
+			border-color: transparent;
+		}
+		.text_input{
+			background-color: gray;
+			transition: 0.8s;
+		}
+		.text_input:hover{
+			font-size: 34px;
+		}
 		.butt {
 			width: 7em;
 			height: 7em;
-			outline: none;
 			padding: 2em;
-			font-weight: 700;
-			color: white;
-			border-radius: 3px;
 			background: #B94040;
-			box-shadow: 1px 1px #A24040;
 			transition: 0.25s;
 			font-size: 12px;
-			border-color: transparent;
 		}
 		.butt:hover{
 			background: #A94040;
@@ -81,7 +89,7 @@
 				<form>
 				<tr>
 					<th>X</th>
-					<td colspan="9"><input type="text" name="X" value="0"></td>
+					<td colspan="9"><input type="text" name="X" value="0" class="text_input"></td>
 				</tr>
 				<tr>
 					<th>Y</th>
@@ -108,7 +116,7 @@
 				</tr>
 				<tr>
 					<th>R</th>
-					<td colspan="9"><input type="text" name="R" value="1"></td>
+					<td colspan="9"><input type="text" name="R" value="1"  class="text_input"></td>
 				</tr>
 				</form>			
 			</table>			
