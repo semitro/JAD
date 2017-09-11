@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<style type="text/css">
 		body {
 			font-family: sans-serif;
 			background-color: #333;
+			color: #eee;
+			height: 100%;
 		}
 		table {
 			border-collapse: collapse; /* - пустые промежутки между ячейками*/
-			border: 20px solid none;  
+			border: 20px solid #c83030;  
+		}
+		th, td {
+			padding: 1ex;
 		}
 		.footer {
 			caption-side: bottom;
@@ -23,6 +29,12 @@
 			color: #FFFFFF;
 			font-size: 1.5em;
 		}
+		.butt {
+			width: 3em;
+		}
+		#wrapper {
+			width: 100%;
+		}
 	</style>
 	
 	<title>This is all but the cat</title>
@@ -30,43 +42,50 @@
 
 <body>
 	
-<table border="1" cellpadding="0" cellspacing="2" width="100%" align="center">
+<table id="wrapper">
 	<!-- The hat  -->
 	<caption class="header">THEEEEEEEE HAAAAAAAAAAAAAAAAAAT</caption>
 	<tr>
-		<td  width="10%">
+		<td>
 			<table>
 				<tr>
-					<td><input type = "submit" name="enter" value="4"></td>
+					<td colspan="2">Введи меня полностью</td>
 				</tr>
-
+				<form>
 				<tr>
-					<td><input type = "submit" name="enter" value="3"></td>
-				</tr>
-				<tr>
-					<td><input type = "submit" name="enter" value="2"></td>
+					<th>X</th>
+					<td colspan="9"><input type="text" name="X" value="0"></td>
 				</tr>
 				<tr>
-					<td><input type = "submit" name="enter" value="1"></td>
+					<th>Y</th>
+					<td>
+						<table>
+							<tr>
+								<td><input type = "submit" name="Y" value="4" class="butt"></td>
+								<td><input type = "submit" name="Y" value="3" class="butt"></td>
+								<td><input type = "submit" name="Y" value="2" class="butt"></td>
+								<td><input type = "submit" name="Y" value="1" class="butt"></td>
+							</tr>
+							<tr>							
+								<td colspan="3"></td>
+								<td><input type = "submit" name="Y" value="0" class="butt"></td>
+							</tr>
+							<tr>
+								<td><input type = "submit" name="Y" value="-4" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-3" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-2" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-1" class="butt"></td>
+							</tr>
+						</table>
+					</td>			
 				</tr>
 				<tr>
-					<td><input type = "submit" name="enter" value="0"></td>
+					<th>R</th>
+					<td colspan="9"><input type="text" name="R" value="1"></td>
 				</tr>
-				<tr>
-					<td><input type = "submit" name="enter" value="-1"></td>
-				</tr>
-				<tr>
-					<td><input type = "submit" name="enter" value="-2"></td>
-				</tr>
-				<tr>
-					<td><input type = "submit" name="enter" value="-3"></td>
-				</tr>
-				<tr>
-					<td><input type = "submit" name="enter" value="-4"></td>
-				</tr>				
+				</form>			
 			</table>			
 		</td>
-		<td  width="100%">fsf</td>
 	</tr>
 	<caption class="footer">hacked by xx360Haxxor69xx</caption>
 </table>
