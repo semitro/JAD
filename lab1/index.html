@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+			background-color: #333;
+			color: #eee;
+			height: 100%;
+			font-weight: 700; /*It is something like bold*/
+		}
+		table {
+			border-collapse: collapse; /* - пустые промежутки между ячейками*/
+			border: 20px solid #c83030;  
+		}
+
+		th, td {
+			padding: 1ex;
+		}
+		.footer {
+			caption-side: bottom;
+			height: 32px;
+			background-color: #c83030;
+		}
+		.footer:hover{
+
+		}
+		
+		.header {
+			height: 32px;
+			background-color: #c83030;
+			padding: 20px;
+			text-align: center;
+			color: #FFFFFF;
+			font-size: 1.5em;
+			transition: 3s;
+			N-webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
+
+		}
+
+		input{
+			border-radius: 3px;
+			color: white;
+			border-color: transparent;
+		}
+		.text_input{
+			background-color: gray;
+			transition: 0.8s;
+		}
+		.text_input:hover{
+			font-size: 34px;
+		}
+		.butt {
+			width: 7em;
+			height: 7em;
+			padding: 2em;
+			background: #B94040;
+			transition: 0.25s;
+			font-size: 12px;
+		}
+		.butt:hover{
+			background: #A94040;
+
+		}
+		.butt:active{
+			background: #994040;
+		}
+
+		#wrapper {
+			width: 100%;
+		}
+	</style>
+	
+	<title>This is all but the cat</title>
+</head>
+
+<body>
+
+<table id="wrapper">
+	<!-- The hat  -->
+	<caption class="header">THEEEEEEEE HAAAAAAAAAAAAAAAAAAT</caption>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td colspan="2">Введи меня полностью</td>
+				</tr>
+				<form>
+				<tr>
+					<th>X</th>
+					<td colspan="9"><input type="text" name="X" value="0" class="text_input"></td>
+				</tr>
+				<tr>
+					<th>Y</th>
+					<td>
+						<table>
+							<tr>
+								<td><input type = "submit" name="Y" value="4" class="butt"></td>
+								<td><input type = "submit" name="Y" value="3" class="butt"></td>
+								<td><input type = "submit" name="Y" value="2" class="butt"></td>
+								<td><input type = "submit" name="Y" value="1" class="butt"></td>
+							</tr>
+							<tr>							
+								<td colspan="3"></td>
+								<td><input type = "submit" name="Y" value="0" class="butt"></td>
+							</tr>
+							<tr>
+								<td><input type = "submit" name="Y" value="-4" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-3" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-2" class="butt"></td>
+								<td><input type = "submit" name="Y" value="-1" class="butt"></td>
+							</tr>
+						</table>
+					</td>			
+				</tr>
+				<tr>
+					<th>R</th>
+					<td colspan="9"><input type="text" name="R" value="1"  class="text_input"></td>
+				</tr>
+				</form>			
+			</table>			
+		</td>
+	</tr>
+	<caption class="footer">hacked by xx360Haxxor69xx</caption>
+</table>
+
+</body>
+</html>
