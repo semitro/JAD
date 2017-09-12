@@ -1,7 +1,7 @@
 
 
 function validate(){
-if(isEverythingOk())
+//if(isEverythingOk())
 	document.getElementById("mainForm").submit();
 }
 
