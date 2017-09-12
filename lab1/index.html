@@ -67,7 +67,6 @@
 		.butt:active{
 			background: #994040;
 		}
-
 		#wrapper {
 			width: 100%;
 		}
@@ -87,7 +86,10 @@
 				<tr>
 					<td colspan="2">Введи меня полностью</td>
 				</tr>
-				<form action="hitTheArea.php" method="post">
+				<form action="hitTheArea.php" method="post" id="mainForm">
+				<!-- It's a hiiden thing to save and translate to the validate script information -->
+				<!-- about which of the buttons has been pressed -->
+				<input type="hidden" name="whichButton" id="whichButton" value="15">
 				<tr>
 					<th>X</th>
 					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="x"></td>
@@ -97,20 +99,22 @@
 					<td>
 						<table>
 							<tr>
-								<td><input type = "submit" name="Y" value="4" class="butt"></td>
-								<td><input type = "submit" name="Y" value="3" class="butt"></td>
-								<td><input type = "submit" name="Y" value="2" class="butt"></td>
-								<td><input type = "submit" name="Y" value="1" class="butt"></td>
+								<td><input type = "button" name="Y" value="4" class="butt" onclick="yButtonPress(4)" > </td>
+								<td><input type = "button" name="Y" value="3" class="butt" onclick="yButtonPress(3)"></td>
+								<td><input type = "button" name="Y" value="2" class="butt" onclick="yButtonPress(2)"></td>
+								<td><input type = "button" name="Y" value="1" class="butt" onclick="yButtonPress(1)"></td>
 							</tr>
 							<tr>							
-								<td colspan="3"></td>
-								<td><input type = "submit" name="Y" value="0" class="butt" onclick="validate()"></td>
+								<td colspan="1"></td>
+								<td colspan="2"><input type="button" name="Submit" value="submit" class="butt" onclick="validate()"></td>
+								<td><input type = "button" name="Y" value="0" class="butt" onclick="yButtonPress(0)"></td>
 							</tr>
 							<tr>
-								<td><input type = "submit" name="Y" value="-4" class="butt"></td>
-								<td><input type = "submit" name="Y" value="-3" class="butt"></td>
-								<td><input type = "submit" onclick="validate()"   name="Y" value="-2" class="butt"></td>
-								<td><input type = "submit" name="Y" value="-1" class="butt"></td>
+								<td><input type = "button" name="Y" value="-4" class="butt" onclick="yButtonPress(-4)" background= "#094040"; 
+></td>
+								<td><input type = "button" name="Y" value="-3" class="butt" onclick="yButtonPress(-3)"></td>
+								<td><input type = "button" name="Y" value="-2" class="butt" onclick="yButtonPress(-2)"></td>
+								<td><input type = "button" name="Y" value="-1" class="butt" onclick="yButtonPress(-1)"></td>
 							</tr>
 						</table>
 					</td>			
@@ -125,6 +129,5 @@
 	</tr>
 	<caption class="footer">hacked by xx360Haxxor69xx</caption>
 </table>
-
 </body>
 </html>
