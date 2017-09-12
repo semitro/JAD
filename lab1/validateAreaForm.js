@@ -1,7 +1,7 @@
 
 
 function validate(){
-//if(isEverythingOk())
+if(isEverythingOk())
 	document.getElementById("mainForm").submit();
 }
 
@@ -23,8 +23,8 @@ function isEverythingOk(){
 		return false;
 	}
 
-	if(r < 2 || r > 5) { alert("R must be in [2,5]"); return false; }
-	if(x<-5  || x > 3) { alert("X must be in [-5,3]"); return false; }
+	if(r < 2 || r > 5) { alert("R must be in [2,5]");  return false; }
+	if(x <-5 || x > 3) { alert("X must be in [-5,3]"); return false; }
 
 	return true;
 }
