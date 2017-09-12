@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<script type="text/javascript" src="validateAreaForm.js"> </script>
 	<style type="text/css">
 		body {
 			font-family: sans-serif;
@@ -86,10 +87,10 @@
 				<tr>
 					<td colspan="2">Введи меня полностью</td>
 				</tr>
-				<form>
+				<form action="hitTheArea.php" method="post">
 				<tr>
 					<th>X</th>
-					<td colspan="9"><input type="text" name="X" value="0" class="text_input"></td>
+					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="x"></td>
 				</tr>
 				<tr>
 					<th>Y</th>
@@ -103,12 +104,12 @@
 							</tr>
 							<tr>							
 								<td colspan="3"></td>
-								<td><input type = "submit" name="Y" value="0" class="butt"></td>
+								<td><input type = "submit" name="Y" value="0" class="butt" onclick="validate()"></td>
 							</tr>
 							<tr>
 								<td><input type = "submit" name="Y" value="-4" class="butt"></td>
 								<td><input type = "submit" name="Y" value="-3" class="butt"></td>
-								<td><input type = "submit" name="Y" value="-2" class="butt"></td>
+								<td><input type = "submit" onclick="validate()"   name="Y" value="-2" class="butt"></td>
 								<td><input type = "submit" name="Y" value="-1" class="butt"></td>
 							</tr>
 						</table>
