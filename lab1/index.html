@@ -56,19 +56,23 @@
 			width: 7em;
 			height: 7em;
 			padding: 2em;
-			background: #B94040;
+			background-color: #B94040;
 			transition: 0.25s;
 			font-size: 12px;
 		}
 		.butt:hover{
-			background: #A94040;
+			background-color: #A94040;
 
 		}
 		.butt:active{
-			background: #994040;
+			background-color: #994040;
 		}
 		#wrapper {
 			width: 100%;
+		}
+		#submit {
+			width: 100%;
+			font-weight: 700;
 		}
 	</style>
 	
@@ -104,9 +108,8 @@
 								<td><input type = "button" name="Y" value="2" class="butt" onclick="yButtonPress(2)"></td>
 								<td><input type = "button" name="Y" value="1" class="butt" onclick="yButtonPress(1)"></td>
 							</tr>
-							<tr>							
-								<td colspan="1"></td>
-								<td colspan="2"><input type="button" name="Submit" value="submit" class="butt" onclick="validate()"></td>
+							<tr>
+								<td colspan="3"><input type="button" name="Submit" value="submit" class="butt" onclick="validate()" id="submit"></td>
 								<td><input type = "button" name="Y" value="0" class="butt" onclick="yButtonPress(0)"></td>
 							</tr>
 							<tr>
@@ -121,13 +124,16 @@
 				</tr>
 				<tr>
 					<th>R</th>
-					<td colspan="9"><input type="text" id="R" name="R" value="1"  class="text_input"></td>
+					<td colspan="9"><input type="text" id="R" name="R" value="3"  class="text_input"></td>
 				</tr>
 				</form>			
 			</table>			
 		</td>
+		<td>
+		<img src="areas.png">
+		</td>
 	</tr>
-	<caption class="footer">hacked by xx360Haxxor69xx</caption>
+	<caption class="footer"><marquee>hacked by xx360Haxxor69xx</marquee></caption>
 </table>
 </body>
 </html>

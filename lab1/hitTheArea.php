@@ -3,8 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<style type="text/css">
-	body{
+	html, body{
 		font-family: ubuntu;
+		background-color: #333;
+		color: #eee;
 	}
 	table{
 		border-collapse: separate;
@@ -21,10 +23,24 @@
 		border: 1px solid gray;
 		text-align: center;
 		padding: 5px;
-				border-radius: 3px;
+		border-radius: 3px;
 
 	}
-
+	#back {
+		display: block;
+		width: 120px;
+		border-radius: 3px;
+		margin: 2em;
+		margin-left: 0px;
+		padding: 10px;
+		background-color: #B94040;
+		color: #eee;
+		text-decoration: none;
+		transition: 1s;
+	}
+	#back:hover {
+		background-color: #994040;
+	}
 	</style>
 </head>
 <body>
@@ -68,9 +84,10 @@
 			<td><?php echo  $y ?></td>
 			<td><?php echo  $R ?></td>
 			<td><?php echo microtime(true) - $start_time ?></td>
-			<td><?php echo date("h.i.s") ?></td>
+			<td><?php echo date("h:i:s") ?></td>
 		</tr>
 	</table>
+	<a href="index.html" id="back">Назад</a>
 
 </body>
 </html>
