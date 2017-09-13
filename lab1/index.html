@@ -13,9 +13,10 @@
 		}
 		table {
 			border-collapse: collapse; /* - пустые промежутки между ячейками*/
+		}
+		table.border {
 			border: 20px solid #c83030;
 		}
-
 		th, td {
 			padding: 1ex;
 		}
@@ -74,6 +75,12 @@
 			width: 100%;
 			font-weight: 700;
 		}
+		.centered {
+			padding-left: 15%;
+		}
+		#error_title {
+			
+		}
 	</style>
 
 	<title>This is all but the cat</title>
@@ -81,20 +88,17 @@
 
 <body>
 
-<table id="wrapper">
+<table id="wrapper" class="border">
 	<!-- The hat  -->
 	<caption class="header">Ощепков, Буланцов P3202 <br> Вариант #503</caption>
 	<tr>
 		<td>
-			<table>
+			<table class="border">
 				<tr>
 					<td colspan="2">Введи меня полностью</td>
 				</tr>
 				<form action="hitTheArea.php" method="post" id="mainForm">
-				<input type="hidden" name="Y" value="null">
-				<!-- It's a hiiden thing to save and translate to the validate script information -->
-				<!-- about which of the buttons has been pressed -->
-				<input type="hidden" name="whichButton" id="whichButton" value="default">
+				<input type="hidden" name="Y" value="default">
 				<tr>
 					<th>X</th>
 					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="X"></td>
@@ -110,7 +114,7 @@
 								<td><input type = "button" name="Z" value="1" class="butt" onclick="yButtonPress(this)"></td>
 							</tr>
 							<tr>
-								<td colspan="3"><input type="button" name="sub" value="sub" class="butt" onclick="validate()" id="submitButt"></td>
+								<td colspan="3"><input type="button" name="sub" value="ОТПРАВИТЬ" class="butt" onclick="validate()" id="submitButt"></td>
 								<td><input type = "button" name="Z" value="0" class="butt" onclick="yButtonPress(this)"></td>
 							</tr>
 							<tr>
@@ -131,7 +135,14 @@
 			</table>
 		</td>
 		<td>
-		<img src="areas.png">
+			<img src="areas.png">			
+		</td>
+	</tr>
+	<tr>
+		<td class="centered" colspan="3">
+			<span id="error_title">Ошибка: </span>
+			<span id="error">пока никакой</span>
+			<span id="error_smile"> ;)</span>
 		</td>
 	</tr>
 	<caption class="footer"><marquee>hacked by xx360Haxxor69xx</marquee></caption>

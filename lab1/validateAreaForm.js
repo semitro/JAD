@@ -6,25 +6,25 @@ function validate(){
 }
 
 function isEverythingOk(){
-
-	if(document.forms[0].Y.value == null){
-		alert("Select Y please");
+	var errorel = document.getElementById("error");
+	if(document.forms[0].Y.value == "default"){
+		errorel.textContent = "надо выбрать Y";
 		return false;
 	}
 	var r = document.getElementById("R").value;
 	var x = document.getElementById("X").value;
-	// if(!/[0-9]*([\.,][0-9]*)?/.test(x)
-	// 	||
-	//    !/[0-9]*([\.,][0-9]*)?/.test(r))
-	// 	return false;
 
-	if(!isNumber(r) || !isNumber(x)){
-		alert("R and X must be numbers");
+	if(!isNumber(r)) {
+		errorel.textContent = "R должно быть числом"
+		return false;
+	}
+	if(!isNumber(x)){
+		errorel.textContent = "X должно быть числом"
 		return false;
 	}
 
-	if(r < 2 || r > 5) { alert("R must be in [2,5]");  return false; }
-	if(x <-5 || x > 3) { alert("X must be in [-5,3]"); return false; }
+	if(r < 2 || r > 5) { errorel.textContent = "R должно принадлежать [2,5]";  return false; }
+	if(x <-5 || x > 3) { errorel.textContent = "X должно принадлежать [-5,3]"; return false; }
 
 	return true;
 }
