@@ -1,5 +1,9 @@
-
-
+ajaxpost("hitTheArea.php","checkMath=true", function(response, code) {
+	if(response == "false") {
+		 document.getElementById('results').innerHTML += 
+			"<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
+	}
+}
 
 function validate(){
 	if(isEverythingOk()){
@@ -7,7 +11,6 @@ function validate(){
 		ajaxpost("hitTheArea.php",body,ajaxCallback);
 	}
 }
-
 
 function isEverythingOk(){
 	var errorel = document.getElementById("error");
