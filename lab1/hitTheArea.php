@@ -48,7 +48,7 @@
 	 	$start_time = microtime(true);
 		$x=$_POST['X'];
 		$R=$_POST['R'];
-		$y = $_POST['whichButton'];
+		$y = $_POST['Y'];
  		$inTheArea = inRange($x,$y,$R);
 
 		function inRange($x, $y, $R){
