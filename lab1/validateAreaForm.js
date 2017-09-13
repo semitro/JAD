@@ -64,4 +64,14 @@ function yButtonPress(whichButton){
 	lastButton = whichButton;
 }
 
+function ajaxCallback(response, code) {
+	if(code==200) {
+		document.getElementById('results').textContent += response;
+	}
+	else {
+		errorel.textContent = "ошибка запроса к серверу";		
+		errorel.style.color = "yellow";
+	}
+}
+
 //yButtonPress(document.getElementById("defbutt"));
