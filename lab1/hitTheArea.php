@@ -52,20 +52,38 @@
  		$inTheArea = inRange($x,$y,$R);
 
 		function inRange($x, $y, $R){
+			print bccomp($x, -$R);
 			// The left area
-			if($x >= -$R and $x <= 0){
-				if($y <= $X + $R and  $y>-$R)
-					return true;
-				}
-			// The right area
-			// x^2 + y^2 = R^2
-			if($x>=0 and $x <= $R){
-				if(
-					$y >= 0 and
-					$x*$x + $y*$y <= $R*$R
-					)
+			if( 
+				// returns 1 if left operand > rigth operand
+				bccomp($x, -$R, 1000)   != -1
+				and
+				bccomp($x, "0.0", 1000) != 1
+				//($x >= -$R and $x <= 0)
+				)
+			{
+				print "LET";
+				if( bccomp( $y, bcadd($x, $R, 1000), 1000 ) != 1
+				            and bccomp($y, -$R, 1000) == 1 ) 
+			//if($y <= $X + $R and  $y>-$R)
 					return true;
 			}
+			// The right area
+			// x^2 + y^2 = R^2
+			if(bccomp($x, "0.0", 1000) != -1 and bccomp($x, $R, 1000) != 1){
+
+
+		//	if($x>=0 and $x <= $R){
+				if(bccomp($y, "0.0", 1000) != -1 and
+					    bccomp(    bcadd( bcmul($x, $x, 1000),  bcmul($y, $y, 1000) , 1000) ,       bcmul($R, $R, 1000), 1000 ) != 1
+					)
+				// if(
+				// 	$y >= 0 and
+				// 	$x*$x + $y*$y <= $R*$R
+				// 	)
+					return true;
+			}
+		//	}
 			return false;
 		}
 	?>
