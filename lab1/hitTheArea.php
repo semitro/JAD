@@ -51,11 +51,6 @@
 			}
 		}
 ?>
-	<?php
-		if(!extension_loaded('bcmath')) {
-			echo "<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
-		}
-	?>
 	<tr>
 		<td><?php echo $inTheArea ? 'Да': 'Нет' ?></td>
 		<td><?php echo  $x ?></td>
