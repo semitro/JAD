@@ -1,3 +1,31 @@
+<?php
+	 	$start_time = microtime(true);
+		$x=$_POST['X'];
+		$R=$_POST['R'];
+		$y = $_POST['Y'];
+ 		$inTheArea = inRange($x,$y,$R);
+
+		function inRange($x, $y, $R){
+			if( 	// left side
+				bccomp($x, -$R, 100)   != -1
+				and
+				bccomp($x, "0.0", 100) != 1
+				)
+			{
+				if( bccomp( $y, bcadd($x, $R, 100), 100 ) != 1
+				            and bccomp($y, -$R, 100) == 1 ) 
+					return true;
+			}
+			// The right area
+			if(bccomp($x, "0.0", 100) != -1 and bccomp($x, $R, 100) != 1){
+				if(bccomp($y, "0.0", 100) != -1 and
+					    bccomp(    bcadd( bcmul($x, $x, 100),  bcmul($y, $y, 100) , 100) ,       bcmul($R, $R, 100), 100 ) != 1
+					)
+					return true;
+			}
+			return false;
+		}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,49 +72,7 @@
 	</style>
 </head>
 <body>
-	<?php
-	 	$start_time = microtime(true);
-		$x=$_POST['X'];
-		$R=$_POST['R'];
-		$y = $_POST['Y'];
- 		$inTheArea = inRange($x,$y,$R);
-
-		function inRange($x, $y, $R){
-			print bccomp($x, -$R);
-			// The left area
-			if( 
-				// returns 1 if left operand > rigth operand
-				bccomp($x, -$R, 1000)   != -1
-				and
-				bccomp($x, "0.0", 1000) != 1
-				//($x >= -$R and $x <= 0)
-				)
-			{
-				print "LET";
-				if( bccomp( $y, bcadd($x, $R, 1000), 1000 ) != 1
-				            and bccomp($y, -$R, 1000) == 1 ) 
-			//if($y <= $X + $R and  $y>-$R)
-					return true;
-			}
-			// The right area
-			// x^2 + y^2 = R^2
-			if(bccomp($x, "0.0", 1000) != -1 and bccomp($x, $R, 1000) != 1){
-
-
-		//	if($x>=0 and $x <= $R){
-				if(bccomp($y, "0.0", 1000) != -1 and
-					    bccomp(    bcadd( bcmul($x, $x, 1000),  bcmul($y, $y, 1000) , 1000) ,       bcmul($R, $R, 1000), 1000 ) != 1
-					)
-				// if(
-				// 	$y >= 0 and
-				// 	$x*$x + $y*$y <= $R*$R
-				// 	)
-					return true;
-			}
-		//	}
-			return false;
-		}
-	?>
+	
 	<table>
 		<tr>
 			<td>Попадание</td>
