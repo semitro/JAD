@@ -43,78 +43,27 @@
 			}
 		}
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<style type="text/css">
-	html, body{
-		font-family: ubuntu;
-		background-color: #333;
-		color: #eee;
-	}
-	table{
-		border-collapse: separate;
-		/*border-color: black;*/
-		border: 1px solid gray;
-		font-size: 1.2em;
-		padding: 5px;
-		border-spacing: 7px;
-		transition: 2s;
-		border-radius: 3px;
-	}
-
-	th, td {
-		border: 1px solid gray;
-		text-align: center;
-		padding: 5px;
-		border-radius: 3px;
-
-	}
-	#back {
-		display: block;
-		width: 120px;
-		border-radius: 3px;
-		margin: 2em;
-		margin-left: 0px;
-		padding: 10px;
-		background-color: #B94040;
-		color: #eee;
-		text-decoration: none;
-		transition: 1s;
-	}
-	#back:hover {
-		background-color: #994040;
-	}
-	</style>
-</head>
-<body>
-	
-	<table>
-		<?php
-			if(!extension_loaded('bcmath')) {
-				echo "<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
-			}
-		?>
-		<tr>
-			<td>Попадание</td>
-			<td>X</td>
-			<td>Y</td>
-			<td>R</td>
-			<td>Время работы скрипта</td>
-			<td>Который час?</td>
-		</tr>
-		<tr>
-			<td><?php echo $inTheArea ? 'Да': 'Нет' ?></td>
-			<td><?php echo  $x ?></td>
-			<td><?php echo  $y ?></td>
-			<td><?php echo  $R ?></td>
-			<td><?php echo microtime(true) - $start_time ?></td>
-			<td><?php echo date("h:i:s") ?></td>
-		</tr>
-	</table>
-	<a href="index.html" id="back">Назад</a>
-
-</body>
-</html>
+<table>
+	<?php
+		if(!extension_loaded('bcmath')) {
+			echo "<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
+		}
+	?>
+	<tr>
+		<td>Попадание</td>
+		<td>X</td>
+		<td>Y</td>
+		<td>R</td>
+		<td>Время работы скрипта</td>
+		<td>Который час?</td>
+	</tr>
+	<tr>
+		<td><?php echo $inTheArea ? 'Да': 'Нет' ?></td>
+		<td><?php echo  $x ?></td>
+		<td><?php echo  $y ?></td>
+		<td><?php echo  $R ?></td>
+		<td><?php echo microtime(true) - $start_time ?></td>
+		<td><?php echo date("h:i:s") ?></td>
+	</tr>
+</table>
 
