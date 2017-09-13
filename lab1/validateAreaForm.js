@@ -29,6 +29,11 @@ function isEverythingOk(){
 	return true;
 }
 
+// Ограничение количества цифр после запятой
+function limitPrecise(e){
+ if (e.value.indexOf(".") != '-1')
+    e.value=e.value.substring(0, e.value.indexOf(".") + 5); 
+}
 function isNumber(n){
 	return parseFloat(n) == n;
  }
