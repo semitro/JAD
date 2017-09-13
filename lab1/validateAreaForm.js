@@ -1,20 +1,20 @@
 
 
 function validate(){
-if(isEverythingOk())
-	document.getElementById("mainForm").submit();
+	if(isEverythingOk())
+		document.forms[0].submit();
 }
 
 function isEverythingOk(){
 
-	if(document.getElementById("whichButton").value == "default"){
+	if(document.forms[0].Y.value == null){
 		alert("Select Y please");
 		return false;
 	}
 	var r = document.getElementById("R").value;
-	var x = document.getElementById("x").value;
-	// if(!/[0-9]*([\.,][0-9]*)?/.test(x) 
-	// 	|| 
+	var x = document.getElementById("X").value;
+	// if(!/[0-9]*([\.,][0-9]*)?/.test(x)
+	// 	||
 	//    !/[0-9]*([\.,][0-9]*)?/.test(r))
 	// 	return false;
 
@@ -36,25 +36,12 @@ function isNumber(n){
 /**
 * A function to hightlight a button last pressed
 **/
-var styleColor;
-var alreadyBeenHere = false;
+var lastButton=null;
 function yButtonPress(whichButton){
-
-	//set up value of the hidden mergin
-	document.getElementById('whichButton').value=whichButton;
- 
-	var elements = document.getElementsByClassName("butt");
-
-	// We need to remember the buttonses true color
-	if(!alreadyBeenHere){
-		styleColor = elements[0].style.backgroundColor;
-		alreadyBeenHere = true;
+	document.forms[0].elements.Y.value = whichButton.value;
+	whichButton.style.backgroundColor = "#736144";
+	if(lastButton) {
+		lastButton.style.backgroundColor = "#B94040";
 	}
-
-
-    for (var butt in elements )
-		if(elements[butt].value == whichButton )
-			elements[butt].style.backgroundColor = "#736144";
-		else
-			elements[butt].style.backgroundColor = styleColor;
+	lastButton = whichButton;
 }
