@@ -101,7 +101,7 @@
 				<input type="hidden" name="Y" value="default">
 				<tr>
 					<th>X</th>
-					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="X"></td>
+					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="X" oninput="limitPrecise(this)"></td>
 				</tr>
 				<tr>
 					<th>Y</th>
@@ -129,7 +129,7 @@
 				</tr>
 				<tr>
 					<th>R</th>
-					<td colspan="9"><input type="text" id="R" name="R" value="3"  class="text_input"></td>
+					<td colspan="9"><input type="text" id="R" name="R" value="3"  class="text_input" oninput="limitPrecise(this)"></td>
 				</tr>
 				</form>
 			</table>
