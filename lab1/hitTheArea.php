@@ -43,20 +43,11 @@
 			}
 		}
 ?>
-<table>
 	<?php
 		if(!extension_loaded('bcmath')) {
 			echo "<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
 		}
 	?>
-	<tr>
-		<td>Попадание</td>
-		<td>X</td>
-		<td>Y</td>
-		<td>R</td>
-		<td>Время работы скрипта</td>
-		<td>Который час?</td>
-	</tr>
 	<tr>
 		<td><?php echo $inTheArea ? 'Да': 'Нет' ?></td>
 		<td><?php echo  $x ?></td>
@@ -65,5 +56,4 @@
 		<td><?php echo microtime(true) - $start_time ?></td>
 		<td><?php echo date("h:i:s") ?></td>
 	</tr>
-</table>
 

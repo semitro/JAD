@@ -87,7 +87,7 @@ function ajaxpost(url, body, callback, encoding) {
 function ajaxCallback(response, code) {
 	var errorel = document.getElementById("error");
 	if(code==200) {
-		document.getElementById('results').textContent += response;
+		document.getElementById('results').innerHTML += response;
 	}
 	else {
 		errorel.textContent = "ошибка запроса к серверу";		
