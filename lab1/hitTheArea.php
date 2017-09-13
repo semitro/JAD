@@ -1,4 +1,12 @@
 <?php
+		if($_POST['checkMath']) {
+			if(extension_loaded('bcmath'))
+				print 'true';
+			else
+				print 'false';
+			exit;
+		}
+		
 	 	$start_time = microtime(true);
 		$x=$_POST['X'];
 		$R=$_POST['R'];
