@@ -46,11 +46,11 @@
 			color: white;
 			border-color: transparent;
 		}
-		.text_input{
+		input[type=text]{
 			background-color: gray;
 			transition: 0.8s;
 		}
-		.text_input:hover{
+		input[type=text]:hover{
 			font-size: 34px;
 		}
 		.butt {
@@ -77,9 +77,6 @@
 		}
 		.centered {
 			padding-left: 15%;
-		}
-		#error_title {
-			
 		}
 	</style>
 
@@ -108,7 +105,7 @@
 				<input type="hidden" name="Y" value="default">
 				<tr>
 					<th>X</th>
-					<td colspan="9"><input type="text" name="X" value="0" class="text_input" id="X" oninput="limitPrecise(this)"></td>
+					<td colspan="9"><input type="text" name="X" value="0" id="X" oninput="limitPrecise(this)"></td>
 				</tr>
 				<tr>
 					<th>Y</th>
@@ -136,7 +133,7 @@
 				</tr>
 				<tr>
 					<th>R</th>
-					<td colspan="9"><input type="text" id="R" name="R" value="3"  class="text_input" oninput="limitPrecise(this)"></td>
+					<td colspan="9"><input type="text" id="R" name="R" value="3" oninput="limitPrecise(this)"></td>
 				</tr>
 				</form>
 			</table>
