@@ -1,8 +1,13 @@
 
+
+
 function validate(){
-	if(isEverythingOk())
-		document.forms[0].submit();
+	if(isEverythingOk()){
+		var body = 'X='+ document.forms[0].X.value+'&Y=' + document.forms[0].Y.value +'&R='+ document.forms[0].R.value;
+		ajaxpost("hitTheArea.php",body,ajaxCallback);
+	}
 }
+
 
 function isEverythingOk(){
 	var errorel = document.getElementById("error");
@@ -64,4 +69,35 @@ function yButtonPress(whichButton){
 	lastButton = whichButton;
 }
 
-//yButtonPress(document.getElementById("defbutt"));
+
+
+
+
+function ajaxpost(url, body, callback, encoding) {
+	var ajaxRequest;
+	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}
+	if (callback){ajaxRequest.onreadystatechange=function(){if(ajaxRequest.readyState==4){callback(ajaxRequest.responseText, ajaxRequest.status);}}}
+	ajaxRequest.open('POST',url,true);
+	if(encoding!=undefined){
+		ajaxRequest.setRequestHeader('Content-Type', encoding);
+	}
+	else {
+		ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	}
+	ajaxRequest.send(body);
+}
+
+
+function ajaxpost(url, body, callback, encoding) {
+	var ajaxRequest;
+	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}
+	if (callback){ajaxRequest.onreadystatechange=function(){if(ajaxRequest.readyState==4){callback(ajaxRequest.responseText, ajaxRequest.status);}}}
+	ajaxRequest.open('POST',url,true);
+	if(encoding!=undefined){
+		ajaxRequest.setRequestHeader('Content-Type', encoding);
+	}
+	else {
+		ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	}
+	ajaxRequest.send(body);
+}
