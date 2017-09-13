@@ -1,5 +1,4 @@
 
-
 function validate(){
 	if(isEverythingOk())
 		document.forms[0].submit();
@@ -55,6 +54,8 @@ function isNumber(n){
 **/
 var lastButton=null;
 function yButtonPress(whichButton){
+	if(lastButton == whichButton)
+		return;
 	document.forms[0].elements.Y.value = whichButton.value;
 	whichButton.style.backgroundColor = "#736144";
 	if(lastButton) {
@@ -62,3 +63,5 @@ function yButtonPress(whichButton){
 	}
 	lastButton = whichButton;
 }
+
+//yButtonPress(document.getElementById("defbutt"));
