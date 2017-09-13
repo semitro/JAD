@@ -70,9 +70,6 @@ function yButtonPress(whichButton){
 }
 
 
-
-
-
 function ajaxpost(url, body, callback, encoding) {
 	var ajaxRequest;
 	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}
@@ -87,17 +84,13 @@ function ajaxpost(url, body, callback, encoding) {
 	ajaxRequest.send(body);
 }
 
-
-function ajaxpost(url, body, callback, encoding) {
-	var ajaxRequest;
-	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}
-	if (callback){ajaxRequest.onreadystatechange=function(){if(ajaxRequest.readyState==4){callback(ajaxRequest.responseText, ajaxRequest.status);}}}
-	ajaxRequest.open('POST',url,true);
-	if(encoding!=undefined){
-		ajaxRequest.setRequestHeader('Content-Type', encoding);
+function ajaxCallback(response, code) {
+	if(code==200) {
+		document.getElementById('results').textContent += response;
 	}
 	else {
-		ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		errorel.textContent = "ошибка запроса к серверу";		
+		errorel.style.color = "yellow";
 	}
-	ajaxRequest.send(body);
 }
+
