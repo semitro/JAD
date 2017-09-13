@@ -30,7 +30,12 @@ function isEverythingOk(){
 }
 
 // Ограничение количества цифр после запятой
+
 function limitPrecise(e){
+	if(!isNumber(e.value))
+		e.style.backgroundColor = "red";
+	else
+		e.style.backgroundColor = "gray";
  if (e.value.indexOf(".") != '-1')
     e.value=e.value.substring(0, e.value.indexOf(".") + 5); 
 }
