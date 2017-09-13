@@ -27,7 +27,20 @@
 				}
 				return false;
 			}
-			return false;
+			else {
+				if($x >= -$R and $x <= 0){
+					if($y <= $X + $R and  $y>-$R)
+						return true;
+				}				
+				if($x>=0 and $x <= $R){
+					if(
+						$y >= 0 and
+						$x*$x + $y*$y <= $R*$R
+						)
+						return true;
+				}
+				return false;
+			}
 		}
 ?>
 <!DOCTYPE html>
@@ -78,6 +91,11 @@
 <body>
 	
 	<table>
+		<?php
+			if(!extension_loaded('bcmath')) {
+				echo "<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
+			}
+		?>
 		<tr>
 			<td>Попадание</td>
 			<td>X</td>
