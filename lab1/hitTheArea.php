@@ -6,22 +6,26 @@
  		$inTheArea = inRange($x,$y,$R);
 
 		function inRange($x, $y, $R){
-			if( 	// left side
-				bccomp($x, -$R, 100)   != -1
-				and
-				bccomp($x, "0.0", 100) != 1
-				)
-			{
-				if( bccomp( $y, bcadd($x, $R, 100), 100 ) != 1
-				            and bccomp($y, -$R, 100) == 1 ) 
-					return true;
-			}
-			// The right area
-			if(bccomp($x, "0.0", 100) != -1 and bccomp($x, $R, 100) != 1){
-				if(bccomp($y, "0.0", 100) != -1 and
-					    bccomp(    bcadd( bcmul($x, $x, 100),  bcmul($y, $y, 100) , 100) ,       bcmul($R, $R, 100), 100 ) != 1
+			if(extension_loaded('bcmath')) {
+				bcscale(100);
+				if( 	// left side
+					bccomp($x, -$R)   != -1
+					and
+					bccomp($x, "0.0") != 1
 					)
-					return true;
+				{
+					if( bccomp( $y, bcadd($x, $R) ) != 1
+								and bccomp($y, -$R) == 1 ) 
+						return true;
+				}
+				// The right area
+				if(bccomp($x, "0.0") != -1 and bccomp($x, $R) != 1){
+					if(bccomp($y, "0.0") != -1 and
+							bccomp(    bcadd( bcmul($x, $x),  bcmul($y, $y) ) ,       bcmul($R, $R) ) != 1
+						)
+						return true;
+				}
+				return false;
 			}
 			return false;
 		}
