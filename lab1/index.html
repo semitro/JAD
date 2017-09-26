@@ -22,15 +22,55 @@
 		th, td {
 			padding: 1ex;
 		}
+		#results {
+			width: 733; /* 100px*4 columns + 170px*1 column + 140px*1 column + 16px scrollbar  + 1px*7 borders*/
+			border: 1px dotted #c83030;
+			border-collapse: collapse;
+		}
+		#results tbody, #results thead tr { display: block; }
+		#results tbody {
+			height: 300px;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+		#results tbody td, #results thead th {
+			width: 100px;
+			border: 1px dotted #c83030;
+		}
+		#results thead th:last-child  {
+			width: 16px; /* 16px scrollbar width */
+			padding: 0;
+		}
+		#results thead th:nth-child(5), #results tbody td:nth-child(5)  {
+			width: 170px;
+		}
+		#results thead th:nth-child(6), #results tbody td:nth-child(6)  {
+			width: 140px;
+		}
+		#results tbody::-webkit-scrollbar-track {
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			background-color: #333;
+		}
+		#results tbody::-webkit-scrollbar {
+			width: 16px;
+			background-color: #c02020;
+		}
+		#results tbody::-webkit-scrollbar-thumb {
+			background-color: #c02020;	
+			background-image: -webkit-linear-gradient(90deg,
+													  rgba(255, 255, 255, .2) 25%,
+													  transparent 25%,
+													  transparent 50%,
+													  rgba(255, 255, 255, .2) 50%,
+													  rgba(255, 255, 255, .2) 75%,
+													  transparent 75%,
+													  transparent)
+		}
 		.footer {
 			caption-side: bottom;
 			height: 32px;
 			background-color: #c83030;
 		}
-		.footer:hover{
-
-		}
-
 		.header {
 			height: 32px;
 			background-color: #c83030;
@@ -40,9 +80,7 @@
 			font-size: 1.5em;
 			transition: 3s;
 			N-webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
-
 		}
-
 		input{
 			border-radius: 3px;
 			color: white;
@@ -56,8 +94,8 @@
 			font-size: 31px;
 		}
 		.butt {
-			width: 7em;
-			height: 7em;
+			width: 3.33em;
+			height: 3.33em;
 			padding: 2em;
 			background-color: #B94040;
 			transition: 0.25s;
@@ -82,7 +120,6 @@
 		}
 	</style>
 	<script type="text/javascript" src="validateAreaForm.js"></script>
-	<script type="text/javascript" src="ajaxTable.js"></script>
 	<link rel="shortcut icon" href="img/logo.png">
 	<title>This is all but the cat</title>
 </head>
@@ -149,14 +186,16 @@
 	<tr>
 		<td colspan="2">
 			<table id="results">
-				<tr>
-					<td>Попадание</td>
-					<td>X</td>
-					<td>Y</td>
-					<td>R</td>
-					<td>Время работы скрипта</td>
-					<td>Который час?</td>
-				</tr>
+					<thead><tr>
+						<th>Попадание</th>
+						<th>X</th>
+						<th>Y</th>
+						<th>R</th>
+						<th>Время работы скрипта</th>
+						<th>Который час?</th>
+						<th></th>
+					</tr></thead>
+					<tbody id="results_body"></tbody>
 			</table>
 		</td>
 	</tr>
