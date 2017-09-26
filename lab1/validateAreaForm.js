@@ -61,16 +61,20 @@ function isNumber(n){
 * A function to hightlight a button last pressed
 **/
 var lastButton=null;
+var lastColor=null;
 function yButtonPress(whichButton){
 	if(lastButton == whichButton)
 		return;
+	lastColor=whichButton.style.color
 	document.forms[0].elements.Y.value = whichButton.value;
-	whichButton.style.backgroundColor = "#736144";
+	whichButton.style.backgroundColor = "#C36144";
 	if(lastButton) {
-		lastButton.style.backgroundColor = "#B94040";
+		lastButton.style.backgroundColor = lastColor;
 	}
 	lastButton = whichButton;
 }
+
+
 
 
 function ajaxpost(url, body, callback, encoding) {
@@ -97,4 +101,3 @@ function ajaxCallback(response, code) {
 		errorel.style.color = "yellow";
 	}
 }
-
