@@ -1,7 +1,7 @@
 ajaxpost("hitTheArea.php","checkMath=true", function(response, code) {
 		if(response == "false") {
 			 document.getElementById('results').innerHTML += 
-				"<tr><td colspan='6'>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</td></tr>";
+				"<caption>ВНИМАНИЕ! ТОЧНЫЕ РЕЗУЛЬТАТЫ НЕ ГАРАНТИРОВАНЫ! (Нужен модуль BCMath)</caption>";
 		}
 	});
 
@@ -94,7 +94,7 @@ function ajaxpost(url, body, callback, encoding) {
 function ajaxCallback(response, code) {
 	var errorel = document.getElementById("error");
 	if(code==200) {
-		document.getElementById('results').innerHTML += response;
+		document.getElementById('results_body').innerHTML += response;
 	}
 	else {
 		errorel.textContent = "ошибка запроса к серверу";		
