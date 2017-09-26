@@ -57,6 +57,6 @@
 		<td><?php echo  $y ?></td>
 		<td><?php echo  $R ?></td>
 		<td><?php echo microtime(true) - $start_time ?></td>
-		<td><?php echo date("h:i:s") ?></td>
+		<td><?php echo date("H:i:s P") ?></td>
 	</tr>
 
