@@ -13,21 +13,11 @@
 			height: 100%;
 			font-weight: 700; /*It is something like bold*/
 		}
-		table {
-			border-collapse: collapse; /* - пустые промежутки между ячейками*/
-		}
-		table.border {
-			border: 20px solid #c83030;
-		}
-		th, td {
-			padding: 1ex;
-		}
+		table { border-collapse: collapse; }
+		table.border { border: 20px solid #c83030; }
+		th, td { padding: 1ex; }
 		#results {
-			width: 733; /* 100px*4 columns + 170px*1 column + 140px*1 column + 16px scrollbar  + 1px*7 borders*/
 			border-collapse: collapse;
-		}
-		#results tbody tr:first-child td {
-			border-top: none;
 		}
 		#results tbody, #results thead tr { display: block; }
 		#results tbody {
@@ -38,17 +28,25 @@
 		#results tbody td, #results thead th {
 			width: 100px;
 			border: 1px dotted #c83030;
+			padding: 10px;
 		}
-		#results thead th:last-child  {
-			width: 15px; /* 16px scrollbar width */
-			border: none;
-			padding: 0;
-		}
+		#results tbody tr:first-child td { border-top: none; }
 		#results thead th:nth-child(5), #results tbody td:nth-child(5)  {
 			width: 170px;
 		}
 		#results thead th:nth-child(6), #results tbody td:nth-child(6)  {
 			width: 140px;
+		}
+		#results caption { height: 20px; }
+		#results thead tr { height: 58px; }
+		#results_wrapper { position: relative; }
+		#results_border {
+			position: absolute;
+			z-index: -1000;
+			top: 77px;
+			width: 835px;
+			height: 300px;
+			border: 1px dotted #c83030;
 		}
 		#results tbody::-webkit-scrollbar-track {
 			background-color: #333;
@@ -103,31 +101,20 @@
 			transition: 0.25s;
 			font-size: 12px;
 		}
-		.butt:hover{
-			background-color: #4040a9;
-
-		}
-		.butt:active{
-			background-color: #994040;
-		}
-		#wrapper {
-			width: 100%;
-		}
+		.butt:hover { background-color: #4040a9; }
+		.butt:active { background-color: #994040; }
+		#wrapper { width: 100%; }
 		#submitButt {
 			width: 100%;
 			font-weight: 700;
 		}
-		.centered {
-			padding-left: 15%;
-		}
+		.centered { padding-left: 15%; }
 	</style>
-	<script type="text/javascript" src="validateAreaForm.js"></script>
 	<link rel="shortcut icon" href="img/logo.png">
 	<title>This is all but the cat</title>
 </head>
 
 <body>
-
 <table id="wrapper" class="border">
 	<!-- The hat  -->
 	<caption class="header">Ощепков, Буланцов P3202 <br> Вариант #503</caption>
@@ -187,21 +174,24 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<table id="results">
-					<thead><tr>
-						<th>Попадание</th>
-						<th>X</th>
-						<th>Y</th>
-						<th>R</th>
-						<th>Время работы скрипта</th>
-						<th>Который час?</th>
-						<th></th>
-					</tr></thead>
-					<tbody id="results_body"></tbody>
-			</table>
+			<div id="results_wrapper">
+				<table id="results">
+						<thead><tr>
+							<th>Попадание</th>
+							<th>X</th>
+							<th>Y</th>
+							<th>R</th>
+							<th>Время работы скрипта</th>
+							<th>Который час?</th>
+						</tr></thead>
+						<tbody id="results_body"></tbody>
+				</table>
+				<div id="results_border"></div>
+			</div>
 		</td>
 	</tr>
 	<caption class="footer"><marquee>hacked by sxx360Haxxor69xx</marquee></caption>
 </table>
 </body>
+	<script type="text/javascript" src="validateAreaForm.js"></script>
 </html>
