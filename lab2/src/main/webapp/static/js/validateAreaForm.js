@@ -24,13 +24,13 @@ function isEverythingOk(){
 	var x = document.getElementById("X").value;
 
 	if(!isNumber(r))
-        return "R должен быть числом";
+        return "R должно быть числом";
 
 	if(!isNumber(x))
-		return "X должен быть числом";
+		return "X должно быть числом";
 
-	if(r < 2 || r > 5) return  "R должен принадлежать [2,5]";
-	if(x <-5 || x > 3) return "X должен принадлежать [-5,3]";
+	if(r < 2 || r > 5) return  "R должно принадлежать [2,5]";
+	if(x <-5 || x > 3) return "X должно принадлежать [-5,3]";
 
 	return "OK";
 }

@@ -37,7 +37,7 @@
             <td>
               <table>
                 <tr>
-                  <td><input type = "button" name="Z" value="4" class="butt" onclick="yButtonPress(this)" ></td>
+                  <td><input type = "button" name="Z" value="4" class="butt" onclick="yButtonPress(this)"></td>
                   <td><input type = "button" name="Z" value="3" class="butt" onclick="yButtonPress(this)"></td>
                   <td><input type = "button" name="Z" value="2" class="butt" onclick="yButtonPress(this)"></td>
                   <td><input type = "button" name="Z" value="1" class="butt" onclick="yButtonPress(this)"></td>
@@ -58,7 +58,7 @@
           </tr>
           <tr>
             <th>R</th>
-            <td colspan="9"><input type="text" id="R" name="R" value="3" oninput="limitPrecise(this)"></td>
+            <td colspan="9"><input type="text" id="R" name="R" value="3" maxlength="100" oninput="limitPrecise(this)"></td>
           </tr>
         </form>
       </table>
