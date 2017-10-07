@@ -49,26 +49,6 @@ function isNumber(n){
 	return parseFloat(n) == n;
  }
 
-/**
-* A function to hightlight a button last pressed
-**/
-var lastButton=null;
-var lastColor=null;
-function yButtonPress(whichButton){
-	if(lastButton == whichButton)
-		return;
-	lastColor=whichButton.style.color
-	document.forms[0].elements.Y.value = whichButton.value;
-	whichButton.style.backgroundColor = "#C36144";
-	if(lastButton) {
-		lastButton.style.backgroundColor = lastColor;
-	}
-	lastButton = whichButton;
-}
-
-
-
-
 function ajaxpost(url, body, callback, encoding) {
 	var ajaxRequest;
 	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}

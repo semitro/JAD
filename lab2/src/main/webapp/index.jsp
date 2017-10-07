@@ -33,25 +33,36 @@
             <td colspan="9"><input type="text" name="X" value="0" id="X" oninput="limitPrecise(this)"></td>
           </tr>
           <tr>
-            <th>Y</th>
+            <th>X</th>
             <td>
               <table>
                 <tr>
-                  <td><input type = "button" name="Z" value="4" class="butt" onclick="yButtonPress(this)"></td>
-                  <td><input type = "button" name="Z" value="3" class="butt" onclick="yButtonPress(this)"></td>
-                  <td><input type = "button" name="Z" value="2" class="butt" onclick="yButtonPress(this)"></td>
-                  <td><input type = "button" name="Z" value="1" class="butt" onclick="yButtonPress(this)"></td>
+                  <td><input type = "radio" name="X" value="2" onclick="yButtonPress(this)" id="x2">
+                  	<label for="x2"><span>1</span></label></td>
+                  <td><input type = "radio" name="X" value="1.5" onclick="yButtonPress(this)" id="x1.5">
+                  	<label for="x1.5"><span>1</span></label></td>
+                  <td><input type = "radio" name="X" value="1" onclick="yButtonPress(this)" id="x1">
+                  	<label for="x1"><span>1</span></label></td>
+                  <td><input type = "radio" name="X" value="0.5" onclick="yButtonPress(this)" id="x0.5">
+                  	<label for="x0.5"><spsan>0.5</spsan></label></td>
                 </tr>
                 <tr>
                   <td colspan="3"><input type="button" name="sub" value="ОТПРАВИТЬ" class="butt" onclick="validate()" id="submitButt"></td>
-                  <td><input type = "button" name="Z" value="0" class="butt" onclick="yButtonPress(this)" id="defbutt"></td>
+                  <td><input type = "radio" name="X" value="0" onclick="yButtonPress(this)" id="x0">
+                    <label for="x0"><span>0</span></label>
+                  </td>
+                  </td>
                 </tr>
                 <tr>
-                  <td><input type = "button" name="Z" value="-4" class="butt" onclick="yButtonPress(this)" background= "#094040";
-                  ></td>
-                  <td><input type = "button" name="Z" value="-3" class="butt" onclick="yButtonPress(this)"></td>
-                  <td><input type = "button" name="Z" value="-2" class="butt" onclick="yButtonPress(this)"></td>
-                  <td><input type = "button" name="Z" value="-1" class="butt" onclick="yButtonPress(this)"></td>
+                  <td><input type = "radio" name="X" value="-2" onclick="yButtonPress(this)" id ="x-2">
+                    <label for="x-2"><span>-2</span></label></td>
+                  </td>
+                  <td><input type = "radio" name="X" value="-1.5" onclick="yButtonPress(this)" id="x-1.5">
+                  	<label for="x-1.5"><span>-1.5</span></label></td>
+                  <td><input type = "radio" name="X" value="-2" onclick="yButtonPress(this)" id="x-1">
+                  	<label for="x-1"><span>-1.0</span></label></td>
+                  <td><input type = "radio" name="X" value="-0.5" onclick="yButtonPress(this)" id="x-0.5">
+                  	<label for="x-0.5"><span>-0.5</span></label></td>
                 </tr>
               </table>
             </td>

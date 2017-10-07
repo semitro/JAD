@@ -105,6 +105,35 @@ input[type=text]{
 input[type=text]:hover{
     font-size: 31px;
 }
+/*** RADIO ***/
+input[type=radio] {
+    width: 2.22em;
+    height: 2.22em;
+    padding: 2em;
+    background-color: #B94040;
+    transition: 0.25s;
+    font-size: 12px;
+    display: none;
+}
+
+input[type=radio] + label {
+    display: inline-block;
+    border: 3px solid #7c7b80;
+    width: 3.33em;
+    height: 3.33em;
+    padding: 2em;
+    background-color: #B94040;
+    transition: 0.32s;
+    text-align: center;
+}
+input[type=radio]:checked  + label{
+    background-color: #802e44;
+}
+
+input[type=radio]+ label:hover{
+    background-color: #4040a9;
+}
+
 .butt {
     width: 3.33em;
     height: 3.33em;
