@@ -11,6 +11,7 @@
   <style>
     @import url("static/css/indexStyle.css");
   </style>
+  <link href="static/css/toastr.scss" rel="stylesheet"/>
   <link rel="shortcut icon" href="static/img/logo.png">
   <title>This is all but the cat</title>
 </head>
@@ -18,14 +19,7 @@
 <body>
 <table id="wrapper" class="border">
   <!-- The hat  -->
-  <caption class="header">Ощепков, Буланцов P3202 <br> Вариант #503</caption>
-  <tr>
-    <td class="centered" colspan="3">
-      <span id="error_title">Ошибка: </span>
-      <span id="error">пока никакой</span>
-      <span id="error_smile"> ;)</span>
-    </td>
-  </tr>
+  <caption class="header">Ощепков, Буланцов P3202 <br> Вариант #505</caption>
   <tr>
     <td>
       <table class="border">
@@ -94,5 +88,7 @@
   <caption class="footer"><marquee>hacked by sxx360Haxxor69xx</marquee></caption>
 </table>
 </body>
-<script type="text/javascript" src="validateAreaForm.js"></script>
+<script type="text/javascript" src="static/js/jquery-min.js"></script>
+<script type="text/javascript" src="static/js/toastr.js"></script>
+<script type="text/javascript" src="static/js/validateAreaForm.js"></script>
 </html>
