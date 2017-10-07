@@ -75,7 +75,7 @@
       </table>
     </td>
     <td>
-      <img src="img/areas.png">
+      <img src="static/img/areas.png">
     </td>
   </tr>
   <tr>
