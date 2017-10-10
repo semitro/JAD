@@ -12,9 +12,11 @@ public class mainController extends HttpServlet{
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(isToAreaCheck(req)) {
+            // Если запрос связан с проверкой попадания, перенаправляем
+            // на нужный сервлет
             req.getRequestDispatcher("checkTheArea").forward(req, resp);
         }
-        else
+        else // корневая страница
             resp.sendRedirect(" ");
 
     }
