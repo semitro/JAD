@@ -30,8 +30,8 @@ function isEverythingOk(){
 	if(!isNumber(y))
 		return "Y должно быть числом";
 	//  -3 < y < 3
-	if( r < 1 || r > 3) return  "R должно принадлежать [1,3]";
-	if(y < -3 || y > 3) return  "Y должно принадлежать [-3,3]";
+	if( r < 2 || r > 5) return  "R должно принадлежать [2,5]";
+	if(y < -3 || y > 3) return "Y должно принадлежать [-3,3]";
 
 	return "OK";
 }
