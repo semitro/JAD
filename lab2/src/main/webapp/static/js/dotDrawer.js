@@ -4,15 +4,6 @@
 
 $('.plot').bind('click',onPlotClick);
 
-$('.plot').onclick(function (event) {
-    $(this).append(
-        $('<div></div>')
-            .css('left',12)
-            .css('top',10)
-            .css('border','thick solid red')
-    )
-})
-
 function onPlotClick(inf){
     console.log(inf.pageX);
     console.log(inf.pageY);

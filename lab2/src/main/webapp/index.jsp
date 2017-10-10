@@ -26,8 +26,7 @@
         <tr>
           <td colspan="2">Введи меня полностью</td>
         </tr>
-        <form action="hitTheArea.php" method="post" id="mainForm">
-          <input type="hidden" name="X" id="X" value="default">
+        <form action="mainController" method="post" id="mainForm">
           <tr>
             <th>Y</th>
             <td colspan="9"><input type="text" name="Y" value="0" id="Y" oninput="limitPrecise(this)"></td>
@@ -37,31 +36,31 @@
             <td>
               <table>
                 <tr>
-                  <td><input type = "radio" name="X" value="2" onclick="yButtonPress(this)" id="x2">
+                  <td><input type = "radio" name="X" value="2" id="x2">
                   	<label for="x2"><span>1</span></label></td>
-                  <td><input type = "radio" name="X" value="1.5" onclick="yButtonPress(this)" id="x1.5">
+                  <td><input type = "radio" name="X" value="1.5" id="x1.5">
                   	<label for="x1.5"><span>1</span></label></td>
-                  <td><input type = "radio" name="X" value="1" onclick="yButtonPress(this)" id="x1">
+                  <td><input type = "radio" name="X" value="1" id="x1">
                   	<label for="x1"><span>1</span></label></td>
-                  <td><input type = "radio" name="X" value="0.5" onclick="yButtonPress(this)" id="x0.5">
+                  <td><input type = "radio" name="X" value="0.5" id="x0.5">
                   	<label for="x0.5"><spsan>0.5</spsan></label></td>
                 </tr>
                 <tr>
                   <td colspan="3"><input type="button" name="sub" value="ОТПРАВИТЬ" class="butt" onclick="validate()" id="submitButt"></td>
-                  <td><input type = "radio" name="X" value="0" onclick="yButtonPress(this)" id="x0">
+                  <td><input type = "radio" name="X" value="0" id="x0">
                     <label for="x0"><span>0</span></label>
                   </td>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type = "radio" name="X" value="-2" onclick="yButtonPress(this)" id ="x-2">
+                  <td><input type = "radio" name="X" value="-2" id ="x-2">
                     <label for="x-2"><span>-2</span></label></td>
                   </td>
-                  <td><input type = "radio" name="X" value="-1.5" onclick="yButtonPress(this)" id="x-1.5">
+                  <td><input type = "radio" name="X" value="-1.5"  id="x-1.5">
                   	<label for="x-1.5"><span>-1.5</span></label></td>
-                  <td><input type = "radio" name="X" value="-2" onclick="yButtonPress(this)" id="x-1">
+                  <td><input type = "radio" name="X" value="-2" id="x-1">
                   	<label for="x-1"><span>-1.0</span></label></td>
-                  <td><input type = "radio" name="X" value="-0.5" onclick="yButtonPress(this)" id="x-0.5">
+                  <td><input type = "radio" name="X" value="-0.5" id="x-0.5">
                   	<label for="x-0.5"><span>-0.5</span></label></td>
                 </tr>
               </table>

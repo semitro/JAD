@@ -1,1 +1,5 @@
+AreaCheckServlet.class
+logic/areaChekerInterface.class
+logic/areaCheker.class
 PidorServlet.class
+mainController.class
