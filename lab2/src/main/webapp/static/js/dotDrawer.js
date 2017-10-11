@@ -4,6 +4,12 @@
 
 $('#plotCanvas').bind('click',onPlotClick);
 
+
+$('#R').bind('blur',function (e) {
+    if(isNumber(e.target.value))
+        redrawAllPoints(e.target.value);
+});
+
 function onPlotClick(inf){
     // isNumber is defined in validateAreaForm.js
     if(!isNumber(document.forms[0].R.value)){
@@ -36,11 +42,13 @@ function onPlotClick(inf){
                     message += "<br>Y: " +
                         calculateY(inf.offsetY,document.forms[0].R.value).toString().substr(0,5);
                     message += "<br>Попадание: " + JSON.parse(response).hit;
+                    var color;
                     if(JSON.parse(response).hit === "Да")
-                        drawPoint(inf.offsetX,inf.offsetY,"#490006");
+                        color = "#490006";
                     else
-                        drawPoint(inf.offsetX,inf.offsetY,"#fff4e0");
-
+                        color = "#fff4e0";
+                    pts.push({x: (inf.offsetX-ZeroX)*R.value, y: (inf.offsetY-ZeroY)*R.value, color: color});
+                    drawPoint(inf.offsetX, inf.offsetY, color);
                     toastr.info(message , "Поймали точку");
                     data = 'X='+ x +
                         '&Y=' + y +
@@ -59,7 +67,7 @@ function onPlotClick(inf){
 
 
 }
-
+var pts = new Array();
 function drawPoint(x, y,color) {
     var c = document.getElementById("plotCanvas");
     var ctx = c.getContext("2d");
@@ -69,11 +77,28 @@ function drawPoint(x, y,color) {
     ctx.arc(x,y,4,0,2*Math.PI);
     ctx.stroke();
 }
+
+pic       = new Image();
+pic.src    = "static/img/areas.png";
+pic.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+    ctx.drawImage(pic, 0, 0);  // Рисуем изображение от точки с координатами 0, 0
+}
+// Просто домножение координаты каждой точки на коэффициент
+function redrawAllPoints(factor) {
+    var c = document.getElementById("plotCanvas");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0,0,1000,1000);
+    ctx.drawImage(pic, 0, 0);
+    pts.forEach(function (point) {
+        drawPoint(point.x / factor + ZeroX, point.y / factor + ZeroY, point.color);
+    });
+
+}
 // Внимание! Всё привязано к конкретному изображению.
 // Эмпирически - для точки (0;0) offsetX = 112 offsetY = 111
 //               для точки (R;0) offsetX = 190 offsetY = 111
 // Значит, расположение точки в воображаемом графике:
-// R * ( (offsetXR - offsetZero) / (clickOffsetX - offsetZero) )
+// R * ( (offsetR - offsetZero) / (clickOffsetX - offsetZero) )
 var ZeroX = 112, ZeroY = 111,
     offsetR = 190;
 

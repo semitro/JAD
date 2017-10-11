@@ -37,9 +37,9 @@
               <table>
                 <tr>
                   <td><input type = "radio" name="X" value="2" id="x2">
-                  	<label for="x2"><span>1</span></label></td>
+                  	<label for="x2"><span>2</span></label></td>
                   <td><input type = "radio" name="X" value="1.5" id="x1.5">
-                  	<label for="x1.5"><span>1</span></label></td>
+                  	<label for="x1.5"><span>1.5</span></label></td>
                   <td><input type = "radio" name="X" value="1" id="x1">
                   	<label for="x1"><span>1</span></label></td>
                   <td><input type = "radio" name="X" value="0.5" id="x0.5">
