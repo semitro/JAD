@@ -74,7 +74,19 @@
       </table>
     </td>
     <td>
-      <img src="static/img/areas.png" class="plot">
+      <div id="imageWrapper">
+      <!--<img src="static/img/areas.png" class="plot">!-->
+        <canvas width="420px" height="380px" id="plotCanvas"></canvas>
+        <script>
+            var plotCanvas = document.getElementById("plotCanvas"),
+                ctx       = plotCanvas.getContext('2d'),
+                pic       = new Image();
+            pic.src    = "static/img/areas.png";
+            pic.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+                ctx.drawImage(pic, 0, 0);  // Рисуем изображение от точки с координатами 0, 0
+            }
+        </script>
+      </div>
     </td>
   </tr>
   <tr>

@@ -150,3 +150,4 @@ input[type=radio]+ label:hover{
     font-weight: 700;
 }
 .centered { padding-left: 15%; }
+.smallPoint{ border: 3px solid red; border-radius: 1px;}

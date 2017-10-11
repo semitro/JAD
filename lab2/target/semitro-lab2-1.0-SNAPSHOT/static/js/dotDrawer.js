@@ -5,12 +5,19 @@
 $('.plot').bind('click',onPlotClick);
 
 function onPlotClick(inf){
-    console.log(inf.pageX);
-    console.log(inf.pageY);
 
+    drawPoint(inf.pageX - document.getElementById("plotCanvas").offsetLeft,
+        inf.pageY - document.getElementById("plotCanvas").offsetTop);
 }
 
-// Переписать. Радиус должен браться с страницы
-function getR(){
-    return 12;
-}
+ function drawPoint(x, y) {
+     console.log(x);
+     console.log(y);
+     var c = document.getElementById("plotCanvas");
+     var ctx = c.getContext("2d");
+     ctx.beginPath();
+     ctx.arc(95,50,2,0,2*Math.PI);
+     ctx.arc(95,50,4,0,2*Math.PI);
+     ctx.stroke();
+
+    }

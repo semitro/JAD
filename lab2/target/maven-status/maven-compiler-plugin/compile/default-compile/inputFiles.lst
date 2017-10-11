@@ -1,4 +1,5 @@
 /home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/PidorServlet.java
-/home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/logic/AreaCheker.java
-/home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/logic/AreaChekerIntefrace.java
+/home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/logic/AreaCheckerInterface.java
+/home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/mainController.java
 /home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/AreaCheckServlet.java
+/home/semitro/Рабочий стол/itmo/Пип/lab2/src/main/java/logic/AreaChecker.java
