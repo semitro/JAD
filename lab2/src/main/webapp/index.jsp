@@ -99,7 +99,7 @@
             <th>Y</th>
             <th>R</th>
             <th>Время работы скрипта</th>
-            <th>Который час?</th>
+            <th>Что по серверу?</th>
           </tr></thead>
           <tbody id="results_body"></tbody>
         </table>

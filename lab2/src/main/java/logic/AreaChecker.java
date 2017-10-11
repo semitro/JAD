@@ -10,6 +10,7 @@ public class AreaChecker implements AreaCheckerInterface {
        BigDecimal big_x = (BigDecimal)x;
        BigDecimal big_y = (BigDecimal)y;
        BigDecimal big_R = (BigDecimal)R;
+
        // Если y >= 0 and y <= R
        if(        big_y.compareTo(BigDecimal.ZERO) >= 0
                && big_y.compareTo(big_R) <= 0){

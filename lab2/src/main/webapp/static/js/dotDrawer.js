@@ -33,9 +33,10 @@ function onPlotClick(inf){
                 if(code==="success"){
                     var message = ""
                     message+= "X: ";
-                    message += calculateX(inf.offsetX,document.forms[0].R.value);
-                    message += "\nY: " + calculateY(inf.offsetY,document.forms[0].R.value) + "\n";
-                    message += "Попали?" + JSON.parse(response).hit;
+                    message += calculateX(inf.offsetX,document.forms[0].R.value).toString().substr(0,5);
+                    message += "<br>Y: " +
+                        calculateY(inf.offsetY,document.forms[0].R.value).toString().substr(0,5);
+                    message += "<br>Попадание: " + JSON.parse(response).hit;
                     toastr.info(message , "Поймали точку");
                     data = 'X='+ x +
                         '&Y=' + y +

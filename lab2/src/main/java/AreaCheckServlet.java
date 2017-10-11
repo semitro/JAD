@@ -21,7 +21,7 @@ public class AreaCheckServlet extends HttpServlet {
         );
 
         if(req.getParameter("format") != null && req.getParameter("format").equals("json")){
-            resp.getWriter().write("{\"hit\":" + (inTheArea? "\"yes\"" : "\"no\"") + "}");
+            resp.getWriter().write("{\"hit\":" + (inTheArea? "\"Да\"" : "\"Нет\"") + "}");
             return;
         }
 
