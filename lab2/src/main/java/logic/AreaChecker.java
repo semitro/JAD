@@ -14,7 +14,8 @@ public class AreaChecker implements AreaCheckerInterface {
        if(big_y.compareTo(BigDecimal.ZERO) >= 0) {
            // Первая четверть
            if(big_x.compareTo(BigDecimal.ZERO) >= 0
-              &&big_x.compareTo(big_R) <= 0)
+              &&big_x.compareTo(big_R) <= 0
+              &&big_y.compareTo(big_R) <= 0)
                return true;
            // Вторая четверть или не попали
            return false;
@@ -25,7 +26,7 @@ public class AreaChecker implements AreaCheckerInterface {
 			   return true;
 			return false;
        }
-       if(big_x.pow(2).add(big_y.pow(2)).compareTo(big_R.divide(BigDecimal(2)).pow(2)) <= 0)
+       if(big_x.pow(2).add(big_y.pow(2)).compareTo(big_R.divide(new BigDecimal(2)).pow(2)) <= 0)
 			return true;
        return false;
     }

@@ -18,7 +18,6 @@ function onPlotClick(inf){
         return;
     }
 
-        drawPoint(inf.offsetX,inf.offsetY);
         // Пересчёт в координаты математической модели
         var x = calculateX(inf.offsetX,document.forms[0].R.value);
         var y = calculateY(inf.offsetY,document.forms[0].R.value)
@@ -37,6 +36,11 @@ function onPlotClick(inf){
                     message += "<br>Y: " +
                         calculateY(inf.offsetY,document.forms[0].R.value).toString().substr(0,5);
                     message += "<br>Попадание: " + JSON.parse(response).hit;
+                    if(JSON.parse(response).hit === "Да")
+                        drawPoint(inf.offsetX,inf.offsetY,"#490006");
+                    else
+                        drawPoint(inf.offsetX,inf.offsetY,"#fff4e0");
+
                     toastr.info(message , "Поймали точку");
                     data = 'X='+ x +
                         '&Y=' + y +
@@ -56,10 +60,11 @@ function onPlotClick(inf){
 
 }
 
-function drawPoint(x, y) {
+function drawPoint(x, y,color) {
     var c = document.getElementById("plotCanvas");
     var ctx = c.getContext("2d");
     ctx.beginPath();
+    ctx.strokeStyle=color;
     ctx.arc(x,y,2,0,2*Math.PI);
     ctx.arc(x,y,4,0,2*Math.PI);
     ctx.stroke();
