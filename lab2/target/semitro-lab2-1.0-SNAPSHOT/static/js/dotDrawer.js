@@ -47,7 +47,9 @@ function onPlotClick(inf){
                         color = "#490006";
                     else
                         color = "#fff4e0";
-                    pts.push({x: (inf.offsetX-ZeroX)*R.value, y: (inf.offsetY-ZeroY)*R.value, color: color});
+                    pts.push({x: (inf.offsetX-ZeroX)*R.value, y: (inf.offsetY-ZeroY)*R.value,
+                        mx: calculateX(inf.offsetX,document.forms[0].R.value),
+                        my: calculateY(inf.offsetY,document.forms[0].R.value)});
                     drawPoint(inf.offsetX, inf.offsetY, color);
                     toastr.info(message , "Поймали точку");
                     data = 'X='+ x +
@@ -90,9 +92,26 @@ function redrawAllPoints(factor) {
     ctx.clearRect(0,0,1000,1000);
     ctx.drawImage(pic, 0, 0);
     pts.forEach(function (point) {
-        drawPoint(point.x / factor + ZeroX, point.y / factor + ZeroY, point.color);
-    });
+         var data = 'X='+ point.mx +
+            '&Y=' + point.my +
+            '&R='+ document.forms[0].R.value + '&format=json';
 
+            $.get(
+            "mainController", // По заданию, направляем главному контроллеру, а не конкретной страничке
+            data,
+            function (response, code) {
+                if(code==="success") {
+                    var color;
+                    if (JSON.parse(response).hit === "Да")
+                        color = "#490006";
+                    else
+                        color = "#fff4e0";
+                    drawPoint(point.x / factor + ZeroX, point.y / factor + ZeroY, color);
+
+                }
+            });
+
+    });
 }
 // Внимание! Всё привязано к конкретному изображению.
 // Эмпирически - для точки (0;0) offsetX = 112 offsetY = 111
