@@ -14,16 +14,22 @@ public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long start_time = System.currentTimeMillis();
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("<tr>");
-        if(areaChecker.inTheArea(
+        boolean inTheArea = areaChecker.inTheArea(
                 new BigDecimal(req.getParameter("X")),
                 new BigDecimal(req.getParameter("Y")),
                 new BigDecimal(req.getParameter("R"))
-        ))
-            resp.getWriter().write("<td>Да</td>");
-        else
-            resp.getWriter().write("<td>Нет</td>");
+        );
 
+        if(req.getParameter("format") != null && req.getParameter("format").equals("json")){
+            resp.getWriter().write("{\"hit\":" + (inTheArea? "\"yes\"" : "\"no\"") + "}");
+            return;
+        }
+
+        resp.getWriter().write("<tr>");
+        if(inTheArea)
+            resp.getWriter().write("<td id='ans'>Да</td>");
+        else    // id, чтобы высвечивать уведомления от тостера
+            resp.getWriter().write("<td id='ans'>Нет</td>");
 
         resp.getWriter().write(
                        "<td>" + req.getParameter("X") + "</td>"

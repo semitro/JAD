@@ -6,16 +6,52 @@ $('#plotCanvas').bind('click',onPlotClick);
 
 function onPlotClick(inf){
     // isNumber is defined in validateAreaForm.js
-    var err = isEverythingOk()
-    if( err == "OK"){
+    if(!isNumber(document.forms[0].R.value)){
+        toastr.error("Ммвыв","Вы забыли указать R");
+        return;
+    }
+
+    // Дублирующийся код. Плохо, но быстро
+    if( inf.offsetX,document.forms[0].R.value < 1
+        || inf.offsetX,document.forms[0].R.value > 3){
+        toastr.error("Ммвыв","R должно принадлежать [1,3]");
+        return;
+    }
+
         drawPoint(inf.offsetX,inf.offsetY);
         // Пересчёт в координаты математической модели
-        console.log(calculateX(inf.offsetX,document.forms[0].R.value));
-        console.log(calculateY(inf.offsetY,document.forms[0].R.value));
+        var x = calculateX(inf.offsetX,document.forms[0].R.value);
+        var y = calculateY(inf.offsetY,document.forms[0].R.value)
+        var data = 'X='+ x +
+            '&Y=' + y +
+            '&R='+ document.forms[0].R.value +
+            '&format=json';
+        $.get(
+            "mainController", // По заданию, направляем главному контроллеру, а не конкретной страничке
+            data,
+            function (response, code) {
+                if(code==="success"){
+                    var message = ""
+                    message+= "X: ";
+                    message += calculateX(inf.offsetX,document.forms[0].R.value);
+                    message += "\nY: " + calculateY(inf.offsetY,document.forms[0].R.value) + "\n";
+                    message += "Попали?" + JSON.parse(response).hit;
+                    toastr.info(message , "Поймали точку");
+                    data = 'X='+ x +
+                        '&Y=' + y +
+                        '&R='+ document.forms[0].R.value;
+                    $.get(
+                        "mainController",
+                        data,
+                        ajaxCallback
+                    );
+                }
+                else
+                    toastr.error("ошибка запроса к серверу","Хмм");
+            },
+            "html"
+        );
 
-    }
-    else
-        toastr.error("Ммвыв",err);
 
 }
 
