@@ -6,8 +6,11 @@ $('#plotCanvas').bind('click',onPlotClick);
 
 
 $('#R').bind('blur',function (e) {
-    if(isNumber(e.target.value))
+    var n = e.target.value;
+    if(isNumber(n) && n>=1 && n<=3)
         redrawAllPoints(e.target.value);
+    else
+        toastr.error("Радус - это не усы", "R должно быть в [1;3]");
 });
 
 function onPlotClick(inf){
@@ -44,9 +47,9 @@ function onPlotClick(inf){
                     message += "<br>Попадание: " + JSON.parse(response).hit;
                     var color;
                     if(JSON.parse(response).hit === "Да")
-                        color = "#490006";
-                    else
                         color = "#fff4e0";
+                    else
+                        color = "#490006";
                     pts.push({x: (inf.offsetX-ZeroX)*R.value, y: (inf.offsetY-ZeroY)*R.value,
                         mx: calculateX(inf.offsetX,document.forms[0].R.value),
                         my: calculateY(inf.offsetY,document.forms[0].R.value)});
@@ -103,9 +106,9 @@ function redrawAllPoints(factor) {
                 if(code==="success") {
                     var color;
                     if (JSON.parse(response).hit === "Да")
-                        color = "#490006";
-                    else
                         color = "#fff4e0";
+                    else
+                        color = "#490006";
                     drawPoint(point.x / factor + ZeroX, point.y / factor + ZeroY, color);
 
                 }

@@ -20,7 +20,7 @@
       <file leaf-file-name="validateAreaForm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/validateAreaForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
+            <state relative-caret-position="88">
               <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
               <folding />
             </state>
@@ -30,8 +30,8 @@
       <file leaf-file-name="dotDrawer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/dotDrawer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+            <state relative-caret-position="234">
+              <caret line="108" column="40" lean-forward="false" selection-start-line="108" selection-start-column="40" selection-end-line="108" selection-end-column="40" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -898,12 +898,12 @@
       <workItem from="1507623963416" duration="220000" />
       <workItem from="1507666679967" duration="13936000" />
       <workItem from="1507711650281" duration="4614000" />
-      <workItem from="1507717038509" duration="11606000" />
+      <workItem from="1507717038509" duration="12016000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51862000" />
+    <option name="totallyTimeSpent" value="52272000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
@@ -1325,14 +1325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/validateAreaForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://MAVEN/lab2:semitro-lab2:1.0-SNAPSHOT">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1350,10 +1342,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/validateAreaForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/dotDrawer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+        <state relative-caret-position="234">
+          <caret line="108" column="40" lean-forward="false" selection-start-line="108" selection-start-column="40" selection-end-line="108" selection-end-column="40" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
