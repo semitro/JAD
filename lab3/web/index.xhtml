@@ -11,12 +11,24 @@
    <title>
       BEAUTYs
    </title>
+   <h:outputStylesheet name="css/start.css"/>
 </h:head>
 <h:body>
 <f:view>
-   <h:outputLabel value="Heallo, wosrld"/>
+   <div id="hat">
+      <p>Ощепков, Буланцsов</p>
+      <p>P3202</p>
+   </div>
+   <h:form>
+      <p:poll interval="10" update="clock" />
+      <p:chart id="clock" type="line" model="#{clock.chartClock}"/>
+   </h:form>
+   <nav style="link">
+      <a href="www.google.com" data-hover="xui">sf</a>
+   </nav>
 </f:view>
-<p:chart type="line" model="#{clock.chartClock}"> </p:chart>
+
+
 </h:body>
 
 

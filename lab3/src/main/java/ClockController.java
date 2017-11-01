@@ -6,6 +6,9 @@ import org.primefaces.model.chart.LineChartSeries;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by semitro on 31.10.17.
@@ -13,8 +16,9 @@ import java.io.Serializable;
 @ManagedBean
 public class ClockController implements Serializable {
     //This plot is a clock
-    private LineChartModel chartClock = new LineChartModel();
+    private LineChartModel chartClock;
 
+    private long initSeconds;
     public LineChartModel getChartClock() {
         return chartClock;
     }
@@ -25,36 +29,32 @@ public class ClockController implements Serializable {
 
     @PostConstruct
     void init(){
-        LineChartModel model = new LineChartModel();
-
+        chartClock = new LineChartModel();
+        initSeconds = System.currentTimeMillis()/1000;
+        // Гавно. Как перенести в разметку?
+        chartClock.setTitle("Часы");
         LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Series 1");
+        series1.set(System.currentTimeMillis()/1000 -initSeconds, new Date().getSeconds());
+        series1.setLabel("Зависимость");
 
-        series1.set(1, 2);
-        series1.set(2, 1);
-        series1.set(3, 3);
-        series1.set(4, 6);
-        series1.set(5, 8);
-
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Series 2");
-
-        series2.set(1, 6);
-        series2.set(2, 3);
-        series2.set(3, 2);
-        series2.set(4, 7);
-        series2.set(5, 9);
-
-        model.addSeries(series1);
-        model.addSeries(series2);
-        this.chartClock = model;
-
-        chartClock.setTitle("Line Chart");
+        chartClock.addSeries(series1);
         chartClock.setAnimate(true);
         chartClock.setLegendPosition("se");
         Axis yAxis = chartClock.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        yAxis.setMax(10);
+        yAxis.setMax(70);
+        yAxis.setLabel("Секунды времени");
+        chartClock.getAxis(AxisType.X).setMin(0);
+        chartClock.getAxis(AxisType.X).setLabel("Время на сайте (сек)");
+
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+        executor.scheduleAtFixedRate(()->{
+            this.chartClock.getSeries().get(0)
+                    .set(System.currentTimeMillis()/1000 - initSeconds,new Date().getSeconds());
+
+        }
+                       ,
+                0,5000, TimeUnit.MILLISECONDS);
 
     }
 }
