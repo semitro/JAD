@@ -35,15 +35,23 @@ public class ClockController implements Serializable {
         chartClock.setTitle("Часы");
         LineChartSeries series1 = new LineChartSeries();
         series1.set(System.currentTimeMillis()/1000 -initSeconds, new Date().getSeconds());
-        series1.setLabel("Зависимость");
+        series1.setLabel("Зависимость секунд от секунд");
+        LineChartSeries series2 = new LineChartSeries();
+        series2.set(System.currentTimeMillis()/1000 -initSeconds, new Date().getMinutes());
+        series2.setLabel("Зависимость минут от секунд");
+        LineChartSeries series3 = new LineChartSeries();
+        series3.set(System.currentTimeMillis()/1000 -initSeconds, new Date().getHours());
+        series3.setLabel("Зависимость часов от секунд");
 
         chartClock.addSeries(series1);
+        chartClock.addSeries(series2);
+        chartClock.addSeries(series3);
         chartClock.setAnimate(true);
         chartClock.setLegendPosition("se");
         Axis yAxis = chartClock.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(70);
-        yAxis.setLabel("Секунды времени");
+        yAxis.setLabel("Время времени");
         chartClock.getAxis(AxisType.X).setMin(0);
         chartClock.getAxis(AxisType.X).setLabel("Время на сайте (сек)");
 
@@ -51,6 +59,10 @@ public class ClockController implements Serializable {
         executor.scheduleAtFixedRate(()->{
             this.chartClock.getSeries().get(0)
                     .set(System.currentTimeMillis()/1000 - initSeconds,new Date().getSeconds());
+            this.chartClock.getSeries().get(1)
+                    .set(System.currentTimeMillis()/1000 - initSeconds,new Date().getMinutes());
+            this.chartClock.getSeries().get(2)
+                    .set(System.currentTimeMillis()/1000 - initSeconds,new Date().getHours());
 
         }
                        ,
