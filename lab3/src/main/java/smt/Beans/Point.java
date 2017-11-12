@@ -1,9 +1,9 @@
+package smt.Beans;
+
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 
-/**
- * Created by semitro on 12.11.17.
- */
+
 public class Point
 {
     private BigDecimal x;

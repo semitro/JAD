@@ -1,3 +1,5 @@
+package smt.Beans;
+
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.LineChartModel;
@@ -10,9 +12,7 @@ import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by semitro on 31.10.17.
- */
+
 @ManagedBean
 public class ClockController implements Serializable {
     //This plot is a clock
