@@ -58,12 +58,4 @@ public class ClockController implements Serializable {
 
     }
 
-    public String toPlot(){
-        try {
-            Runtime.getRuntime().exec("alert xui");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "*";
-    }
 }
