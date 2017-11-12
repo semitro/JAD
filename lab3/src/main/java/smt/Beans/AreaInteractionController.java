@@ -15,7 +15,7 @@ public class AreaInteractionController {
 
     @PostConstruct
     void init(){
-
+        point = new Point(0,0,0);
         FacesContext fc = FacesContext.getCurrentInstance();
         model = fc.getApplication().evaluateExpressionGet(fc,"#{model}",MainModel.class);
     }

@@ -29,5 +29,6 @@
     <orderEntry type="library" name="PrimeFaces-6.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.faces:jsf-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.1" level="project" />
+    <orderEntry type="library" name="el-api" level="project" />
   </component>
 </module>

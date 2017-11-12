@@ -1,6 +1,5 @@
 package smt.Business;
 
-import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 
 
@@ -9,15 +8,10 @@ public class Point
     private BigDecimal x;
     private BigDecimal y;
     private BigDecimal r;
-    public Point(){
-
-    }
-
-    @PostConstruct
-    void init(){
-        x = new BigDecimal(0);
-        y = new BigDecimal(0);
-        r = new BigDecimal(0);
+    public Point(Number x, Number y, Number r){
+        this.x = new BigDecimal(x.doubleValue());
+        this.y = new BigDecimal(y.doubleValue());
+        this.r = new BigDecimal(r.doubleValue());
     }
 
     public BigDecimal getX() {
