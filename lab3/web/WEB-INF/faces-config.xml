@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
   <managed-bean>
       <managed-bean-name>clock</managed-bean-name>
       <managed-bean-class>smt.Beans.ClockController</managed-bean-class>
@@ -10,8 +11,15 @@
   </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>point</managed-bean-name>
-        <managed-bean-class>smt.Beans.Point</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-name>model</managed-bean-name>
+        <managed-bean-class>smt.Beans.MainModel</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>areaController</managed-bean-name>
+        <managed-bean-class>smt.Beans.AreaInteractionController</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+
     </managed-bean>
 </faces-config>

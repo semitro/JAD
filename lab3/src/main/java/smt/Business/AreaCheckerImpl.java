@@ -1,7 +1,5 @@
 package smt.Business;
 
-import smt.Beans.Point;
-
 
 public class AreaCheckerImpl implements AreaChecker {
     @Override

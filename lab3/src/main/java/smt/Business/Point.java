@@ -1,4 +1,4 @@
-package smt.Beans;
+package smt.Business;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
