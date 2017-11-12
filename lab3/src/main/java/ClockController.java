@@ -57,4 +57,13 @@ public class ClockController implements Serializable {
                 0,5000, TimeUnit.MILLISECONDS);
 
     }
+
+    public String toPlot(){
+        try {
+            Runtime.getRuntime().exec("alert xui");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "*";
+    }
 }

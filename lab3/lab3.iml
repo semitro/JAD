@@ -25,8 +25,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Mojarra-2.2.1" level="project" />
-    <orderEntry type="library" name="PrimeFaces-6.1" level="project" />
+    <orderEntry type="library" exported="" name="PrimeFaces-6.1" level="project" />
     <orderEntry type="library" name="PrimeFaces-6.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.faces:jsf-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:2.0.0.RC" level="project" />
   </component>
 </module>
