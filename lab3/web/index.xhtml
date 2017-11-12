@@ -7,22 +7,32 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
 <h:head>
+
    <title>
-      BEAUTYs
+      BEAUTY
    </title>
+
    <h:outputStylesheet name="css/start.css"/>
+
 </h:head>
+
 <h:body>
+
+
 <f:view>
+
    <div id="hat">
       <p>Ощепков, Буланцsов</p>
       <p>P3202</p>
    </div>
+
    <h:form>
       <p:poll interval="10" update="clock" />
       <p:chart id="clock" type="line" model="#{clock.chartClock}"/>
    </h:form>
+
    <h:form>
       <h:commandButton action="PlotInteraction" value="В лабу"/>
    </h:form>
@@ -30,7 +40,5 @@
 </f:view>
 
 </h:body>
-
-
 
 </html>

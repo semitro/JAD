@@ -8,4 +8,5 @@
       <managed-bean-class>ClockController</managed-bean-class>
       <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
+
 </faces-config>
