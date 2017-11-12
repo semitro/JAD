@@ -13,8 +13,8 @@
 <!-- main form !-->
 <h:form >
 
-    <div class="knob-container  ui-corner-all">
-        <p:knob max="3" min="-3" step="1" value="#{areaController.point.r}" required="true">
+    <div class="knob-container  ui-corner-all" >
+        <p:knob max="3" min="-3" step="1" value="#{areaController.point.r}" required="true" width="120" height="120">
             <f:validateLongRange minimum="-3" maximum="3"/>
         </p:knob>
     </div>

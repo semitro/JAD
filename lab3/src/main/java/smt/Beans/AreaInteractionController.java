@@ -30,5 +30,7 @@ public class AreaInteractionController {
 
     public void handle_submit(){
         model.doesItHit(point);
+
     }
+
 }
