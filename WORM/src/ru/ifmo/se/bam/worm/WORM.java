@@ -32,6 +32,14 @@ import java.sql.Statement;
  * <p>Supplying different types for different parametres results in
  * {@link IllegalArgumentException} being thrown at some unspecified time,
  * but even this should not be relied upon.</p>
+ * <p>Typical usage example:<blockquote><pre>
+ * url = "jdbc:postgresql://localhost/mydatabase?user=user&password=password";
+ * Connection conn = DriverManager.getConnection(url);
+ * SqlHelper sqlHelper = new SqlHelper(MyClass.class, "psql");
+ *{@code WORM<MyClass>} worm = new WORM<>(MyClass.class, conn, sqlHelper);
+ * MyClass myObject = new MyClass();
+ * worm.insert(myObject);
+ * </pre></blockquote></p>
  * @param <Type> the type of object for mapping
  * @author Alexandr Bulantsov
  */
