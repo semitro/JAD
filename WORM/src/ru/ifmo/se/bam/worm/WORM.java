@@ -22,6 +22,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>CRAWLING IN MY SKIN</p>
@@ -143,32 +145,40 @@ public class WORM<Type> {
      * @param obj object to be selected
      * @return a ResultSet containing quieried object
      * @throws SQLException if a database error occurs
+     * @throws InstantiationException if return object can not be instantiated
      * @throws IllegalArgumentException if Type parameter and class differ
      * @see Connection#prepareStatement
      * @see PreparedStatement#executeQuery()
      */
-    public ResultSet select(Type obj)
-            throws SQLException {
+    public Type select(Type obj)
+            throws SQLException, InstantiationException {
         if(selectStmt == null) {
             selectStmt = conn.prepareStatement(help.makeSelectStatement());
         }
         bindValues(null, obj, selectStmt);
-        return selectStmt.executeQuery();
+        ResultSet rs = selectStmt.executeQuery();
+        return convertToObject(rs);
     }
     
     /**
      * <p>Executes a SELECT statement for every row.</p>
-     * @param obj object to be selected
      * @return a ResultSet containing all rows in the table
      * @throws SQLException if a database error occurs
+     * @throws InstantiationException if return object can not be instantiated
      * @throws IllegalArgumentException if Type parameter and class differ
      * @see Connection#createStatement() 
      * @see Statement#executeQuery()
      */
-    public ResultSet selectAll(Type obj) 
-            throws SQLException {
+    public List<Type> selectAll() 
+            throws SQLException, InstantiationException {
         Statement stmt = conn.createStatement();
-        return stmt.executeQuery(help.makeSelectStatementForEveryRow());
+        ResultSet rs = stmt.executeQuery(help.makeSelectStatementForEveryRow());
+        List<Type> ret = new ArrayList<>();
+        Type obj;
+        while((obj=convertToObject(rs))!=null) {
+            ret.add(obj);
+        }
+        return ret;
     }
     
     private void bindValues(Type newObject, Type selectObject, PreparedStatement stmt)
@@ -198,23 +208,44 @@ public class WORM<Type> {
     
     private void bindValue(PreparedStatement stmt, Class fType, int fOrder, Object value)
             throws SQLException {
-        if(fType==Byte.class || fType==Byte.TYPE) {
-            stmt.setByte(fOrder, (Byte)value);
-        } else if(fType==Short.class || fType==Short.TYPE) {
-            stmt.setShort(fOrder, (Short)value);
-        } else if(fType==Integer.class || fType==Integer.TYPE) {
-            stmt.setInt(fOrder, (Integer)value);
-        } else if(fType==Long.class || fType==Long.TYPE) {
-            stmt.setLong(fOrder, (Long)value);
-        } else if(fType==Float.class || fType==Float.TYPE) {
-            stmt.setFloat(fOrder, (Float)value);
-        } else if(fType==Double.class || fType==Double.TYPE) {
-            stmt.setDouble(fOrder, (Double)value);
-        } else if(fType==Character.class || fType==Character.TYPE) {
-            stmt.setNString(fOrder, String.valueOf((Character)value));
-        } else if(fType==String.class) {
-            stmt.setNString(fOrder, (String)value);
-        } else {
+        stmt.setObject(fOrder, value);
+//        if(fType==Byte.class || fType==Byte.TYPE) {
+//            stmt.setByte(fOrder, (Byte)value);
+//        } else if(fType==Short.class || fType==Short.TYPE) {
+//            stmt.setShort(fOrder, (Short)value);
+//        } else if(fType==Integer.class || fType==Integer.TYPE) {
+//            stmt.setInt(fOrder, (Integer)value);
+//        } else if(fType==Long.class || fType==Long.TYPE) {
+//            stmt.setLong(fOrder, (Long)value);
+//        } else if(fType==Float.class || fType==Float.TYPE) {
+//            stmt.setFloat(fOrder, (Float)value);
+//        } else if(fType==Double.class || fType==Double.TYPE) {
+//            stmt.setDouble(fOrder, (Double)value);
+//        } else if(fType==Character.class || fType==Character.TYPE) {
+//            stmt.setNString(fOrder, String.valueOf((Character)value));
+//        } else if(fType==String.class) {
+//            stmt.setNString(fOrder, (String)value);
+//        } else {
+//            throw new IllegalArgumentException();
+//        }
+    }
+    
+    private Type convertToObject(ResultSet rs)
+            throws InstantiationException, SQLException {
+        try {
+            if(rs.next()) {
+                Type ret;
+                ret = (Type)cl.newInstance();
+                String fName;
+                for(Field f: cl.getFields()) {
+                    fName = f.getName();
+                    f.set(f, rs.getObject(help.getOrderIndex(fName)));
+                }
+                return ret;
+            }
+            else
+                return null;
+        } catch (IllegalAccessException|NoSuchFieldException ex) {
             throw new IllegalArgumentException();
         }
     }
