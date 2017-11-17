@@ -5,18 +5,17 @@ import java.math.BigDecimal;
 
 public class Point
 {
-    public BigDecimal x;
-    public BigDecimal y;
-    public BigDecimal r;
-    public byte hit;
+    private BigDecimal x;
+    private BigDecimal y;
+    private BigDecimal r;
+    private boolean hit;
+    
     public Point(Number x, Number y, Number r){
         this.x = new BigDecimal(x.doubleValue());
         this.y = new BigDecimal(y.doubleValue());
         this.r = new BigDecimal(r.doubleValue());
     }
-    public Point() {
-        
-    }
+    public Point() {}
 
     public BigDecimal getX() {
         return x;
@@ -46,13 +45,13 @@ public class Point
      * @return the hit
      */
     public boolean getHit() {
-        return hit==1;
+        return hit;
     }
 
     /**
      * @param hit the hit to set
      */
     public void setHit(boolean hit) {
-        this.hit = (byte) (hit ? 1 : 0);
+        this.hit = hit;
     }
 }
