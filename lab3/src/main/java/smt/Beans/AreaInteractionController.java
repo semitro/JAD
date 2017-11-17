@@ -20,6 +20,9 @@ public class AreaInteractionController {
 //        model = fc.getApplication().evaluateExpressionGet(fc,"#{model}",MainModel.class);
     }
 
+    public AreaInteractionController(){
+
+    }
     public Point getPoint() {
         return point;
     }

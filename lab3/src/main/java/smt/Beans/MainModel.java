@@ -1,14 +1,13 @@
 package smt.Beans;
 
-import java.util.LinkedList;
-import java.util.List;
 import smt.Business.AreaChecker;
 import smt.Business.AreaCheckerImpl;
 import smt.Business.DataBaseInteraction;
 import smt.Business.Point;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedProperty;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class MainModel {
@@ -17,6 +16,9 @@ public class MainModel {
     private DataBaseInteraction database;
     private List<Point> points;
 
+    public MainModel(){
+
+    }
     @PostConstruct
     void init(){
         areaChecker = new AreaCheckerImpl();
