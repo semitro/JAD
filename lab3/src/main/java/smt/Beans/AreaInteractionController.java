@@ -15,9 +15,9 @@ public class AreaInteractionController {
 
     @PostConstruct
     void init(){
-        point = new Point(0,0,0);
 //        FacesContext fc = FacesContext.getCurrentInstance();
 //        model = fc.getApplication().evaluateExpressionGet(fc,"#{model}",MainModel.class);
+        point = new Point(0.75, 0, 0);
     }
 
     public AreaInteractionController(){
@@ -31,7 +31,7 @@ public class AreaInteractionController {
         this.point = point;
     }
 
-    public void handle_submit(){
+    public void handle_submit() throws Exception{
         model.addPoint(point);
     }
 

@@ -29,6 +29,7 @@
             <property-name>model</property-name>
             <value>#{model}</value>
         </managed-property>
+
     </managed-bean>
 
     <managed-bean>
@@ -36,5 +37,6 @@
         <managed-bean-class>smt.Business.DataBaseInteractionImpl</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+
 
 </faces-config>

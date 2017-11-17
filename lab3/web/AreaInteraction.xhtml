@@ -37,7 +37,7 @@
     <p:commandButton value="Добавить точку" update="mainGrid" onclick="#{areaController.handle_submit()}" />
 
 </h:form>
-<p:dataTable var="point" value="#{mainModel.points}">
+<p:dataTable var="point" value="#{model.points}">
     <p:column headerText="X">
         <h:outputText value="#{point.x}" />
     </p:column>
