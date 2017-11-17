@@ -8,11 +8,14 @@ public class Point
     public BigDecimal x;
     public BigDecimal y;
     public BigDecimal r;
-    public boolean hit;
+    public byte hit;
     public Point(Number x, Number y, Number r){
         this.x = new BigDecimal(x.doubleValue());
         this.y = new BigDecimal(y.doubleValue());
         this.r = new BigDecimal(r.doubleValue());
+    }
+    public Point() {
+        
     }
 
     public BigDecimal getX() {
@@ -42,14 +45,14 @@ public class Point
     /**
      * @return the hit
      */
-    public boolean isHit() {
-        return hit;
+    public boolean getHit() {
+        return hit==1;
     }
 
     /**
      * @param hit the hit to set
      */
     public void setHit(boolean hit) {
-        this.hit = hit;
+        this.hit = (byte) (hit ? 1 : 0);
     }
 }
