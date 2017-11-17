@@ -1,6 +1,9 @@
+
 target/
 build/
 dist/
 build.xml
 nbproject/
-
+**.pdf
+**.idea
+**JOHNLENNON*
