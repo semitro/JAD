@@ -1,0 +1,58 @@
+body{
+ background-color: gainsboro;
+}
+
+#hat{
+    color: white;
+    font-size: 2em;
+    padding-right: 20px;
+    text-align: right;
+}
+
+.blehh-wrapper {
+    overflow: hidden;
+    margin-bottom: 2em;
+}
+.blehh-container {
+    height: 60px;
+    width: 180px;
+    float: left;
+    padding: 10px;
+    border-right: 1px dimgray solid;
+}
+.blehh-container:last-child {
+    border-right: none;
+}
+.blehh-container input {
+    height: 40px;
+    width: 50px;
+}
+.blehh-container span.ui-widget {
+    width: 60px;
+    height: 50px;
+}
+.blehh-container span.ui-widget input {
+    width: 30px;
+    margin: 0;
+}
+.blehh-container .ui-corner-all {
+    margin: 5px 0 5px 0;
+}
+.blehh-container button {
+    width: 100%;
+    height: 50px;
+}
+.blehh-title {
+    width: 120px;
+    height: 60px;
+    font-size: 300%;
+    font-family: monospace;
+    float: left;
+}
+.blehh-afterfloat {
+    clear: left;
+}
+
+img {
+    max-height: 500px;
+}

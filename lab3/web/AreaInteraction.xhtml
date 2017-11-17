@@ -8,56 +8,73 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <link rel="script" href="resources/js/jquery-min.js"/>
+    <h:outputStylesheet name="css/main.css"/>
+    <title>
+        FLAVOURLESS VICTORY
+    </title>
 </h:head>
-
-<!-- main form !-->
-<h:form >
-
-    <div class="knob-container  ui-corner-all" >
-        <p:knob max="3" min="-3" step="1" value="#{areaController.point.r}" required="true" width="120" height="120">
-            <f:validateLongRange minimum="-3" maximum="3"/>
-        </p:knob>
+<h:body>
+    <h:form>
+        <h:commandButton action="index" value="Стартовая страница"/>
+    </h:form>
+    <div id="hat">
+      <p>Ощепков, Буланцов</p>
+      <p>P3202</p>
     </div>
+    
+    <!-- main form !-->
+    <h:form id="inputForm">
+        <div class="blehh-wrapper">
+            <div class="blehh-container">
+                <div class="blehh-title">
+                    <p:outputLabel value="R:" for="r_input"/>
+                </div>
+                <div class="knob-container ui-corner-all" >
+                    <p:knob id="r_input" max="3" min="-3" step="1" value="#{areaController.point.r}" required="true" width="60" height="60">
+                        <f:validateLongRange minimum="-3" maximum="3"/>
+                    </p:knob>
+                </div>
+            </div>
+            <div class="blehh-container">
+                <div class="blehh-title">
+                    <p:outputLabel value="X:" for="x_input"/>
+                </div>
+                <p:spinner id="x_input" min="0.1" max="3" value="#{areaController.point.x}" stepFactor="0.1" required="true">
+                    <f:validateDoubleRange minimum="0.1" maximum="3"/>
+                </p:spinner>
+                <p:message for="x_input" display="Введите X"/>
+            </div>
+            <div class="blehh-container">
+                <div class="blehh-title">
+                    <p:outputLabel value="Y:" for="y_input"/>
+                </div>
+                <p:inputText id="y_input" maxlength="50" value="#{areaController.point.y}" required="true">
+                    <f:validateDoubleRange minimum="-3" maximum="5"/>
+                </p:inputText>
+                <p:message for="y_input" display="Введите Y"/>
+            </div>
+            <div class="blehh-container">
+                <p:commandButton value="Добавить точку" update="inputForm" onclick="#{areaController.handle_submit()}" />
+            </div>
+        </div>
+        <div class="blehh-afterfloat" />
+    </h:form>
 
-    <h:panelGrid columns="3" cellpadding="5" id="mainGrid">
-        <p:outputLabel value="x: " for="x_input"/>
-        <p:spinner id="x_input" min="0.1" max="3" value="#{areaController.point.x}" stepFactor="0.1" required="true">
-            <f:validateDoubleRange minimum="0.1" maximum="3"/>
-        </p:spinner>
-        <p:message for="x_input" display="Введите X"/>
-
-        <p:outputLabel value="y: " for="y_input"/>
-        <p:inputText id="y_input" maxlength="50" value="#{areaController.point.y}" required="true">
-            <f:validateDoubleRange minimum="-3" maximum="5"/>
-        </p:inputText>
-        <p:message for="y_input" display="Введите y"/>
-
-    </h:panelGrid>
-
-    <p:commandButton value="Добавить точку" update="mainGrid" onclick="#{areaController.handle_submit()}" />
-
-</h:form>
-<p:dataTable var="point" value="#{mainModel.points}">
-    <p:column headerText="X">
-        <h:outputText value="#{point.x}" />
-    </p:column>
-    <p:column headerText="Y">
-        <h:outputText value="#{point.y}" />
-    </p:column>
-    <p:column headerText="R">
-        <h:outputText value="#{point.r}" />
-    </p:column>
-    <p:column headerText="Попали?">
-        <h:outputText value="#{point.hit}" />
-    </p:column>    
-</p:dataTable>
-<h:form>
-    <h:commandButton action="index" value="Стартовая страница"/>
-</h:form>
-
-<p:graphicImage url="/resources/img/areas.png">
-
-</p:graphicImage>
-
-
+    <p:graphicImage url="/resources/img/areas.png" />
+    
+    <p:dataTable var="point" value="#{mainModel.points}" id="dataTable">
+        <p:column headerText="X">
+            <h:outputText value="#{point.x}" />
+        </p:column>
+        <p:column headerText="Y">
+            <h:outputText value="#{point.y}" />
+        </p:column>
+        <p:column headerText="R">
+            <h:outputText value="#{point.r}" />
+        </p:column>
+        <p:column headerText="Попали?">
+            <h:outputText value="#{point.hit}" />
+        </p:column>    
+    </p:dataTable>
+</h:body>
 </html>
