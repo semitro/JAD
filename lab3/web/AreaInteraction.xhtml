@@ -37,7 +37,20 @@
     <p:commandButton value="Добавить точку" update="mainGrid" onclick="#{areaController.handle_submit()}" />
 
 </h:form>
-
+<p:dataTable var="point" value="#{mainModel.points}">
+    <p:column headerText="X">
+        <h:outputText value="#{point.x}" />
+    </p:column>
+    <p:column headerText="Y">
+        <h:outputText value="#{point.y}" />
+    </p:column>
+    <p:column headerText="R">
+        <h:outputText value="#{point.r}" />
+    </p:column>
+    <p:column headerText="Попали?">
+        <h:outputText value="#{point.hit}" />
+    </p:column>    
+</p:dataTable>
 <h:form>
     <h:commandButton action="index" value="Стартовая страница"/>
 </h:form>
