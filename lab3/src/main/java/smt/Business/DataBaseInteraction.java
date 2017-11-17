@@ -7,5 +7,6 @@ import java.util.List;
  */
 public interface DataBaseInteraction {
     List<Point> loadPoints();
-    void savePoints(List<Point> t);
+    void savePoints(List<Point> points);
+    void savePoint(Point point);
 }

@@ -29,8 +29,7 @@ public class AreaInteractionController {
     }
 
     public void handle_submit(){
-        model.doesItHit(point);
-
+        model.addPoint(point);
     }
 
     public MainModel getModel() {

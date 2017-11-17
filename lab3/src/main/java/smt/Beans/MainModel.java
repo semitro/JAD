@@ -1,5 +1,7 @@
 package smt.Beans;
 
+import java.util.LinkedList;
+import java.util.List;
 import smt.Business.AreaChecker;
 import smt.Business.AreaCheckerImpl;
 import smt.Business.DataBaseInteraction;
@@ -12,18 +14,26 @@ import javax.faces.bean.ManagedProperty;
 public class MainModel {
     private AreaChecker areaChecker;
     // inject dbimpl to here
-    @ManagedProperty(value = "#{dbImpl}")
     private DataBaseInteraction database;
+    private List<Point> points;
 
     @PostConstruct
     void init(){
         areaChecker = new AreaCheckerImpl();
-       // database.loadPoints();
-        database.savePoints(null);
+        points = new LinkedList<>(database.loadPoints());
     }
 
-    boolean doesItHit(Point point){
-        return areaChecker.doesPointHit(point);
+    void addPoint(Point point){
+        point.setHit(areaChecker.doesPointHit(point));
+        points.add(point);
+        database.savePoint(point);
+    }
+
+    /**
+     * @return the points
+     */
+    public List<Point> getPoints() {
+        return points;
     }
 
 
