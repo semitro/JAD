@@ -11,9 +11,9 @@ public class Point
     private boolean hit;
     
     public Point(Number x, Number y, Number r){
-        this.x = new BigDecimal(x.doubleValue());
-        this.y = new BigDecimal(y.doubleValue());
-        this.r = new BigDecimal(r.doubleValue());
+        this.x = new BigDecimal(x.toString());
+        this.y = new BigDecimal(y.toString());
+        this.r = new BigDecimal(r.toString());
     }
     public Point() {}
 

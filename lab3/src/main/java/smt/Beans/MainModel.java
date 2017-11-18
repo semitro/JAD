@@ -35,7 +35,7 @@ public class MainModel {
     void addPoint(Point point) throws SQLException{
         point.setHit(areaChecker.doesPointHit(point));
         database.savePoint(point);
-        points.add(point);
+        points.add(0, point);
 //        try {
 //        }catch (SQLException  e){
 //            // !! УБРАТЬ !! //
