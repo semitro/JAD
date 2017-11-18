@@ -14,14 +14,16 @@
     </title>
 </h:head>
 <h:body>
-    <h:form>
-        <h:commandButton action="index" value="Стартовая страница"/>
-    </h:form>
+
     <div id="hat">
-      <p>Ощепков, Буланцов</p>
-      <p>P3202</p>
+      <!--<p></p>-->
+        <p:graphicImage url="/resources/img/areas.png" />
+        <h:form>
+            <p:commandButton action="index" value="Стартовая страница"/>
+        </h:form>
     </div>
-    
+
+
     <!-- main form !-->
     <h:form id="inputForm">
         <div class="blehh-wrapper">
@@ -30,7 +32,7 @@
                     <p:outputLabel value="X:" for="x_input"/>
                 </div>
                 <div class="knob-container ui-corner-all" >
-                    <p:knob id="x_input" max="3" min="-3" step="1" value="#{areaController.point.x}" required="true" width="60" height="60">
+                    <p:knob cursor="true" backgroundColor="white" id="x_input" max="3" min="-3" step="1" value="#{areaController.point.x}" required="true" width="62" height="62">
                         <f:validateLongRange minimum="-3" maximum="3"/>
                     </p:knob>
                 </div>
@@ -60,7 +62,6 @@
         <div class="blehh-afterfloat" />
     </h:form>
 
-    <p:graphicImage url="/resources/img/areas.png" />
 
     <p:dataTable var="point" value="#{model.points}" id="dataTable">
         <p:column headerText="X">
