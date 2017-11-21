@@ -27,10 +27,10 @@
         <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
         <h:outputScript name="click_handler.js" library="js" target="head"/>
         <h:inputText id="x_input" value="#{imageClick.point.x}">
-            <f:validateLongRange minimum="-3" maximum="3"/>
+            <f:validateDoubleRange minimum="-20" maximum="20"/>
         </h:inputText>
         <h:inputText id="y_input" value="#{imageClick.point.y}">
-            <f:validateDoubleRange minimum="-3" maximum="5"/>
+            <f:validateDoubleRange minimum="-20" maximum="20"/>
         </h:inputText>
         <h:inputText id="r_input" value="#{imageClick.point.r}">
             <f:validateDoubleRange minimum="0.1" maximum="3"/>
