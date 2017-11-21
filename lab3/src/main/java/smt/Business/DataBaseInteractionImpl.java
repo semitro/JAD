@@ -11,7 +11,7 @@ import java.util.List;
 public class DataBaseInteractionImpl implements DataBaseInteraction , Serializable{
 
     private Connection conn;
-    // create table point(id serial primary key, x varchar(80), y varchar(80), r varchar(80), hit integer);
+    // create table point(x varchar(80), y varchar(80), r varchar(80), hit integer);
     // create user xaroxx with password 'xxx123';
     private String usr         = "xaroxx";
     private String password    = "xxx123";

@@ -26,21 +26,19 @@ public class MainModel {
     void init(){
         areaChecker = new AreaCheckerImpl();
         try {
-            points = new LinkedList<>(database.loadPoints());
-        }catch (SQLException e){
+            points = new LinkedList<>();
+            points.addAll(database.loadPoints());
+        }catch (Exception e){
             points.add(new Point(-1, -1, -1));
         }
     }
 
-    void addPoint(Point point) throws SQLException{
-        point.setHit(areaChecker.doesPointHit(point));
+    void addPoint(Point point)
+            throws SQLException {
+        boolean hit = areaChecker.doesPointHit(point);
+        point.setHit(hit);
         database.savePoint(point);
         points.add(0, point);
-//        try {
-//        }catch (SQLException  e){
-//            // !! УБРАТЬ !! //
-//            points.add(new Point(7, 7, 7));
-//        }
     }
 
     /**
