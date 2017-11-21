@@ -2,33 +2,6 @@ body{
  background-color: gainsboro;
 }
 
-@media (max-width: 750px) {
-    #hat {
-        float: none;
-    }
-}
-
-@media (min-width: 751px) {
-    #hat {
-        float: right;
-    }
-}
-#hat{
-    color: white;
-    font-size: 2em;
-    padding-right: 20px;
-    text-align: right;
-    overflow: auto;
-    width: 350px;
-}
-#hat form{
-    max-width: 374px;
-    font-size: 24px;
-    max-height: 50px;
-    width: 374px;
-    float: right;
-}
-
 .blehh-wrapper {
     margin-bottom: 2em;
     height: 60px;
@@ -69,13 +42,62 @@ body{
     font-family: monospace;
     float: left;
 }
-.blehh-afterfloat {
+.blehh-clear {
     clear: left;
 }
 table {
     max-width: 924px;
 }
-img {
-    float: right;
+
+
+@media (max-width: 750px) {
+    #hat {
+        float: left;
+        height: 280px;
+    }
+    img {
+        float: left;
+    }
+    .thin_clear {
+        clear: both;
+    }
+}
+@media (min-width: 751px) {
+    #hat {
+        float: right;
+        margin-left: 1em;
+    }
+    .thin_clear {
+        clear: none;
+    }
+}
+#hat{
+    color: white;
+    font-size: 2em;
+    padding-right: 20px;
+    text-align: right;
+}
+#hat form{
+    width: 202px;
+    font-size: 16px;
+    max-height: 50px;
+}
+#imageWrapper {
+    position: relative;
+}
+#plotCanvas {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 200px;
+    height: 200px;
     max-width: 100%;
+}
+img {
+    width: 200px;
+    height: 200px;
+    border: 1px cadetblue solid;
+}
+.hide {
+    display: none;
 }

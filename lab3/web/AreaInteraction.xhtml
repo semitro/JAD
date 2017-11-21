@@ -14,12 +14,11 @@
     </title>
 </h:head>
 <h:body>
-
-    
-    <div id="main-container">
     <div id="hat">
-      <!--<p></p>-->
-        <p:graphicImage library="img" name="areas.png" />
+        <div id="imageWrapper">
+            <canvas width="420px" height="380px" id="plotCanvas"></canvas>
+            <p:graphicImage library="img" name="areas-crop.png" />
+        </div>
         <h:form>
             <p:commandButton action="index?faces-redirect=true" value="Стартовая страница"/>
         </h:form>
@@ -40,6 +39,9 @@
             <h:inputText id="hidden_hit" value="${imageClick.point.hit}"/>
         </h:form>
     </div>
+    <div class="thin_clear"/>
+    
+    <div id="main-container">        
         <!-- main form !-->
         <h:form id="inputForm">
             <div class="blehh-wrapper">
@@ -75,7 +77,7 @@
                     <p:commandButton value="Добавить точку" update="inputForm,dataTable" action="#{areaController.handle_sususu()}" />
                 </div>
             </div>
-            <div class="blehh-afterfloat" />
+            <div class="blehh-clear" />
         </h:form>
 
         <p:dataTable var="point" value="#{model.points}" id="dataTable">
