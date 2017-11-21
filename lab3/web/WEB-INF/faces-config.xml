@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-  <managed-bean>
-      <managed-bean-name>clock</managed-bean-name>
-      <managed-bean-class>smt.Beans.ClockController</managed-bean-class>
-      <managed-bean-scope>session</managed-bean-scope>
-  </managed-bean>
+    <managed-bean>
+        <managed-bean-name>clock</managed-bean-name>
+        <managed-bean-class>smt.Beans.ClockController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>model</managed-bean-name>
@@ -21,7 +21,6 @@
     </managed-bean>
 
     <managed-bean>
-
         <managed-bean-name>areaController</managed-bean-name>
         <managed-bean-class>smt.Beans.AreaInteractionController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
@@ -29,7 +28,6 @@
             <property-name>model</property-name>
             <value>#{model}</value>
         </managed-property>
-
     </managed-bean>
 
     <managed-bean>
@@ -38,5 +36,14 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>imageClick</managed-bean-name>
+        <managed-bean-class>smt.Beans.ImageInteraction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>model</property-name>
+            <value>#{model}</value>
+        </managed-property>
+    </managed-bean>
 
 </faces-config>
