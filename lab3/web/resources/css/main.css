@@ -2,20 +2,31 @@ body{
  background-color: gainsboro;
 }
 
+@media (max-width: 750px) {
+    #hat {
+        float: none;
+    }
+}
+
+@media (min-width: 751px) {
+    #hat {
+        float: right;
+    }
+}
 #hat{
     color: white;
     font-size: 2em;
     padding-right: 20px;
     text-align: right;
-    float: right;
     overflow: auto;
+    width: 350px;
 }
 #hat form{
-    align-content: right;
     max-width: 374px;
     font-size: 24px;
     max-height: 50px;
     width: 374px;
+    float: right;
 }
 
 .blehh-wrapper {
@@ -65,6 +76,6 @@ table {
     max-width: 924px;
 }
 img {
-    max-height: 500px;
-    float: top;
+    float: right;
+    max-width: 100%;
 }
