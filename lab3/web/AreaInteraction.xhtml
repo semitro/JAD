@@ -17,11 +17,28 @@
 
     <div id="hat">
       <!--<p></p>-->
-        <p:graphicImage url="/resources/img/areas.png" />
+        <p:graphicImage library="img" name="areas.png" />
         <h:form>
             <p:commandButton action="index?faces-redirect=true" value="Стартовая страница"/>
         </h:form>
     </div>
+    
+    <h:form id="pointInputForm" class="hide">
+        <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+        <h:outputScript name="click_handler.js" library="js" target="head"/>
+        <h:inputText id="x_input" value="#{imageClick.point.x}">
+            <f:validateLongRange minimum="-3" maximum="3"/>
+        </h:inputText>
+        <h:inputText id="y_input" value="#{imageClick.point.y}">
+            <f:validateDoubleRange minimum="-3" maximum="5"/>
+        </h:inputText>
+        <h:inputText id="r_input" value="#{imageClick.point.r}">
+            <f:validateDoubleRange minimum="0.1" maximum="3"/>
+            <f:ajax event="change" execute="@form" listener="#{imageClick.handle_click()}"
+                    render="dataTable hidden_hit" onevent="click_handler"/>
+        </h:inputText>
+        <h:inputText id="hidden_hit" value="${imageClick.point.hit}"/>
+    </h:form>
 
 
     <!-- main form !-->
@@ -56,7 +73,7 @@
                 </p:spinner>
             </div>
             <div class="blehh-container">
-                <p:commandButton value="Добавить точку" update="inputForm,dataTable"  action="#{areaController.handle_sususu()}" />
+                <p:commandButton value="Добавить точку" update="inputForm,dataTable" action="#{areaController.handle_sususu()}" />
             </div>
         </div>
         <div class="blehh-afterfloat" />
