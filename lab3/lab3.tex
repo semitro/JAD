@@ -1,0 +1,175 @@
+\documentclass[14pt,a4paper,report]{ncc}
+\usepackage[a4paper, mag=1000, left=2.5cm, right=1cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage{listings} 
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{graphicx}
+
+
+\DeclareCaptionFont{white}{\color{white}} 
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{% Собственно настройки вида листинга
+inputencoding=utf8, extendedchars=\true, keepspaces = true, % поддержка кириллицы и пробелов в комментариях
+language=Java,            % выбор языка для подсветки (здесь это Pascal)
+basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
+numbers=left,               % где поставить нумерацию строк (слева\справа)
+numberstyle=\tiny,          % размер шрифта для номеров строк
+stepnumber=1,               % размер шага между двумя номерами строк
+numbersep=5pt,              % как далеко отстоят номера строк от подсвечиваемого кода
+backgroundcolor=\color{white}, % цвет фона подсветки - используем \usepackage{color}
+showspaces=false,           % показывать или нет пробелы специальными отступами
+showstringspaces=false,     % показывать или нет пробелы в строках
+showtabs=false,             % показывать или нет табуляцию в строках
+frame=single,               % рисовать рамку вокруг кода
+tabsize=2,                  % размер табуляции по умолчанию равен 2 пробелам
+captionpos=t,               % позиция заголовка вверху [t] или внизу [b] 
+breaklines=true,            % автоматически переносить строки (да\нет)
+breakatwhitespace=false,    % переносить строки только если есть пробел
+escapeinside={\%*}{*)}      % если нужно добавить комментарии в коде
+}
+\begin{document}
+% Переоформление некоторых стандартных названий
+%\renewcommand{\chaptername}{Лабораторная работа}
+\def\contentsname{Содержание}
+
+
+
+
+% Оформление титульного листа
+\begin{titlepage}
+\begin{center}
+\textsc{СПБ НИУ ИТМО \\[2mm]«Университет информационных технологий,\\ механики и оптики»\\[5mm]
+Кафедра вычислительной техники\\[2mm]}
+
+
+\vfill
+
+\textbf{ОТЧЁТ ПО ЛАБОРАТОРНОЙ РАБОТЕ №3\\[3mm]
+Вариант №505 \\[25mm]
+}
+\end{center}
+
+\hfill
+\begin{minipage}{.3\textwidth}
+Выполнили:  \\[2mm] 
+Ощепков А.А.\\
+Буланцов А.М. \\
+группа: P3202\\[5mm]
+
+Преподаватель:\\[2mm] 
+Николаев В.В.
+\end{minipage}%
+\vfill
+\begin{center}
+Санкт-Петербург \theyear\
+\end{center}
+\end{titlepage}
+
+\newpage
+\large \textbf{Задание} 
+\small
+\par
+
+Разработать приложение на базе JavaServer Faces Framework, которое осуществляет проверку попадания точки в заданную область на координатной плоскости.
+
+Приложение должно включать в себя 2 facelets-шаблона - стартовую страницу и основную страницу приложения, а также набор управляемых бинов (managed beans), реализующих логику на стороне сервера.
+
+Стартовая страница должна содержать следующие элементы:
+
+"Шапку", содержащую ФИО студента, номер группы и номер варианта.
+Интерактивные часы, показывающие текущие дату и время, обновляющиеся раз в 10 секунд.
+Ссылку, позволяющую перейти на основную страницу приложения.
+Основная страница приложения должна содержать следующие элементы:
+
+Набор компонентов для задания координат точки и радиуса области в соответствии с вариантом задания. Может потребоваться использование дополнительных библиотек компонентов - ICEfaces (префикс "ace") и PrimeFaces (префикс "p"). Если компонент допускает ввод заведомо некорректных данных (таких, например, как буквы в координатах точки или отрицательный радиус), то приложение должно осуществлять их валидацию.
+Динамически обновляемую картинку, изображающую область на координатной плоскости в соответствии с номером варианта и точки, координаты которых были заданы пользователем. Клик по картинке должен инициировать сценарий, осуществляющий определение координат новой точки и отправку их на сервер для проверки её попадания в область. Цвет точек должен зависить от факта попадания / непопадания в область. Смена радиуса также должна инициировать перерисовку картинки.
+Таблицу со списком результатов предыдущих проверок.
+Ссылку, позволяющую вернуться на стартовую страницу.
+Дополнительные требования к приложению:
+
+Все результаты проверки должны сохраняться в базе данных под управлением СУБД Oracle.
+Для доступа к БД необходимо использовать протокол JDBC без каких-либо дополнительных библиотек.
+Для управления списком результатов должен использоваться Application-scoped Managed Bean.
+Конфигурация управляемых бинов должна быть задана с помощью параметров в конфигурационном файле.
+Правила навигации между страницами приложения должны быть заданы в отдельном конфигурационном файле.
+\\[2mm]
+\large \textbf{Текст программы}\\
+\small
+
+\begin{lstlisting}public class AreaInteractionController {
+
+    private MainModel model;
+
+    @ManagedProperty("point")
+    private Point point;
+
+    @PostConstruct
+    void init(){
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        model = fc.getApplication().evaluateExpressionGet(fc,"#{model}",MainModel.class);
+        point = new Point(0, 0, 0.1);
+    }
+
+    public AreaInteractionController(){
+
+    }
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
+    }
+
+    public void handle_sususu() throws Exception{
+        model.addPoint(point);
+    }
+
+    public MainModel getModel() {
+        return model;
+    }
+
+    public void setModel(MainModel model) {
+        this.model = model;
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <managed-bean>
+        <managed-bean-name>clock</managed-bean-name>
+        <managed-bean-class>smt.Beans.ClockController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>model</managed-bean-name>
+        <managed-bean-class>smt.Beans.MainModel</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>database</property-name>
+            <value>#{dbImpl}</value>
+        </managed-property>
+    </managed-bean>
+    ...
+    
+\end{lstlisting}
+
+\large \textbf{Выводы}
+\small
+\par
+В результате выполнения данной лабораторной работы, мы познакомились с технологией JSF, впервые на практике использовали DI, сделали ещё один шажок в болота энтерпрайза.\\
+
+\end{document}
