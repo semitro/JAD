@@ -31,6 +31,8 @@ public class ImageInteraction {
     private Point point;
     private boolean hit;
     private MainModel model;
+    private double xoffset;
+    private double yoffset;
     
     public ImageInteraction() {
         point = new Point();
@@ -55,5 +57,33 @@ public class ImageInteraction {
 
     public void setModel(MainModel model) {
         this.model = model;
+    }
+
+    /**
+     * @return the xoffset
+     */
+    public double getXoffset() {
+        return xoffset;
+    }
+
+    /**
+     * @param xoffset the xoffset to set
+     */
+    public void setXoffset(double xoffset) {
+        this.xoffset = xoffset;
+    }
+
+    /**
+     * @return the yoffset
+     */
+    public double getYoffset() {
+        return yoffset;
+    }
+
+    /**
+     * @param yoffset the yoffset to set
+     */
+    public void setYoffset(double yoffset) {
+        this.yoffset = yoffset;
     }
 }
