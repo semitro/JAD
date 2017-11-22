@@ -26,8 +26,8 @@ public class AreaCheckerImpl implements AreaChecker {
         }
         else // 3'st quoter
         if(x.compareTo(BigDecimal.ZERO) < 0 && y.compareTo(BigDecimal.ZERO) < 0){
-            // y >= -r + x
-            return y.compareTo(r.negate().add(x)) >= 0;
+            // y >= -r - x
+            return y.compareTo(r.negate().add(x.negate())) >= 0;
         }
         else // 4'st quoter
         if(x.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) <0){
