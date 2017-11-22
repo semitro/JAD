@@ -78,7 +78,7 @@ table {
     text-align: right;
 }
 #hat form{
-    width: 202px;
+    width: 252px;
     font-size: 16px;
     max-height: 50px;
 }
@@ -89,14 +89,15 @@ table {
     position: absolute;
     left: 1px;
     top: 1px;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     max-width: 100%;
 }
 img {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border: 1px cadetblue solid;
+    z-index: -1;
 }
 .hide {
     display: none;

@@ -16,7 +16,7 @@
 <h:body>
     <div id="hat">
         <div id="imageWrapper">
-            <canvas width="420px" height="380px" id="plotCanvas"></canvas>
+            <canvas id="plotCanvas"></canvas>
             <p:graphicImage library="img" name="areas-crop.png" />
         </div>
         <h:form>
@@ -25,18 +25,20 @@
         <h:form id="pointInputForm" class="hide">
             <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
             <h:outputScript name="click_handler.js" library="js" target="head"/>
-            <h:inputText id="x_input" value="#{imageClick.point.x}">
+            <h:inputHidden id="x_input" value="#{imageClick.point.x}">
                 <f:validateDoubleRange minimum="-20" maximum="20"/>
-            </h:inputText>
-            <h:inputText id="y_input" value="#{imageClick.point.y}">
+            </h:inputHidden>
+            <h:inputHidden id="y_input" value="#{imageClick.point.y}">
                 <f:validateDoubleRange minimum="-20" maximum="20"/>
-            </h:inputText>
+            </h:inputHidden>
             <h:inputText id="r_input" value="#{imageClick.point.r}">
                 <f:validateDoubleRange minimum="0.1" maximum="3"/>
                 <f:ajax event="change" execute="@form" listener="#{imageClick.handle_click()}"
-                        render="dataTable hidden_hit" onevent="click_handler"/>
+                        render="dataTable @form" onevent="click_handler"/>
             </h:inputText>
-            <h:inputText id="hidden_hit" value="${imageClick.point.hit}"/>
+            <h:inputHidden id="x_offset" value="${imageClick.xoffset}"/>
+            <h:inputHidden id="y_offset" value="${imageClick.yoffset}"/>
+            <h:inputHidden id="hidden_hit" value="${imageClick.point.hit}"/>
         </h:form>
     </div>
     <div class="thin_clear"/>
