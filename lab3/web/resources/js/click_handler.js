@@ -22,28 +22,34 @@ function click_handler(data) {
 //$('#imageWrapper').bind('click',onPlotClick);
 window.addEventListener("DOMContentLoaded", function() {
     document.getElementById("plotCanvas").addEventListener("click", onPlotClick);
+    document.getElementById("inputForm:r_input_input").addEventListener("blur", redrawAllPoints);
 });
 
 function onPlotClick(inf){
     // Заданная пользователем радиус
     var R = parseFloat(document.getElementById("inputForm:r_input_input").value);
+    // Пересчёт в координаты математической модели
+    var x = calculateX(inf.offsetX, R);
+    var y = calculateY(inf.offsetY, R);
+    doCheckArea(x, y, inf.offsetX, inf.offsetY, R);
+}
+
+function doCheckArea(x, y, xoff, yoff, R) {
     // Поля для передачи в запросе
     var xfield = document.getElementById("pointInputForm:x_input");
     var yfield = document.getElementById("pointInputForm:y_input");
     var rfield = document.getElementById("pointInputForm:r_input");
     var xofield =  document.getElementById("pointInputForm:x_offset");
     var yofield =  document.getElementById("pointInputForm:y_offset");
-    // Пересчёт в координаты математической модели
-    var x = calculateX(inf.offsetX, R);
-    var y = calculateY(inf.offsetY, R);
     // Заполняем поля и они сами отправляются!
     xfield.value = x;
     yfield.value = y;
-    xofield.value = inf.offsetX.toString();
-    yofield.value = inf.offsetY.toString();
+    xofield.value = xoff.toString();
+    yofield.value = yoff.toString();
     rfield.value = R.toString();
     rfield.dispatchEvent(new Event("change"));
 }
+
 function makePoint() {
     var xfield = document.getElementById("pointInputForm:x_input");
     var yfield = document.getElementById("pointInputForm:y_input");
@@ -78,31 +84,16 @@ function drawPoint(x, y,color) {
 }
 
 // Просто домножение координаты каждой точки на коэффициент
-function redrawAllPoints(factor) {
+function redrawAllPoints(ev) {
+    factor = parseFloat(ev.target.value);
+    var R = parseFloat(document.getElementById("inputForm:r_input_input").value);
     var c = document.getElementById("plotCanvas");
     var ctx = c.getContext("2d");
     ctx.clearRect(0,0,1000,1000);
-    pts.forEach(function (point) {
-         var data = 'X='+ point.mx +
-            '&Y=' + point.my +
-            '&R='+ document.forms[0].R.value + '&format=json';
-
-            $.get(
-            "mainController", // По заданию, направляем главному контроллеру, а не конкретной страничке
-            data,
-            function (response, code) {
-                if(code==="success") {
-                    var color;
-                    if (JSON.parse(response).hit === "Да")
-                        color = "#fff4e0";
-                    else
-                        color = "#490006";
-                    drawPoint(point.x / factor + ZeroX, point.y / factor + ZeroY, color);
-
-                }
-            });
-
-    });
+    while(pts.length) {
+        var point = pts.pop();
+        doCheckArea(point.mx, point.my, point.x / factor + ZeroX, point.y / factor + ZeroY, R);
+    }
 }
 
 function calculateX(clickOffsetX, currentR) {
