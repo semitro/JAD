@@ -13,8 +13,10 @@ public class DataBaseInteractionImpl implements DataBaseInteraction , Serializab
     private Connection conn;
     // create table point(x varchar(80), y varchar(80), r varchar(80), hit integer);
     // create user xaroxx with password 'xxx123';
-    private String usr         = "s225065";
-    private String password    = "e2UPKItT";
+    private String orcl_usr    = "s225065";
+    private String orcl_pswr   = "e2UPKItT";
+    private String psql_usr    = "xaroxx";
+    private String psql_pswr   = "xxx123";
     private String psql_URL    = "jdbc:postgresql://localhost:5432/iad_lab3";
     private String oracle_URL  = "jdbc:oracle:thin:@127.0.0.1:1521:orbis";
     private String insPointSql = "insert into point(x, y, r, hit) values (?, ?, ?, ?)";
@@ -40,13 +42,12 @@ public class DataBaseInteractionImpl implements DataBaseInteraction , Serializab
 
     public DataBaseInteractionImpl() throws SQLException, ClassNotFoundException{
 
-       // conn = Driver
         try {
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(psql_URL, usr, password);
+            conn = DriverManager.getConnection(psql_URL, psql_usr, psql_pswr);
         }catch (SQLException | ClassNotFoundException e){
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(oracle_URL, usr, password);
+            conn = DriverManager.getConnection(oracle_URL, orcl_usr, orcl_pswr);
         }
 
         insPointStatement = conn.prepareStatement(insPointSql);
