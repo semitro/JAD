@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
 
 // The Java class will be hosted at the URI path "/helloworld"
-@Path("/help")
+@Path("/services/help")
 public class HelloWorldResource {
 
     // The Java method will process HTTP GET requests
