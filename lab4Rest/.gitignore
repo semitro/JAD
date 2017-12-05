@@ -1,5 +1,8 @@
 out
-.idea
-lib
+*
+!src
+pom.xml
+
 *.iml
 *~
+
