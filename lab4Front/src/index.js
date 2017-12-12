@@ -1,27 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from 'react-toolbox/lib/button';
-import AppBar from 'react-toolbox/lib/app_bar';
 import Input from 'react-toolbox/lib/input';
 import Layout, {Panel} from 'react-toolbox/lib/layout';
+import LoginPage from './components/login_page.js';
+import LabAppBar from './components/lab_app_bar.js';
+import ajaxpost from './ajax.js';
 
-const LabAppBar = () => (
-	<AppBar title='P3202, Буланцов, Ощепков, вариант, 4984561'/>
-);
-
-const LoginForm = (props) => (
-	<form>
-		<Input type='text' label='Имя пользователя' name="name" icon="account_circle" required />
-		<Input type="password" label="Пароль" name="password" icon="pregnant_woman" required />
-		<Button label="Войти полностью" icon="lock_open" raised accent/>
-	</form>
-);
+const backend_path = "/";
 
 ReactDOM.render(
 	<Layout>
 		<Panel>
 			<LabAppBar />
-			<LoginForm />
+			<LoginPage handleLoginSubmit={o=>{
+				ajaxpost(
+					backend_path+"user/login",
+					"{'name':'"+o.name+"', 'password':'"+o.password+"'}",
+					(response, code)=>{
+						var o;
+						if(code=="success") {
+							o = eval(response);
+						}
+						else {
+						
+						}
+					}
+				)
+			}}/>
 		</Panel>
 	</Layout>,
 	document.getElementById('app')
