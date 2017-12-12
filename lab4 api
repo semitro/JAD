@@ -1,0 +1,15 @@
+user/login
+-> {"name": String, "password": String}
+<- {"success": Boolean, "authtoken":String } (токен только при успехе)
+
+user/logout
+-> {"authtoken": String} (имей в виду, что следует его делать именно строкой)
+<- {"success": Boolean}
+
+points/add
+-> {"authtoken": String, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String} ]}
+<- {"success": Boolean, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String, "hit": Boolean} ]}
+
+points/get
+-> {"authtoken": String}
+<- {"success": Boolean, "points": Array[ {"x":String, "y":String, "r":String, "hit": Boolean} ]}
