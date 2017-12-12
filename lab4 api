@@ -7,7 +7,7 @@ user/logout
 <- {"success": Boolean}
 
 points/add
--> {"authtoken": String, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String} ]}
+-> {"authtoken": String, "save": Boolean, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String} ]}
 <- {"success": Boolean, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String, "hit": Boolean} ]}
 
 points/get
