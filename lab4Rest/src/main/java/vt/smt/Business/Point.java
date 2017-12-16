@@ -1,10 +1,16 @@
 package vt.smt.Business;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Entity
+public class Point implements Serializable{
 
-public class Point
-{
+    @Id
+    private Integer point_id;
+
     private BigDecimal x;
     private BigDecimal y;
     private BigDecimal r;
@@ -29,6 +35,15 @@ public class Point
     public void setX(BigDecimal x) {
         this.x = x;
     }
+
+    public Integer getPoint_id() {
+        return point_id;
+    }
+
+    public void setPoint_id(Integer id) {
+        this.point_id = id;
+    }
+
 
     public BigDecimal getY() {
         return y;
