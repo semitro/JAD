@@ -1,8 +1,7 @@
 out
-*
-!src
-pom.xml
 
+pom.xml
+*.jar
 *.iml
 *~
 
