@@ -1,24 +1,25 @@
 package vt.smt.world.entryPoints;
 
-import vt.smt.Business.AreaChecker;
-import vt.smt.Business.DataBaseInteraction;
 import vt.smt.Business.Point;
+import vt.smt.db.DBUtil;
+import vt.smt.world.user.register.RegistrationAnswer;
+import vt.smt.world.user.register.User;
+import vt.smt.world.user.security.Hasher;
+import vt.smt.world.user.session.Session;
 
 import javax.ejb.Stateless;
 import javax.persistence.RollbackException;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import vt.smt.db.DBUtil;
-import vt.smt.world.user.register.RegistrationAnswer;
-import vt.smt.world.user.register.UserRegistration;
-import vt.smt.world.user.session.*;
-import vt.smt.world.user.security.*;
 /**
  * Created by semitro on 14.12.17.
  *
  * user/login
  * -> {"name": String, "password": String}
- * <- {"success": Boolean, "authtoken":String } (токен только при успехе)
+ * <- {"success": Boolean, "authtoken":String, "error":String } (токен только при успехе)
  *
  * user/logout
  * -> {"authtoken": String} (имей в виду, что следует его делать именно строкой)
@@ -29,23 +30,55 @@ import vt.smt.world.user.security.*;
 @Path("/user")
 public class UserHandler{
 
-    private DataBaseInteraction db;
-    private AreaChecker areaCheker;
     private static final int miminal_password_lenght = 2;
-    @GET
+
+    @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String login(UserRegistration newUser){
+    public RegistrationAnswer login(User user){
+        RegistrationAnswer response = new RegistrationAnswer();
+        User userInDatabase = DBUtil.findUserByName(user.getName());
 
-        return "Hello";
+        response.setSuccees(false); // just default
+        if(userInDatabase == null) {
+            response.setError("There's no user with name" + user.getName());
+            return response;
+        }
+
+        if( user.getPassword() == null
+                || !userInDatabase.getPassword().equals(Hasher.getHash(user.getPassword()))){
+            response.setError("Wrong password");
+            return response;
+        }
+
+        if(Session.getUsersToken(userInDatabase.getId()) != null) {
+            response.setError("already login");
+            response.setAuthToken(Session.getUsersToken(userInDatabase.getId()));
+            return response;
+        }
+        response.setSuccees(true);
+
+        response.setAuthToken(Session.startSession(userInDatabase.getId()));
+
+        return response;
+    }
+
+    @POST
+    @Path("/logout")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public RegistrationAnswer logout(User user){
+        RegistrationAnswer response = new RegistrationAnswer();
+        response.setSuccees(Session.endSession(user.getAuthToken()));
+        return response;
     }
 
     @POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public RegistrationAnswer register(UserRegistration newUser){
+    public RegistrationAnswer register(User newUser){
         //
         RegistrationAnswer response = new RegistrationAnswer();
         response.setError(checkValidationError(newUser));
@@ -65,7 +98,7 @@ public class UserHandler{
             return response;
         }
         // absolutely everything is already ok because we're still alive!
-        response.setAuthToken(Session.generateToken(newUser.getId()));
+        response.setAuthToken(Session.startSession(newUser.getId()));
         return response;
     }
 
@@ -84,7 +117,7 @@ public class UserHandler{
     }
 
     // if everything is ok, returns null
-    private String checkValidationError(UserRegistration user){
+    private String checkValidationError(User user){
         if(user.getPassword().length() < miminal_password_lenght)
             return "The length of the password is to small (At least 2 symbols are required)";
         if(user.getName().isEmpty())

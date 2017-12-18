@@ -7,7 +7,7 @@
         <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
 
         <!-- Entity classes -->
-        <class>vt.smt.world.user.register.UserRegistration</class>
+        <class>vt.smt.world.user.register.User</class>
 
         <properties>
             <!-- The JDBC driver of your database -->
