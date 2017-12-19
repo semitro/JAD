@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Stateful
 public class Session {
-    private static Map<Integer, String> user_id_token = new HashMap<>();
+    private final static Map<Integer, String> user_id_token = new HashMap<>();
 
     public static String startSession(@NotNull Integer userId){
         if(user_id_token.containsKey(userId))
@@ -40,7 +40,7 @@ public class Session {
     }
 
     public static boolean endSession(@NotNull Integer userId){
-       return user_id_token.remove(userId,user_id_token.get(userId));
+       return user_id_token.remove(userId, user_id_token.get(userId));
     }
 
     public static boolean endSession(@NotNull String token){

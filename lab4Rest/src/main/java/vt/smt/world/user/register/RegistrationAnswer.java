@@ -1,16 +1,16 @@
 package vt.smt.world.user.register;
 
 public class RegistrationAnswer {
-    private boolean succees;
+    private boolean success;
     private String authToken;
     private String error;
 
-    public boolean isSuccees() {
-        return succees;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setSuccees(boolean succeed) {
-        this.succees = succeed;
+    public void setSuccess(boolean succeed) {
+        this.success = succeed;
     }
 
     public String getAuthToken() {

@@ -40,7 +40,7 @@ public class UserHandler{
         RegistrationAnswer response = new RegistrationAnswer();
         User userInDatabase = DBUtil.findUserByName(user.getName());
 
-        response.setSuccees(false); // just default
+        response.setSuccess(false); // just default
         if(userInDatabase == null) {
             response.setError("There's no user with name" + user.getName());
             return response;
@@ -57,7 +57,7 @@ public class UserHandler{
             response.setAuthToken(Session.getUsersToken(userInDatabase.getId()));
             return response;
         }
-        response.setSuccees(true);
+        response.setSuccess(true);
 
         response.setAuthToken(Session.startSession(userInDatabase.getId()));
 
@@ -70,7 +70,7 @@ public class UserHandler{
     @Produces(MediaType.APPLICATION_JSON)
     public RegistrationAnswer logout(User user){
         RegistrationAnswer response = new RegistrationAnswer();
-        response.setSuccees(Session.endSession(user.getAuthToken()));
+        response.setSuccess(Session.endSession(user.getAuthToken()));
         return response;
     }
 
@@ -83,9 +83,9 @@ public class UserHandler{
         RegistrationAnswer response = new RegistrationAnswer();
         response.setError(checkValidationError(newUser));
         // if the string is not null, it's succeed
-        response.setSuccees( (response.getError() == null) );
+        response.setSuccess( (response.getError() == null) );
 
-        if(!response.isSuccees()) // Validation error -> there's no reason to continue
+        if(!response.isSuccess()) // Validation error -> there's no reason to continue
             return response;
         // saving hash of the password into the database
         newUser.setPassword(Hasher.getHash(newUser.getPassword()));
@@ -93,7 +93,7 @@ public class UserHandler{
             DBUtil.save(newUser);
 
         }catch (RollbackException e){ // handling the unique name constraint
-            response.setSuccees(false);
+            response.setSuccess(false);
             response.setError("Sorry, user with such name already exists");
             return response;
         }
