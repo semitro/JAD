@@ -16,7 +16,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/lab4rest" />
             <!-- The database username -->
             <property name="javax.persistence.jdbc.user" value="xaroxx" />
-            <!-- The database password -->
+            <!-- The databased password -->
             <property name="javax.persistence.jdbc.password" value="xxx123" />
             <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
