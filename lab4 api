@@ -1,10 +1,14 @@
 user/login
 -> {"name": String, "password": String}
-<- {"success": Boolean, "authtoken":String } (токен только при успехе)
+<- {"success": Boolean, "authtoken": String, "error": String } (токен только при успехе)
 
 user/logout
 -> {"authtoken": String} (имей в виду, что следует его делать именно строкой)
 <- {"success": Boolean}
+
+user/register
+-> {"name": String, "password": String }
+<- {"success": Boolean, "error": String, "authtoken": String }
 
 points/add
 -> {"authtoken": String, "save": Boolean, "points": Array[ {"x":String, "y":String, "r":String, "xoff":String, "yoff":String} ]}
