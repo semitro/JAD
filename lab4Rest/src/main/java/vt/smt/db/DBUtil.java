@@ -33,7 +33,7 @@ public class DBUtil {
             throw re;
         }
         //before update
-        entitymanager.getTransaction().commit();
+      //  entitymanager.getTransaction().commit();
         //after update
     }
 

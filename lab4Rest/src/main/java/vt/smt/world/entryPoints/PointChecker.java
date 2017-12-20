@@ -46,6 +46,17 @@ public class PointChecker {
         return p;
     }
 
+    @OPTIONS
+    @Path("/*")
+    public Response register_allow(){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Method","POST");
+
+        rb.header("Access-Control-Allow-Origin","*");
+        rb.header("Access-Control-Allow-Headers","Content-Type");
+        return rb.build();
+    }
+
     @javax.ws.rs.POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
