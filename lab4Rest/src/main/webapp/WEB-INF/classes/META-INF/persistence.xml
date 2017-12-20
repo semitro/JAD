@@ -11,13 +11,15 @@
 
         <properties>
             <!-- The JDBC driver of your database -->
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <!--<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />-->
             <!-- The JDBC URL to the database instance -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/lab4rest" />
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@127.0.0.1:1521:orbis" />
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/lab4rest" />-->
             <!-- The database username -->
-            <property name="javax.persistence.jdbc.user" value="xaroxx" />
+            <property name="javax.persistence.jdbc.user" value="s225065" />
             <!-- The databased password -->
-            <property name="javax.persistence.jdbc.password" value="xxx123" />
+            <property name="javax.persistence.jdbc.password" value="e2UPKItT" />
             <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
             <!--<property name="javax.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>-->

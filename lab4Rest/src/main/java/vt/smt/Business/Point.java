@@ -5,11 +5,15 @@ import vt.smt.world.user.register.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+
 @Entity
+@SequenceGenerator(name="point_seq", sequenceName="point_seq")
+@Table(name="point3")
 public class Point implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="point_seq")
     private Integer point_id;
 
     private BigDecimal x;

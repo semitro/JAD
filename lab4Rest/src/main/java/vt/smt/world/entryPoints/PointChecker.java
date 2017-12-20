@@ -75,6 +75,10 @@ public class PointChecker {
             point.setOwner(owner);
             DBUtil.save(point);
         }
+        for (Point point : response.getPoints()) {
+            point.setOwner(null);
+            point.setPoint_id(null); // don't transfer it!
+        }
 
         return response;
     }

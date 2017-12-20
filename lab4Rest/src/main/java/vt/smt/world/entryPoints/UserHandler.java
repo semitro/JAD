@@ -8,6 +8,7 @@ import vt.smt.world.user.security.Hasher;
 import vt.smt.world.user.session.Session;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.RollbackException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -38,11 +39,17 @@ public class UserHandler{
     @Produces(MediaType.APPLICATION_JSON)
     public RegistrationAnswer login(User user){
         RegistrationAnswer response = new RegistrationAnswer();
-        User userInDatabase = DBUtil.findUserByName(user.getName());
-
         response.setSuccess(false); // just default
+        User userInDatabase = null;
+        try {
+            userInDatabase = DBUtil.findUserByName(user.getName());
+        }catch (NoResultException no){
+            response.setError("There's no user with name '" + user.getName() + "'");
+            return response;
+        }
+
         if(userInDatabase == null) {
-            response.setError("There's no user with name" + user.getName());
+            response.setError("There's no user with name " + user.getName());
             return response;
         }
 
@@ -91,7 +98,6 @@ public class UserHandler{
         newUser.setPassword(Hasher.getHash(newUser.getPassword()));
         try {
             DBUtil.save(newUser);
-
         }catch (RollbackException e){ // handling the unique name constraint
             response.setSuccess(false);
             response.setError("Sorry, user with such name already exists");

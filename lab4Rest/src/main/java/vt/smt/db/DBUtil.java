@@ -19,19 +19,22 @@ public class DBUtil {
         entitymanager = emfactory.createEntityManager();
 //        Persistence.generateSchema("LocalPersist", null);
 //                emfactory.close();
-       getUserByNameQuery = entitymanager.createQuery("select u from User u where u.name like :name");
+       getUserByNameQuery = entitymanager.createQuery("select u from User u where u.name = :name");
 
        getPointByOwnerId  = entitymanager.createQuery("select p from Point p where p.owner = :user");
     }
 
     public static void save(Object o){
         entitymanager.getTransaction().begin();
-        entitymanager.persist(o);
+        try {
+            entitymanager.persist(o);
+        }catch (RuntimeException re){
+            entitymanager.getTransaction().rollback();
+            throw re;
+        }
         //before update
         entitymanager.getTransaction().commit();
-
         //after update
-
     }
 
     public static User findUserById(Integer id){

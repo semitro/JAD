@@ -1,5 +1,7 @@
 package vt.smt.world.user.register;
 
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,11 +12,13 @@ import java.util.Objects;
  *
  */
 @Entity
-@Table(name="Users")
-@TableGenerator(name="Users")
+@Table(name="users3")
+@TableGenerator(name="Users2")
+@SequenceGenerator(name="users_seq", sequenceName="usr_seq")
 public class User implements Serializable{
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="users_seq")
     private Integer id;
 
 
