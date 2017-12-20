@@ -1,13 +1,19 @@
-export default function ajaxpost(url, body, callback, encoding) {
-	var ajaxRequest;
-	try{ajaxRequest = new XMLHttpRequest();} catch (e){try{ajaxRequest=new ActiveXObject('Msxml2.XMLHTTP');} catch (e) {try{ajaxRequest=new ActiveXObject('Microsoft.XMLHTTP');} catch (e){alert("AJAX не работает!");return false;}}}
-	if (callback){ajaxRequest.onreadystatechange=function(){if(ajaxRequest.readyState==4){callback(ajaxRequest.responseText, ajaxRequest.status);}}}
-	ajaxRequest.open('POST',url,true);
-	if(encoding!=undefined){
-		ajaxRequest.setRequestHeader('Content-Type', encoding);
+export default function ajaxpost(url, body, callback, onerror, encoding) {
+	var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+	var xhr = new XHR();
+	xhr.open('POST', url, true);
+	if (callback != undefined) {
+		xhr.onload = ()=>callback(xhr.responseText, xhr.status);
+	}
+	if (onerror != undefined) {
+		xhr.onerror = ()=>onerror(xhr.status);
+	}
+	if (encoding != undefined){
+		xhr.setRequestHeader('Content-Type', encoding);
 	}
 	else {
-		ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.setRequestHeader('Content-Type', 'application/json');
 	}
-	ajaxRequest.send(body);
+	xhr.timeout = 1000*30;
+	xhr.send(body);
 }
