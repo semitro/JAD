@@ -15,6 +15,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 /**
  * Created by semitro on 14.12.17.
  *
@@ -37,63 +39,75 @@ public class UserHandler{
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public RegistrationAnswer login(User user){
+    public Response login(User user){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Origin", new String("*"));
+
         RegistrationAnswer response = new RegistrationAnswer();
+        rb.entity(response);
         response.setSuccess(false); // just default
         User userInDatabase = null;
         try {
             userInDatabase = DBUtil.findUserByName(user.getName());
         }catch (NoResultException no){
             response.setError("There's no user with name '" + user.getName() + "'");
-            return response;
+            return rb.build();
         }
 
         if(userInDatabase == null) {
             response.setError("There's no user with name " + user.getName());
-            return response;
+            return rb.build();
         }
 
         if( user.getPassword() == null
                 || !userInDatabase.getPassword().equals(Hasher.getHash(user.getPassword()))){
             response.setError("Wrong password");
-            return response;
+            return rb.build();
         }
 
         if(Session.getUsersToken(userInDatabase.getId()) != null) {
             response.setError("already login");
             response.setAuthToken(Session.getUsersToken(userInDatabase.getId()));
-            return response;
+            return rb.build();
         }
         response.setSuccess(true);
 
         response.setAuthToken(Session.startSession(userInDatabase.getId()));
 
-        return response;
+        return rb.build();
     }
 
     @POST
     @Path("/logout")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public RegistrationAnswer logout(User user){
+    public Response logout(User user){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Origin", new String("*"));
+
         RegistrationAnswer response = new RegistrationAnswer();
+        rb.entity(response);
         response.setSuccess(Session.endSession(user.getAuthToken()));
-        return response;
+        return rb.build();
     }
 
     @POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public RegistrationAnswer register(User newUser){
+    public Response register(User newUser){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Origin", new String("*"));
         //
         RegistrationAnswer response = new RegistrationAnswer();
+        rb.entity(response);
+
         response.setError(checkValidationError(newUser));
         // if the string is not null, it's succeed
         response.setSuccess( (response.getError() == null) );
 
         if(!response.isSuccess()) // Validation error -> there's no reason to continue
-            return response;
+            return rb.build();
         // saving hash of the password into the database
         newUser.setPassword(Hasher.getHash(newUser.getPassword()));
         try {
@@ -101,11 +115,11 @@ public class UserHandler{
         }catch (RollbackException e){ // handling the unique name constraint
             response.setSuccess(false);
             response.setError("Sorry, user with such name already exists");
-            return response;
+            return rb.build();
         }
         // absolutely everything is already ok because we're still alive!
         response.setAuthToken(Session.startSession(newUser.getId()));
-        return response;
+        return rb.build();
     }
 
 

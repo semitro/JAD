@@ -10,11 +10,9 @@ import vt.smt.db.DBUtil;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
 * points/add
@@ -52,19 +50,22 @@ public class PointChecker {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public PointTransport savePoints(PointTransport points){
-        PointTransport response = points;
+    public Response savePoints(PointTransport points){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Origin", new String("*"));
 
+        PointTransport response = points;
+        rb.entity(response);
         response.setSuccess(false);
         if(points.getAuthToken() == null){
             response.setError("Where's auth token?");
-            return response;
+            return rb.build();
         }
 
         Integer owner_id = Session.getIdByToken(points.getAuthToken());
         if(owner_id == null){
             response.setError("There's no your token in session-table!");
-            return response;
+            return rb.build();
         }
 
         response.setSuccess(true);
@@ -80,26 +81,29 @@ public class PointChecker {
             point.setPoint_id(null); // don't transfer it!
         }
 
-        return response;
+        return rb.build();
     }
 
     @javax.ws.rs.POST
     @Path("/get")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    public Response getPoints(User owner){
+        Response.ResponseBuilder rb = Response.ok();
+        rb.header("Access-Control-Allow-Origin", new String("*"));
 
-    public PointTransport getPoints(User owner){
         PointTransport response = new PointTransport();
+        rb.entity(response);
         response.setSuccess(false);
         if(owner.getAuthToken() == null){
             response.setError("Where's auth token?");
-            return response;
+            return rb.build();
         }
 
         Integer owner_id = Session.getIdByToken(owner.getAuthToken());
         if(owner_id == null){
             response.setError("There's no your token in session-table!");
-            return response;
+            return rb.build();
         }
 
         owner = DBUtil.findUserById(owner_id);
@@ -109,6 +113,6 @@ public class PointChecker {
         }
         response.setSuccess(true);
 
-        return response;
+        return rb.build();
     }
 }
