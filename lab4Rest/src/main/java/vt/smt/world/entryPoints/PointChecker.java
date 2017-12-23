@@ -47,14 +47,25 @@ public class PointChecker {
     }
 
     @OPTIONS
-    @Path("/*")
-    public Response register_allow(){
+    @Path("/add")
+    public Response allow_add(){
         Response.ResponseBuilder rb = Response.ok();
         rb.header("Access-Control-Allow-Method","POST");
 
         rb.header("Access-Control-Allow-Origin","*");
         rb.header("Access-Control-Allow-Headers","Content-Type");
         return rb.build();
+    }
+
+    @OPTIONS
+    @Path("/hit")
+    public Response allow_hit(){
+        return allow_add();
+    }
+    @OPTIONS
+    @Path("/get")
+    public Response allow_get(){
+        return allow_add();
     }
 
     @javax.ws.rs.POST
@@ -82,11 +93,13 @@ public class PointChecker {
         response.setSuccess(true);
         User owner = new User();
         owner.setId(owner_id);
+
         for (Point point : points.getPoints()) {
             point.setHit(areaChecker.doesPointHit(point));
             point.setOwner(owner);
             DBUtil.save(point);
         }
+
         for (Point point : response.getPoints()) {
             point.setOwner(null);
             point.setPoint_id(null); // don't transfer it!
@@ -101,7 +114,7 @@ public class PointChecker {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPoints(User owner){
         Response.ResponseBuilder rb = Response.ok();
-        rb.header("Access-Control-Allow-Origin", new String("*"));
+        rb.header("Access-Control-Allow-Origin", "*");
 
         PointTransport response = new PointTransport();
         rb.entity(response);

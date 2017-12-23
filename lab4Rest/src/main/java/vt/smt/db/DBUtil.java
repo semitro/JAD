@@ -10,31 +10,29 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class DBUtil {
-    static EntityManager entitymanager;
     static Query getUserByNameQuery;
     static Query getPointByOwnerId;
+    static EntityManagerFactory emfactory;
     static {
-        EntityManagerFactory emfactory =
+       emfactory =
                 Persistence.createEntityManagerFactory( "LocalPersist" );
-        entitymanager = emfactory.createEntityManager();
-//        Persistence.generateSchema("LocalPersist", null);
-//                emfactory.close();
+
+       EntityManager entitymanager = emfactory.createEntityManager();
        getUserByNameQuery = entitymanager.createQuery("select u from User u where u.name = :name");
 
        getPointByOwnerId  = entitymanager.createQuery("select p from Point p where p.owner = :user");
+       entitymanager.close();
     }
 
     public static void save(Object o){
-        entitymanager.getTransaction().begin();
-        try {
+        try{
+            entitymanager.getTransaction().begin();
             entitymanager.persist(o);
+            entitymanager.getTransaction().commit();
         }catch (RuntimeException re){
             entitymanager.getTransaction().rollback();
             throw re;
         }
-        //before update
-      //  entitymanager.getTransaction().commit();
-        //after update
     }
 
     public static User findUserById(Integer id){

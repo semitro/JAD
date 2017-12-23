@@ -132,8 +132,8 @@ public class UserHandler{
         return rb.build();
     }
 
-    @OPTIONS
-    @Path("/*")
+//    @OPTIONS
+//    @Path("/*")
     public Response register_allow(){
         Response.ResponseBuilder rb = Response.ok();
         rb.header("Access-Control-Allow-Method","POST");
