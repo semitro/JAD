@@ -27,6 +27,8 @@ function setUserName(state = "", action) {
 	switch(action.type) {
 		case 'USER_NAME':
 			return action.text;
+		case 'LOGOUT':
+			return "";
 		default:
 			return state;
 	}
@@ -35,6 +37,8 @@ function setPassword(state = "", action) {
 	switch(action.type) {
 		case 'USER_PASSWORD':
 			return action.text;
+		case 'LOGOUT':
+			return "";
 		default:
 			return state;
 	}
@@ -57,6 +61,41 @@ function setRFormActive(state = false, action) {
 	}
 }
 
+function setPoints(state = [], action) {
+	switch(action.type) {
+		case 'POINTS_ADD':
+			return state.concat([action.point]);
+		case 'POINTS_CLEAR':
+			return [];
+		default:
+			return state;
+	}
+}
+
+function enterData(state = {x: 0, y: 0, r: 0}, action) {
+	switch(action.type) {
+		case 'ENTER_DATA_X':
+			return Object.assign({}, state, {x: action.value});
+		case 'ENTER_DATA_Y':
+			return Object.assign({}, state, {y: action.value});
+		case 'ENTER_DATA_R':
+			return Object.assign({}, state, {r: action.value});
+		default:
+			return state;
+	}
+}
+
+function showErrors(state = {visible: false, message: ""}, action) {
+	switch(action.type) {
+		case 'ERROR_HIDE':
+			return Object.assign({}, state, {visible: false});
+		case 'ERROR_SHOW':
+			return {visible: true, message: action.message};
+		default:
+			return state;
+	}
+}
+
 const formsReducer = combineReducers({
 	login: setLFormActive,
 	register: setRFormActive
@@ -70,7 +109,10 @@ const userReducer = combineReducers({
 const reducer = combineReducers({
 	token: setToken,
 	user: userReducer,
-	forms: formsReducer
+	forms: formsReducer,
+	data: setPoints,
+	dataEntry: enterData,
+	error: showErrors
 });
 
 export default reducer;

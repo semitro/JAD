@@ -7,6 +7,7 @@ export default function ajaxpost(url, body, callback, onerror, encoding) {
 	}
 	if (onerror != undefined) {
 		xhr.onerror = ()=>onerror(xhr.status);
+		xhr.ontimeout = ()=>onerror(xhr.status);
 	}
 	if (encoding != undefined){
 		xhr.setRequestHeader('Content-Type', encoding);
@@ -14,6 +15,6 @@ export default function ajaxpost(url, body, callback, onerror, encoding) {
 	else {
 		xhr.setRequestHeader('Content-Type', 'application/json');
 	}
-	xhr.timeout = 1000*30;
+	xhr.timeout = 1000*10;
 	xhr.send(body);
 }
