@@ -4,7 +4,7 @@ import {createStore} from 'redux';
 import {connect, Provider} from 'react-redux';
 import Button from 'react-toolbox/lib/button';
 import Layout, {Panel} from 'react-toolbox/lib/layout';
-import Table from 'react-toolbox/lib/table';
+import Table from './components/table.js';
 import Dialog from 'react-toolbox/lib/dialog';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import Input from 'react-toolbox/lib/input';
@@ -160,21 +160,21 @@ const ImageClicker = ({width, height, onClick, children}) => {
         </div>
 	);
 }
-const TableModel = {
-	x: {type: String},
-	y: {type: String},
-	r: {type: String},
-	hit: {type: Boolean}
-};
 
-const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR}) => {
-	var Check = ({variable, value, onClick, className}) => (
+const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
+	const TableModel = {
+		x: {type: String},
+		y: {type: String},
+		r: {type: String},
+		hit: {type: Boolean, heading: 'Попали?'}
+	};
+	const Check = ({variable, value, onClick, className}) => (
 		<Checkbox key={value.toString()} checked={variable==value} label={value} onChange={()=>onClick(value)}
 				className='inline width50' />
 	);
-	var CheckContainer = ({label, children, labelStyle}) => (
+	const CheckContainer = ({label, children, labelStyle}) => (
 		<div style={{marginTop: '10px'}}>
-			<div style={Object.assign({},
+			<div style={Object.assign(
 				{fontSize: '130%', fontWeight: 'bold', float: 'left', textAlign: 'center'},
 				labelStyle)}>
 				{label}
@@ -217,14 +217,9 @@ const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR}) => {
 				<Check variable={r} value={2} onClick={onR} />
 				<Check variable={r} value={3} onClick={onR} />
 			</CheckContainer>
+			<Button label="Добавить точку" onClick={onAdd} raised />
 		</form>
-        <table>
-			<thead>
-				<tr><th>X</th><th>Y</th><th>R</th><th>Попал?</th></tr>
-			</thead>
-			<tbody id="tbody">
-			</tbody>
-		</table>
+        <Table model={TableModel} source={data} />
 	</div>
 	));
 };
@@ -240,11 +235,13 @@ const CWorkPage = connect (
 		}
 	},
 	dispatch => {
+		var state = store.getState();
 		return {
 			onLogout: ()=>doLogout(),
 			onX: (n)=>dispatch(actions.enterDataX(n)),
 			onY: (n)=>dispatch(actions.enterDataY(n)),
-			onR: (n)=>dispatch(actions.enterDataR(n))
+			onR: (n)=>dispatch(actions.enterDataR(n)),
+			onAdd: () => dispatch(actions.addNewPoint(state.dataEntry))
 		}
 	}
 )(WorkPage);
