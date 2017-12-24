@@ -1,0 +1,55 @@
+body {
+	background-image: url("bliss.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+canvas {
+	position: absolute;
+}
+#imageWrapper {
+	position: relative;
+	overflow: hidden;
+	border: black 1px solid;
+	border-radius: 5px;
+	margin: 1em;
+}
+
+.inline {
+	display: inline !important;
+	margin: 5px !important;
+	margin-left: 10px !important;
+	float: left !important;
+}
+
+.width50 {
+	width: 50px !important;
+}
+
+table {
+	border-collapse: collapse;
+	margin-top: 1em;
+}
+thead th {
+	font-size: 130%;
+	padding: 10px;
+	background-color: cornsilk;
+}
+tbody td {
+	font-weight: bold;
+	padding-left: 1ex;
+	padding-right: 1ex;
+	background-color: aliceblue;
+}
+tbody td label {
+	padding-top: 0.8ex;
+}
+tbody td, thead th {
+	width: 100px;
+	border: 1px solid black;
+}
+tbody tr {
+	height: 0.5em;
+	overflow: hidden;
+}

@@ -38,3 +38,70 @@ export function showRegister(activ) {
 		active: activ
 	}
 }
+
+export function addNewPoint(point) {
+	return {
+		type: 'POINTS_ADD',
+		point: point
+	}
+}
+
+export function addNewDrawnPoint(point) {
+	return {
+		type: 'POINTS_DRAWN_ADD',
+		point: point
+	}
+}
+
+export function clearPoints() {
+	return {
+		type: 'POINTS_CLEAR'
+	}
+}
+
+export function enterDataX(value) {
+	return {
+		type: 'ENTER_DATA_X',
+		value: value
+	}
+}
+
+export function enterDataY(value) {
+	return {
+		type: 'ENTER_DATA_Y',
+		value: value
+	}
+}
+
+export function enterDataR(value) {
+	return {
+		type: 'ENTER_DATA_R',
+		value: value
+	}
+}
+
+export function errorHide() {
+	return {
+		type: 'ERROR_HIDE'
+	}
+}
+
+export function errorShow(msg) {
+	return {
+		type: 'ERROR_SHOW',
+		message: msg
+	}
+}
+
+export function messageHide() {
+	return {
+		type: 'MESSAGE_HIDE'
+	}
+}
+
+export function messageShow(msg) {
+	return {
+		type: 'MESSAGE_SHOW',
+		message: msg
+	}
+}
