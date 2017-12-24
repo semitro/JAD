@@ -1,7 +1,7 @@
 package vt.smt.world.entryPoints;
 
 import vt.smt.Business.AreaChecker;
-import vt.smt.Business.AreaCheckerImpl;
+import vt.smt.Business.AreaCheckerImpl4;
 import vt.smt.Business.Point;
 import vt.smt.world.PointTransport;
 import vt.smt.world.user.register.User;
@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 public class PointChecker {
 
     @EJB
-    private AreaChecker areaChecker = new AreaCheckerImpl();
+    private AreaChecker areaChecker = new AreaCheckerImpl4();
 
     @GET
     @Path("/sayHello")

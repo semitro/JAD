@@ -15,27 +15,27 @@ public class AreaCheckerImpl4 implements AreaChecker {
          * @return -1, 0, or 1 as this {@code BigDecimal} is numerically
          * less than, equal to, or greater than {@code val}.
          */
-        // 1'st quoter
 
-        if(x.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) >= 0){
-            // x^2 + y^2 not greater than (r/2)^2
+		// First quarter
+        if(x.compareTo(BigDecimal.ZERO) > 0 && y.compareTo(BigDecimal.ZERO) > 0){
             return false;
         }
-        else // 2'st quoter
-        if(x.compareTo(BigDecimal.ZERO) < 0 && y.compareTo(BigDecimal.ZERO) >=0){
-           // y <= x+r/2, x >= -r/2
-            return x.compareTo(r.divide(BigDecimal.valueOf(2))) <= 0
-                    && y.compareTo(x.add(r.negate().divide(BigDecimal.valueOf(2)))) >= 0;
+        else // Second quarter
+        if(x.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) >0){
+           // y <= x+r/2
+            return y.compareTo(x.add(r.negate().divide(BigDecimal.valueOf(2)))) <= 0;
         }
-        else // 3'st quoter
-        if(x.compareTo(BigDecimal.ZERO) < 0 && y.compareTo(BigDecimal.ZERO) < 0){
+        else // Third quarter
+        if(x.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) <= 0){
               // y >= -r and x >= -r
                return y.compareTo(r.negate()) >= 0 && x.compareTo(r.negate()) >= 0;
         }
-        else // 4'st quoter
-        if(x.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) <0){
-            // x
-
+        else // Fourth quarter
+        if(x.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) <=0){
+            // x^2 + y^2 <= (R/2)^2
+			return x.multiply(x).add(y.multiply(y)).compareTo(
+				r.divide(BigDecimal.valueOf(2)).multiply(r.divide(BigDecimal.valueOf(2))))
+				<= 0;
         }
 
         return false;
