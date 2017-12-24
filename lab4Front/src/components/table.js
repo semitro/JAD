@@ -11,8 +11,13 @@ const Table = ({model, source}) => {
 				let thing;
 				if(typeof content == "boolean")
 					thing = (<Checkbox checked={content} />);
-				else						
-					thing = (<span>{content.toString()}</span>);
+				else {
+					thing = content.toString();
+					if (thing.length > 12) {
+						thing = thing.substr(0, 15) + '...';
+					}
+					thing = (<span>{thing}</span>);
+				}
 				return (
 					<td key={entry[0]} style={entry[1].style}>{thing}</td>
 				);

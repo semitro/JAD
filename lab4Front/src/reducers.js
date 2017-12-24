@@ -1,17 +1,5 @@
 import { combineReducers } from 'redux';
 
-//~ function setUser(state = {"user": "", "password": ""}, action) {
-	//~ switch(action.type) {
-		//~ case 'LOGIN':
-			//~ return {"user": action.user,
-				//~ "password": action.password};
-		//~ case 'LOGOUT":
-			//~ return {"user": "", "password": ""};
-		//~ default:
-			//~ return state;
-	//~ }
-//~ }
-
 function setToken(state = "", action) {
 	switch(action.type) {
 		case 'LOGIN':
@@ -98,6 +86,10 @@ function enterData(state = {x: "0", y: "0", r: "1"}, action) {
 			let y = action.value;
 			//~ if(y == "" || y == undefined || y == false || y == null)
 				//~ y = "0";
+			if(y != "") {
+				if (parseFloat(y) > 3) y ="3";
+				else if (parseFloat(y) < -5) y = "-5";
+			}
 			return Object.assign({}, state, {y: y});
 		case 'ENTER_DATA_R':
 			let r = action.value;
