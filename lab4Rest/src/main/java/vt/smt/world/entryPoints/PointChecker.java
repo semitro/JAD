@@ -1,15 +1,15 @@
 package vt.smt.world.entryPoints;
 
 import vt.smt.Business.AreaChecker;
-import vt.smt.Business.AreaCheckerImpl4;
 import vt.smt.Business.Point;
+import vt.smt.db.DBUtil;
 import vt.smt.world.PointTransport;
 import vt.smt.world.user.register.User;
 import vt.smt.world.user.session.Session;
-import vt.smt.db.DBUtil;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Qualifier;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 public class PointChecker {
 
     @EJB
-    private AreaChecker areaChecker = new AreaCheckerImpl4();
+    private AreaChecker areaChecker;
 
     @GET
     @Path("/sayHello")

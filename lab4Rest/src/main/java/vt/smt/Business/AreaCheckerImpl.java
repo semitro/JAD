@@ -1,9 +1,7 @@
 package vt.smt.Business;
 
-import javax.ejb.Stateless;
 import java.math.BigDecimal;
 
-@Stateless
 public class AreaCheckerImpl implements AreaChecker {
 
     public AreaCheckerImpl(){}

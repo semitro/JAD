@@ -1,10 +1,12 @@
 package vt.smt.Business;
 
+import javax.ejb.Stateless;
 import java.math.BigDecimal;
 
 /**
  * Created by semitro on 20.12.17.
  */
+@Stateless
 public class AreaCheckerImpl4 implements AreaChecker {
     @Override
     public boolean doesPointHit(Point p) {
@@ -21,9 +23,9 @@ public class AreaCheckerImpl4 implements AreaChecker {
             return false;
         }
         else // Second quarter
-        if(x.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) >0){
+        if(x.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) > 0){
            // y <= x+r/2
-            return y.compareTo(x.add(r.negate().divide(BigDecimal.valueOf(2)))) <= 0;
+            return y.compareTo(x.add(r.divide(BigDecimal.valueOf(2)))) <= 0;
         }
         else // Third quarter
         if(x.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) <= 0){
