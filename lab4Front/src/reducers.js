@@ -65,8 +65,21 @@ function setPoints(state = [], action) {
 	switch(action.type) {
 		case 'POINTS_ADD':
 			if (Array.isArray(action.point))
-				return action.point.concat(state);
-			return [action.point].concat(state);
+				return state.concat(action.point);
+			return state.concat([action.point]);
+		case 'POINTS_CLEAR':
+			return [];
+		default:
+			return state;
+	}
+}
+
+function setDrawnPoints(state = [], action) {
+	switch(action.type) {
+		case 'POINTS_DRAWN_ADD':
+			if (Array.isArray(action.point))
+				return state.concat(action.point);
+			return state.concat([action.point]);
 		case 'POINTS_CLEAR':
 			return [];
 		default:
@@ -136,6 +149,7 @@ const reducer = combineReducers({
 	forms: formsReducer,
 	data: setPoints,
 	dataEntry: enterData,
+	dataDrawn: setDrawnPoints,
 	error: showErrors,
 	message: showMessages
 });

@@ -46,6 +46,13 @@ export function addNewPoint(point) {
 	}
 }
 
+export function addNewDrawnPoint(point) {
+	return {
+		type: 'POINTS_DRAWN_ADD',
+		point: point
+	}
+}
+
 export function clearPoints() {
 	return {
 		type: 'POINTS_CLEAR'
@@ -79,7 +86,6 @@ export function errorHide() {
 	}
 }
 
-
 export function errorShow(msg) {
 	return {
 		type: 'ERROR_SHOW',
@@ -92,7 +98,6 @@ export function messageHide() {
 		type: 'MESSAGE_HIDE'
 	}
 }
-
 
 export function messageShow(msg) {
 	return {

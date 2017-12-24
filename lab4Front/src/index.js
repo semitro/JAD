@@ -25,6 +25,9 @@ const backend_path = backend_host + "lab4Rest-16832552988866737753.0-SNAPSHOT/ap
 const xhrerror = "Ошибка соединения с сервером";
 const regmsg = "Вы успешно зарегистрировались!";
 
+const ZeroX = 125, ZeroY = 125, offsetR = 225;
+const HitColor = "#ffaa00", NotHitColor = "#ff0000", UndeterminedHitColor = "#000";
+
 function  queryServer(where, what, whatToDoWhenGood) {
 	ajaxpost(
 		backend_path+where,	what,
@@ -161,22 +164,17 @@ const CLoginPage = connect (
 	}
 )(LoginPage);
 
-const ImageClicker = ({width, height, onClick, children}) => {
-	const Canvas = (props)=> (
-		<div style={{position: 'relative'}} onMouseDown={props.onMouseDown}
-				onTouchStart={props.onTouchStart}>
-			<canvas id="plotCanvas" width={props.width} height={props.height}
-					style={{width: props.width+"px", height: props.height+"px"}}
-					onClick={props.onClick}></canvas>
-			{props.children}
-		</div>);
-	const RippleCanvas = Ripple({spread: 3})(Canvas);
-	const Link = (props) => (
-	  <a {...props} style={{position: 'relative'}}>
+const Canvas = (props)=> (
+	<div style={{position: 'relative'}} onMouseDown={props.onMouseDown}
+			onTouchStart={props.onTouchStart}>
+		<canvas id="plotCanvas" width={props.width} height={props.height}
+				style={{width: props.width+"px", height: props.height+"px"}}
+				onClick={props.onClick}></canvas>
 		{props.children}
-	  </a>
-	);
-	const RippleLink = Ripple({spread: 3})(Link);
+	</div>
+);
+const RippleCanvas = Ripple({spread: 3})(Canvas);
+const ImageClicker = ({width, height, onClick, children}) => {
 	return (
 		<div id="imageWrapper" style={{width: width+"px", height: height+"px"}}>
             <RippleCanvas width={width} height={height} onClick={onClick} />
@@ -185,72 +183,69 @@ const ImageClicker = ({width, height, onClick, children}) => {
 	);
 }
 
-const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd, onImageClick}) => {
-	const TableModel = {
-		x: {type: String, style: {width: '135px'}},
-		y: {type: String, style: {width: '135px'}},
-		r: {type: String, style: {width: '135px'}},
-		hit: {type: Boolean, heading: 'Попали?', style: {width: '65px'}}
-	};
-	const Check = ({variable, value, onClick, className}) => (
-		<Checkbox key={value.toString()} checked={variable==value} label={value} onChange={()=>onClick(value)}
-				className='inline width50' />
-	);
-	const CheckContainer = ({label, children, labelStyle}) => (
-		<div style={{marginTop: '10px', marginBottom: '10px'}}>
-			<div style={Object.assign(
-				{fontSize: '130%', fontWeight: 'bold', float: 'left', textAlign: 'center'},
-				labelStyle)}>
-				{label}
-			</div>
-			<div style={{clear: 'both'}} />
-			<div>{children}</div>
-			<div style={{clear: 'both'}} />
+const TableModel = {
+	x: {type: String, style: {width: '135px'}},
+	y: {type: String, style: {width: '135px'}},
+	r: {type: String, style: {width: '135px'}},
+	hit: {type: Boolean, heading: 'Попали?', style: {width: '65px'}}
+};
+const Check = ({variable, value, onClick, className}) => (
+	<Checkbox key={value.toString()} checked={variable==value} label={value} onChange={()=>onClick(value)}
+			className='inline width50' />
+);
+const CheckContainer = ({label, children, labelStyle}) => (
+	<div style={{marginTop: '10px', marginBottom: '10px'}}>
+		<div style={Object.assign(
+			{fontSize: '130%', fontWeight: 'bold', float: 'left', textAlign: 'center'},
+			labelStyle)}>
+			{label}
 		</div>
-	);
+		<div style={{clear: 'both'}} />
+		<div>{children}</div>
+		<div style={{clear: 'both'}} />
+	</div>
+);
+const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd, onImageClick}) => {
 	return (visible && (
 	<div>
 		<LabAppBar>
 			<Button label='Выйти' inverse onClick={onLogout} />
 		</LabAppBar>
 		<ImageClicker width={250} height={250} onClick={onImageClick}/>
-        <form>
-			<CheckContainer label='X'>
-				<Check variable={x} value={-5} onClick={onX} />
-				<Check variable={x} value={-4} onClick={onX} />
-				<Check variable={x} value={-3} onClick={onX} />
-				<Check variable={x} value={-2} onClick={onX} />
-				<Check variable={x} value={-1} onClick={onX} />
-				<Check variable={x} value='0' onClick={onX} />
-				<Check variable={x} value={1} onClick={onX} />
-				<Check variable={x} value={2} onClick={onX} />
-				<Check variable={x} value={3} onClick={onX} />
-			</CheckContainer>
-			<CheckContainer label='Y' labelStyle={{marginBottom: '-25px'}}>
-				<Input type='number' max='3' min='-5' name='y' value={y}
-						onChange={(v)=>onY(v)} style={{marginLeft: '10px'}}/>
-			</CheckContainer>
-			<CheckContainer label='R' labelStyle={{marginTop: '-25px'}}>
-				<Check variable={r} value={-5} onClick={onR} />
-				<Check variable={r} value={-4} onClick={onR} />
-				<Check variable={r} value={-3} onClick={onR} />
-				<Check variable={r} value={-2} onClick={onR} />
-				<Check variable={r} value={-1} onClick={onR} />
-				<Check variable={r} value='0' onClick={onR} />
-				<Check variable={r} value={1} onClick={onR} />
-				<Check variable={r} value={2} onClick={onR} />
-				<Check variable={r} value={3} onClick={onR} />
-			</CheckContainer>
-			<Button label="Добавить точку" onClick={onAdd} raised />
-		</form>
+		<CheckContainer label='X'>
+			<Check variable={x} value={-5} onClick={onX} />
+			<Check variable={x} value={-4} onClick={onX} />
+			<Check variable={x} value={-3} onClick={onX} />
+			<Check variable={x} value={-2} onClick={onX} />
+			<Check variable={x} value={-1} onClick={onX} />
+			<Check variable={x} value='0' onClick={onX} />
+			<Check variable={x} value={1} onClick={onX} />
+			<Check variable={x} value={2} onClick={onX} />
+			<Check variable={x} value={3} onClick={onX} />
+		</CheckContainer>
+		<CheckContainer label='Y' labelStyle={{marginBottom: '-25px'}}>
+			<Input type='number' max='3' min='-5' name='y' value={y}
+					onChange={(v)=>onY(v)} style={{marginLeft: '10px'}}/>
+		</CheckContainer>
+		<CheckContainer label='R' labelStyle={{marginTop: '-25px'}}>
+			<Check variable={r} value={-5} onClick={onR} />
+			<Check variable={r} value={-4} onClick={onR} />
+			<Check variable={r} value={-3} onClick={onR} />
+			<Check variable={r} value={-2} onClick={onR} />
+			<Check variable={r} value={-1} onClick={onR} />
+			<Check variable={r} value='0' onClick={onR} />
+			<Check variable={r} value={1} onClick={onR} />
+			<Check variable={r} value={2} onClick={onR} />
+			<Check variable={r} value={3} onClick={onR} />
+		</CheckContainer>
+		<Button label="Добавить точку" onClick={onAdd} raised />
         {store.getState().data.length > 0 && (
 			<Table model={TableModel} source={data} />
 		)}
 	</div>
 	));
 };
-const ZeroX = 125, ZeroY = 125, offsetR = 225;
-const HitColor = "#fff4e0", NotHitColor = "#490006";
+
 function calculatePlotX(clickOffsetX, currentR) {
     return currentR * ( (clickOffsetX-ZeroX)/(offsetR - ZeroX));
 }
@@ -263,9 +258,15 @@ function drawPoint(x, y,color) {
     ctx.beginPath();
     ctx.strokeStyle=color;
     ctx.arc(x,y,2,0,2*Math.PI);
-    ctx.arc(x,y,4,0,2*Math.PI);
+    //~ ctx.arc(x,y,4,0,2*Math.PI);
     ctx.stroke();
 }
+function clearCanvas() {	
+    var c = document.getElementById("plotCanvas");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0,0,1000,1000);
+}
+
 function onPlotClick(ev){
     var R = parseFloat(store.getState().dataEntry.r);
     var offX, offY;
@@ -280,7 +281,9 @@ function onPlotClick(ev){
     // Пересчёт в координаты математической модели
     var x = calculatePlotX(offX, R);
     var y = calculatePlotY(offY, R);
-    doAddPoints({x: x, y: y, r: R, xoff: offX, yoff: offY, plotted: true});
+    drawPoint(offX, offY, UndeterminedHitColor);
+    doAddPoints({x: x, y: y, r: R, xoff: offX, yoff: offY});
+    store.dispatch(actions.addNewDrawnPoint({x: x, y: y}));
 }
 
 const CWorkPage = connect (
@@ -312,56 +315,82 @@ const CWorkPage = connect (
 	}
 )(WorkPage);
 
+const querize = (pt) => {
+	if(pt.xoff === undefined) {pt.xoff = "undefined"; pt.yoff = "0";}
+	return '{"x":"'+pt.x+'", "y":"'+pt.y+'", "r":"'+pt.r+'", "xoff":"'+
+		pt.xoff+'", "yoff":"'+pt.yoff+'"}\n'
+};
 const doAddPoints = (points) => {
 	if(points === undefined) return;
 	let pts = points;
-	let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
 	if(!Array.isArray(pts))
 		pts = [points];
-	if(pts[0].xoff === undefined || pts[0].yoff === undefined){
-		pts[0].xoff = "undefined"; pts[0].yoff = "undefined";
-	}
-	query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"'+
-		pts[0].xoff+'", "yoff":"'+pts[0].yoff+'"}\n';
+		
+	let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
+	query = query + querize(pts[0]);
 	for(var i = 1; i<pts.length; i++) {
-		if(pts[i].xoff === undefined || pts[i].yoff === undefined){
-			pts[i].xoff = "0"; pts[i].yoff = "0";
-		}
-		query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+'", "xoff":"'+
-			pts[i].xoff+'", "yoff":"'+pts[i].yoff+'"}\n';
+		query = query + ',' + querize(pts[i]);
 	}
 	query = query+']}';
 	queryServer("points/add", query,
 		(o) => {
 			store.dispatch(actions.addNewPoint(o.points));
+			for(var i = 0; i < o.points.length; i++) {
+				var point = o.points[i];
+				if(point.xoff != "undefined") {
+					drawPoint(
+							parseFloat(point.xoff),
+							parseFloat(point.yoff),
+							(point.hit ? HitColor : NotHitColor)
+					);
+				}
+			}
 		}
 	)
 };
 
 const doRecheckPoints = (R) => {
-	var allPts = store.getState().data;
-	var pts = [];
-	for(let i = 0; i < allPts.length; i++) {
-		if(allPts[i].plotted !== undefined && allPts[i].plotted == true)
-			pts.push(pts[i]);
-	}
-	// Recalculate R
-	if (pts.length > 0) {
-		let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
-		query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"'+
-				pts[0].xoff+'", "yoff":"'+pts[0].yoff+'"}\n';
-		for(var i = 1; i<pts.length; i++) {
-			query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+
-					'", "xoff":"'+pts[i].yoff+'", "yoff":"'+pts[i].yoff+'"}\n';
-		}
-		query = query+']}';
-		queryServer("points/add", query,
-			(o) => {
-				//store.dispatch(actions.addNewPoint(o.points));
-					// TODO: redrawing
+	var pts = store.getState().dataDrawn;
+	if (!pts.length) return;
+	let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
+	for (var i = 0; i < pts.length; i++) {
+		let p = pts[i];
+		let xoff, yoff;
+		if (R === 0) {
+			if (p.x == 0 && p.y == 0) {
+				xoff = ZeroX;
+				yoff = ZeroY;
 			}
-		)
+			else {
+				xoff = "undefined";
+				yoff = "0";
+			}
+		}
+		else {
+			xoff = (p.x/R)*(offsetR-ZeroX) + ZeroX;
+			yoff = (-p.y/R)*(offsetR-ZeroY) + ZeroY;
+		}
+		if (i!=0)
+			query = query + ',';
+		query = query + querize({x: p.x, y: p.y, r: R, xoff: xoff, yoff: yoff});
 	}
+	query = query+']}';
+	queryServer("points/add", query,
+		(o) => {
+			store.dispatch(actions.addNewPoint(o.points));
+			clearCanvas();
+			for(var i = 0; i < o.points.length; i++) {
+				var point = o.points[i];
+				if (point.xoff != "undefined") {
+					drawPoint(
+						parseFloat(point.xoff),
+						parseFloat(point.yoff),
+						(point.hit ? HitColor : NotHitColor)
+					);
+				}
+			}
+		}
+	)	
 };
 
 const doGetPoints = () => {
