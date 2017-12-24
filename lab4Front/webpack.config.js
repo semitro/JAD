@@ -23,7 +23,6 @@ module.exports = {
 				loader: "css-loader",
 				options: {
 					modules: true, // default is false
-					sourceMap: true,
 					importLoaders: 1,
 					localIdentName: "[name]--[local]--[hash:base64:8]"
 				}
@@ -39,8 +38,7 @@ module.exports = {
 		'process.env.NODE_ENV': JSON.stringify('production')
   	}),
 	new UglifyJsPlugin({
-		parallel: true,
-		sourceMap: true
+		parallel: true
 	})
   ],
 
