@@ -163,9 +163,9 @@ const ImageClicker = ({width, height, onClick, children}) => {
 
 const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
 	const TableModel = {
-		x: {type: String},
-		y: {type: String},
-		r: {type: String},
+		x: {type: String, style: {width: '150px'}},
+		y: {type: String, style: {width: '150px'}},
+		r: {type: String, style: {width: '150px'}},
 		hit: {type: Boolean, heading: 'Попали?'}
 	};
 	const Check = ({variable, value, onClick, className}) => (
@@ -241,10 +241,30 @@ const CWorkPage = connect (
 			onX: (n)=>dispatch(actions.enterDataX(n)),
 			onY: (n)=>dispatch(actions.enterDataY(n)),
 			onR: (n)=>dispatch(actions.enterDataR(n)),
-			onAdd: () => dispatch(actions.addNewPoint(state.dataEntry))
+			onAdd: () => doAddPoints(store.getState().dataEntry)
 		}
 	}
 )(WorkPage);
+
+const doAddPoints = (points) => {
+	if(points === undefined) return;
+	let pts = points;
+	let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
+	if(!Array.isArray(pts))
+		pts = [points];
+	query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"0", "yoff":"0"}\n';
+	for(var i = 1; i<pts.length; i++) {
+		query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+'", "xoff":"0", "yoff":"0"}\n';
+	}
+	query = query+']}';
+	queryServer("points/add", query,
+		(o) => {
+			for(var i=0; i<o.points.length; i++) {
+				store.dispatch(actions.addNewPoint(o.points[i]));
+			}
+		}
+	)
+};
 
 const doGetPoints = () => {
 	queryServer("points/get", '{"authToken":"'+store.getState().token+'"}',
@@ -285,17 +305,13 @@ const doLogout = () => {
 	)
 };
 
-store.dispatch(actions.addNewPoint({x:"hey",y:"ah",r:"neigh",hit:true}));
-
 const Page = (props) => (
 	<Provider store={store} >
-	<Layout>
-		<Panel>
+	<div>
 			<CLoginPage />
 			<CWorkPage />
 			<CErrorBar />
-		</Panel>
-	</Layout>
+	</div>
 	</Provider>
 );
 

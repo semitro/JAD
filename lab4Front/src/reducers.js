@@ -80,6 +80,8 @@ function enterData(state = {x: 0, y: 0, r: 0}, action) {
 			return Object.assign({}, state, {y: action.value});
 		case 'ENTER_DATA_R':
 			return Object.assign({}, state, {r: action.value});
+		case 'LOGOUT':
+			return {x: 0, y: 0, r: 0};
 		default:
 			return state;
 	}

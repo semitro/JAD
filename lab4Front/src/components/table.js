@@ -9,12 +9,12 @@ const Table = ({model, source}) => {
 			Object.entries(model).map((entry) => {
 				let content = ob[entry[0]] === undefined ? null : ob[entry[0]];
 				let thing;
-				if(entry[1].type === Boolean)
+				if(typeof content == "boolean")
 					thing = (<Checkbox checked={content} />);
 				else						
 					thing = (<span>{content.toString()}</span>);
 				return (
-					<td key={entry[0]}>{thing}</td>
+					<td key={entry[0]} style={entry[1].style}>{thing}</td>
 				);
 			})
 		}</tr>
@@ -26,9 +26,9 @@ const Table = ({model, source}) => {
 		<thead><tr>{
 			Object.entries(model).map((entry) => {
 				if (entry[1].heading !== undefined)
-					return (<th key={entry[0]}>{entry[1].heading}</th>);
+					return (<th key={entry[0]} style={entry[1].style}>{entry[1].heading}</th>);
 				else
-					return (<th key={entry[0]}>{entry[0].toUpperCase()}</th>);
+					return (<th key={entry[0]} style={entry[1].style}>{entry[0].toUpperCase()}</th>);
 			})
 		}</tr></thead>
 		<tbody>{
