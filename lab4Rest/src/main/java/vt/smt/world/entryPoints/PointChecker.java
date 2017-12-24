@@ -80,13 +80,13 @@ public class PointChecker {
         rb.entity(response);
         response.setSuccess(false);
         if(points.getAuthToken() == null){
-            response.setError("Where's auth token?");
+            response.setError("Не указан токен!");
             return rb.build();
         }
 
         Integer owner_id = Session.getIdByToken(points.getAuthToken());
         if(owner_id == null){
-            response.setError("There's no your token in session-table!");
+            response.setError("Такого токена нет в моих таблицах!");
             return rb.build();
         }
 
@@ -120,13 +120,13 @@ public class PointChecker {
         rb.entity(response);
         response.setSuccess(false);
         if(owner.getAuthToken() == null){
-            response.setError("Where's auth token?");
+            response.setError("Укажите токен");
             return rb.build();
         }
 
         Integer owner_id = Session.getIdByToken(owner.getAuthToken());
         if(owner_id == null){
-            response.setError("There's no your token in session-table!");
+            response.setError("Нет сессии с данным токеном!");
             return rb.build();
         }
 

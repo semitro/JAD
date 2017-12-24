@@ -8,12 +8,13 @@ import java.math.BigDecimal;
 
 
 @Entity
-@SequenceGenerator(name="point_seq", sequenceName="point_seq")
-@Table(name="point3")
+@Table(name="points4")
 public class Point implements Serializable{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="point_seq")
+    @Column(name="id")
+    @SequenceGenerator( name = "pointseq", sequenceName = "pseq", allocationSize = 1 )
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "pointseq")
     private Integer point_id;
 
     private BigDecimal x;

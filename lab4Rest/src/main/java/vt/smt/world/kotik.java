@@ -1,12 +1,12 @@
 package vt.smt.world;
 
+import vt.smt.world.entryPoints.PointChecker;
+import vt.smt.world.entryPoints.UserHandler;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-
-import vt.smt.world.entryPoints.PointChecker;
-import vt.smt.world.entryPoints.UserHandler;
 
 /**
  * Created by semitro on 06.12.17.

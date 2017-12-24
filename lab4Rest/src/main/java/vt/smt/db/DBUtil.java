@@ -21,31 +21,40 @@ public class DBUtil {
        getUserByNameQuery = entitymanager.createQuery("select u from User u where u.name = :name");
 
        getPointByOwnerId  = entitymanager.createQuery("select p from Point p where p.owner = :user");
-       entitymanager.close();
     }
 
     public static void save(Object o){
+        EntityManager entitymanager = emfactory.createEntityManager();
         try{
             entitymanager.getTransaction().begin();
             entitymanager.persist(o);
             entitymanager.getTransaction().commit();
         }catch (RuntimeException re){
-            entitymanager.getTransaction().rollback();
+            if(entitymanager.getTransaction().isActive())
+                entitymanager.getTransaction().rollback();
+            entitymanager.close();
             throw re;
         }
+        entitymanager.close();
     }
 
     public static User findUserById(Integer id){
-        return entitymanager.find(User.class, id);
+        EntityManager entitymanager = emfactory.createEntityManager();
+        try {
+            User u = entitymanager.find(User.class, id);
+            entitymanager.close();
+            return u;
+        }catch (RuntimeException e){
+            entitymanager.close();
+            throw e;
+        }
     }
+
     public static User findUserByName(String name){
         return (User)getUserByNameQuery.setParameter("name", name).getSingleResult();
     }
 
     public static List<Point> findThisGuysPoints(User guy){
         return getPointByOwnerId.setParameter("user", guy).getResultList();
-    }
-    public static void closeSession(){
-        entitymanager.close();
     }
 }

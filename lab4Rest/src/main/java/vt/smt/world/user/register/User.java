@@ -12,13 +12,12 @@ import java.util.Objects;
  *
  */
 @Entity
-@Table(name="users3")
-@TableGenerator(name="Users2")
-@SequenceGenerator(name="users_seq", sequenceName="usr_seq")
+@Table(name="users4")
 public class User implements Serializable{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="users_seq")
+    @SequenceGenerator( name = "usersq", sequenceName = "useq", allocationSize = 1 )
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "usersq")
     private Integer id;
 
 
