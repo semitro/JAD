@@ -86,3 +86,17 @@ export function errorShow(msg) {
 		message: msg
 	}
 }
+
+export function messageHide() {
+	return {
+		type: 'MESSAGE_HIDE'
+	}
+}
+
+
+export function messageShow(msg) {
+	return {
+		type: 'MESSAGE_SHOW',
+		message: msg
+	}
+}

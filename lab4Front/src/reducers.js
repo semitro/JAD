@@ -98,6 +98,17 @@ function showErrors(state = {visible: false, message: ""}, action) {
 	}
 }
 
+function showMessages(state = {visible: false, message: ""}, action) {
+	switch(action.type) {
+		case 'MESSAGE_HIDE':
+			return Object.assign({}, state, {visible: false});
+		case 'MESSAGE_SHOW':
+			return {visible: true, message: action.message};
+		default:
+			return state;
+	}
+}
+
 const formsReducer = combineReducers({
 	login: setLFormActive,
 	register: setRFormActive
@@ -114,7 +125,8 @@ const reducer = combineReducers({
 	forms: formsReducer,
 	data: setPoints,
 	dataEntry: enterData,
-	error: showErrors
+	error: showErrors,
+	message: showMessages
 });
 
 export default reducer;

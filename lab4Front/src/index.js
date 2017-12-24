@@ -23,6 +23,7 @@ const backend_host = "http://localhost:12381/"
 const backend_path = backend_host + "lab4Rest-16832552988866737753.0-SNAPSHOT/api/";
 
 const xhrerror = "Ошибка соединения с сервером";
+const regmsg = "Вы успешно зарегистрировались!";
 
 function  queryServer(where, what, whatToDoWhenGood) {
 	ajaxpost(
@@ -89,9 +90,10 @@ const CRegDialog = connect (
 
 const ErrorBar = ({visible, hideError, message, timeout}) => {
 	return (
-		<Snackbar label={message} action='OK' onClick={hideError} onTimeout={hideError} timeout={timeout} type='cancel' active={visible} />
+		<Snackbar label={message} action='OK' onClick={hideError} onTimeout={hideError}
+				timeout={timeout} type='cancel' active={visible} />
 	);
-}
+};
 
 const CErrorBar = connect (
 	state => {
@@ -107,6 +109,28 @@ const CErrorBar = connect (
 		}
 	}
 )(ErrorBar);
+
+const MessageBar = ({visible, hideMessage, message, timeout}) => {
+	return (
+		<Snackbar label={message} action='OK' onClick={hideMessage} onTimeout={hideMessage}
+				timeout={timeout} type='accept' active={visible} />
+	);
+};
+
+const CMessageBar = connect (
+	state => {
+		return {
+			visible: state.message.visible,
+			message: state.message.message,
+			timeout: 5000
+		}
+	},
+	dispatch => {
+		return {
+			hideMessage: ()=>dispatch(actions.messageHide())
+		}
+	}
+)(MessageBar);
 
 const LoginPage = ({visible, onLogin, onRegister}) => {
 	return (visible && (
@@ -219,7 +243,9 @@ const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
 			</CheckContainer>
 			<Button label="Добавить точку" onClick={onAdd} raised />
 		</form>
-        <Table model={TableModel} source={data} />
+        {store.getState().data.length > 0 && (
+			<Table model={TableModel} source={data} />
+		)}
 	</div>
 	));
 };
@@ -240,7 +266,7 @@ const CWorkPage = connect (
 			onLogout: ()=>doLogout(),
 			onX: (n)=>dispatch(actions.enterDataX(n)),
 			onY: (n)=>dispatch(actions.enterDataY(n)),
-			onR: (n)=>dispatch(actions.enterDataR(n)),
+			onR: (n)=>{doRecheckPoints(n); dispatch(actions.enterDataR(n));},
 			onAdd: () => doAddPoints(store.getState().dataEntry)
 		}
 	}
@@ -266,6 +292,34 @@ const doAddPoints = (points) => {
 	)
 };
 
+const doRecheckPoints = (R) => {
+	var allPts = store.getState().data;
+	var pts = [];
+	for(let i = 0; i < allPts.length; i++) {
+		if(allPts[i].recheck !== undefined && allPts[i].recheck == true)
+			pts.push(pts[i]);
+	}
+	// Recalculate R
+	if (ptsToSend.length > 0) {
+		let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
+		query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"'+
+				pts[0].xoff+'", "yoff":"'+pts[0].yoff+'"}\n';
+		for(var i = 1; i<pts.length; i++) {
+			query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+
+					'", "xoff":"'+pts[i].yoff+'", "yoff":"'+pts[i].yoff+'"}\n';
+		}
+		query = query+']}';
+		queryServer("points/add", query,
+			(o) => {
+				for(var i=0; i<o.points.length; i++) {
+					store.dispatch(actions.addNewPoint(o.points[i]));
+					// TODO: redrawing
+				}
+			}
+		)
+	}
+};
+
 const doGetPoints = () => {
 	queryServer("points/get", '{"authToken":"'+store.getState().token+'"}',
 		(o) => {
@@ -277,23 +331,36 @@ const doGetPoints = () => {
 };
 
 const doLogin = () => {
-	queryServer("user/login", '{"name":"'+store.getState().user.name+'", "password":"'+store.getState().user.password+'"}',
-		(o) => {
-			store.dispatch(actions.showLogin(false));
-			store.dispatch(actions.login(o.authToken));
-			doGetPoints();
-		}
-	)
+	let state = store.getState();
+	if(state.user.name != "" && state.user.password != "") {
+		queryServer("user/login", '{"name":"'+store.getState().user.name+'", "password":"'+store.getState().user.password+'"}',
+			(o) => {
+				store.dispatch(actions.showLogin(false));
+				store.dispatch(actions.login(o.authToken));
+				doGetPoints();
+			}
+		)
+	}
+	else {
+		store.dispatch(actions.errorShow("Пожалуйста, введите имя пользователя пароль"));
+	}
 };
 
 const doRegister = () => {
-	queryServer("user/register", '{"name":"'+store.getState().user.name+'", "password":"'+store.getState().user.password+'"}',
-		(o) => {
-			store.dispatch(actions.showRegister(false));
-			store.dispatch(actions.login(o.authToken));
-			doGetPoints();
-		}
-	)
+	let state = store.getState();
+	if(state.user.name != "" && state.user.password != "") {
+		queryServer("user/register", '{"name":"'+store.getState().user.name+'", "password":"'+store.getState().user.password+'"}',
+			(o) => {
+				store.dispatch(actions.showRegister(false));
+				store.dispatch(actions.login(o.authToken));
+				store.dispatch(actions.messageShow(regmsg));
+				doGetPoints();
+			}
+		)
+	}
+	else {
+		store.dispatch(actions.errorShow("Пожалуйста, введите имя пользователя и пароль"));
+	}
 };
 
 const doLogout = () => {
@@ -308,9 +375,10 @@ const doLogout = () => {
 const Page = (props) => (
 	<Provider store={store} >
 	<div>
-			<CLoginPage />
-			<CWorkPage />
-			<CErrorBar />
+		<CLoginPage />
+		<CWorkPage />
+		<CErrorBar />
+		<CMessageBar />
 	</div>
 	</Provider>
 );
