@@ -64,7 +64,9 @@ function setRFormActive(state = false, action) {
 function setPoints(state = [], action) {
 	switch(action.type) {
 		case 'POINTS_ADD':
-			return state.concat([action.point]);
+			if (Array.isArray(action.point))
+				return action.point.concat(state);
+			return [action.point].concat(state);
 		case 'POINTS_CLEAR':
 			return [];
 		default:
@@ -72,16 +74,25 @@ function setPoints(state = [], action) {
 	}
 }
 
-function enterData(state = {x: 0, y: 0, r: 0}, action) {
+function enterData(state = {x: "0", y: "0", r: "1"}, action) {
 	switch(action.type) {
 		case 'ENTER_DATA_X':
-			return Object.assign({}, state, {x: action.value});
+			let x = action.value;
+			//~ if(x == "" || x == undefined || x == false || x == null)
+				//~ x = "0";
+			return Object.assign({}, state, {x: x});
 		case 'ENTER_DATA_Y':
-			return Object.assign({}, state, {y: action.value});
+			let y = action.value;
+			//~ if(y == "" || y == undefined || y == false || y == null)
+				//~ y = "0";
+			return Object.assign({}, state, {y: y});
 		case 'ENTER_DATA_R':
-			return Object.assign({}, state, {r: action.value});
+			let r = action.value;
+			//~ if(r == "" || r == undefined || r == false || r == null)
+				//~ r = "0";
+			return Object.assign({}, state, {r: r});
 		case 'LOGOUT':
-			return {x: 0, y: 0, r: 0};
+			return {x: "0", y: "0", r: "1"};
 		default:
 			return state;
 	}

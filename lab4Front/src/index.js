@@ -185,19 +185,19 @@ const ImageClicker = ({width, height, onClick, children}) => {
 	);
 }
 
-const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
+const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd, onImageClick}) => {
 	const TableModel = {
-		x: {type: String, style: {width: '150px'}},
-		y: {type: String, style: {width: '150px'}},
-		r: {type: String, style: {width: '150px'}},
-		hit: {type: Boolean, heading: 'Попали?'}
+		x: {type: String, style: {width: '135px'}},
+		y: {type: String, style: {width: '135px'}},
+		r: {type: String, style: {width: '135px'}},
+		hit: {type: Boolean, heading: 'Попали?', style: {width: '65px'}}
 	};
 	const Check = ({variable, value, onClick, className}) => (
 		<Checkbox key={value.toString()} checked={variable==value} label={value} onChange={()=>onClick(value)}
 				className='inline width50' />
 	);
 	const CheckContainer = ({label, children, labelStyle}) => (
-		<div style={{marginTop: '10px'}}>
+		<div style={{marginTop: '10px', marginBottom: '10px'}}>
 			<div style={Object.assign(
 				{fontSize: '130%', fontWeight: 'bold', float: 'left', textAlign: 'center'},
 				labelStyle)}>
@@ -213,7 +213,7 @@ const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
 		<LabAppBar>
 			<Button label='Выйти' inverse onClick={onLogout} />
 		</LabAppBar>
-		<ImageClicker width={250} height={250} onClick={()=>console.log('heh')}/>
+		<ImageClicker width={250} height={250} onClick={onImageClick}/>
         <form>
 			<CheckContainer label='X'>
 				<Check variable={x} value={-5} onClick={onX} />
@@ -249,6 +249,39 @@ const WorkPage = ({visible, onLogout, data, x, y, r, onX, onY, onR, onAdd}) => {
 	</div>
 	));
 };
+const ZeroX = 125, ZeroY = 125, offsetR = 225;
+const HitColor = "#fff4e0", NotHitColor = "#490006";
+function calculatePlotX(clickOffsetX, currentR) {
+    return currentR * ( (clickOffsetX-ZeroX)/(offsetR - ZeroX));
+}
+function calculatePlotY(clickOffsetY, currentR) {
+    return currentR * ( (clickOffsetY-ZeroY)/(ZeroY - offsetR));
+}
+function drawPoint(x, y,color) {
+    var c = document.getElementById("plotCanvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.strokeStyle=color;
+    ctx.arc(x,y,2,0,2*Math.PI);
+    ctx.arc(x,y,4,0,2*Math.PI);
+    ctx.stroke();
+}
+function onPlotClick(ev){
+    var R = parseFloat(store.getState().dataEntry.r);
+    var offX, offY;
+    if(ev.offsetX === undefined) {
+		offX = ev.nativeEvent.offsetX;
+		offY = ev.nativeEvent.offsetY;
+	}
+	else {
+		offX = ev.offsetX;
+		offY = ev.offsetY;
+	}
+    // Пересчёт в координаты математической модели
+    var x = calculatePlotX(offX, R);
+    var y = calculatePlotY(offY, R);
+    doAddPoints({x: x, y: y, r: R, xoff: offX, yoff: offY, plotted: true});
+}
 
 const CWorkPage = connect (
 	state => {
@@ -267,7 +300,14 @@ const CWorkPage = connect (
 			onX: (n)=>dispatch(actions.enterDataX(n)),
 			onY: (n)=>dispatch(actions.enterDataY(n)),
 			onR: (n)=>{doRecheckPoints(n); dispatch(actions.enterDataR(n));},
-			onAdd: () => doAddPoints(store.getState().dataEntry)
+			onAdd: () => {
+				let p = store.getState().dataEntry;
+				if(!p.x) dispatch(actions.enterDataX("0"));
+				if(!p.y) dispatch(actions.enterDataY("0"));
+				if(!p.r) dispatch(actions.enterDataR("0"));
+				doAddPoints(store.getState().dataEntry);
+			},
+			onImageClick: onPlotClick
 		}
 	}
 )(WorkPage);
@@ -278,16 +318,22 @@ const doAddPoints = (points) => {
 	let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
 	if(!Array.isArray(pts))
 		pts = [points];
-	query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"0", "yoff":"0"}\n';
+	if(pts[0].xoff === undefined || pts[0].yoff === undefined){
+		pts[0].xoff = "undefined"; pts[0].yoff = "undefined";
+	}
+	query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"'+
+		pts[0].xoff+'", "yoff":"'+pts[0].yoff+'"}\n';
 	for(var i = 1; i<pts.length; i++) {
-		query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+'", "xoff":"0", "yoff":"0"}\n';
+		if(pts[i].xoff === undefined || pts[i].yoff === undefined){
+			pts[i].xoff = "0"; pts[i].yoff = "0";
+		}
+		query = query+',{"x":"'+pts[i].x+'", "y":"'+pts[i].y+'", "r":"'+pts[i].r+'", "xoff":"'+
+			pts[i].xoff+'", "yoff":"'+pts[i].yoff+'"}\n';
 	}
 	query = query+']}';
 	queryServer("points/add", query,
 		(o) => {
-			for(var i=0; i<o.points.length; i++) {
-				store.dispatch(actions.addNewPoint(o.points[i]));
-			}
+			store.dispatch(actions.addNewPoint(o.points));
 		}
 	)
 };
@@ -296,11 +342,11 @@ const doRecheckPoints = (R) => {
 	var allPts = store.getState().data;
 	var pts = [];
 	for(let i = 0; i < allPts.length; i++) {
-		if(allPts[i].recheck !== undefined && allPts[i].recheck == true)
+		if(allPts[i].plotted !== undefined && allPts[i].plotted == true)
 			pts.push(pts[i]);
 	}
 	// Recalculate R
-	if (ptsToSend.length > 0) {
+	if (pts.length > 0) {
 		let query = '{"authToken":"'+store.getState().token+'", "save":true, "points":[\n';
 		query = query+'{"x":"'+pts[0].x+'", "y":"'+pts[0].y+'", "r":"'+pts[0].r+'", "xoff":"'+
 				pts[0].xoff+'", "yoff":"'+pts[0].yoff+'"}\n';
@@ -311,10 +357,8 @@ const doRecheckPoints = (R) => {
 		query = query+']}';
 		queryServer("points/add", query,
 			(o) => {
-				for(var i=0; i<o.points.length; i++) {
-					store.dispatch(actions.addNewPoint(o.points[i]));
+				//store.dispatch(actions.addNewPoint(o.points));
 					// TODO: redrawing
-				}
 			}
 		)
 	}
@@ -323,9 +367,7 @@ const doRecheckPoints = (R) => {
 const doGetPoints = () => {
 	queryServer("points/get", '{"authToken":"'+store.getState().token+'"}',
 		(o) => {
-			for(var i = 0; i < o.points.length; i++) {
-				store.dispatch(actions.addNewPoint(o.points[i]));
-			}				
+			store.dispatch(actions.addNewPoint(o.points));		
 		}
 	)
 };
