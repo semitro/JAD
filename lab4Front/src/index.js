@@ -19,7 +19,12 @@ import * as actions from './actions.js';
 
 const store = createStore(reducer);
 
-const backend_host = "http://localhost:12381/"
+var backend_host;
+if (process.env.NODE_ENV !== 'production')
+	backend_host = "http://localhost:12381/";
+else
+	backend_host = "/";
+	
 const backend_path = backend_host + "lab4Rest-16832552988866737753.0-SNAPSHOT/api/";
 
 const xhrerror = "Ошибка соединения с сервером";
