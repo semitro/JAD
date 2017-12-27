@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <managed-bean>
+        <managed-bean-name>clock</managed-bean-name>
+        <managed-bean-class>smt.Beans.ClockController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>model</managed-bean-name>
+        <managed-bean-class>smt.Beans.MainModel</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>database</property-name>
+            <value>#{dbImpl}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>areaController</managed-bean-name>
+        <managed-bean-class>smt.Beans.AreaInteractionController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>model</property-name>
+            <value>#{model}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>dbImpl</managed-bean-name>
+        <managed-bean-class>smt.Business.DataBaseInteractionImpl</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>imageClick</managed-bean-name>
+        <managed-bean-class>smt.Beans.ImageInteraction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>model</property-name>
+            <value>#{model}</value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>

@@ -1,0 +1,104 @@
+body{
+ background-color: gainsboro;
+}
+
+.blehh-wrapper {
+    margin-bottom: 2em;
+    height: 60px;
+}
+.blehh-container {
+    height: 74px;
+    width: 210px;
+    float: left;
+    padding: 10px;
+    border-right: 1px dimgray solid;
+}
+.blehh-container:last-child {
+    border-right: none;
+}
+.blehh-container input {
+    height: 40px;
+    width: 60px;
+}
+.blehh-container span.ui-widget {
+    width: 70px;
+    height: 50px;
+}
+.blehh-container span.ui-widget input {
+    width: 40px;
+    margin: 0;
+}
+.blehh-container .ui-corner-all {
+    margin: 5px 0 5px 0;
+}
+.blehh-container button {
+    width: 100%;
+    height: 50px;
+}
+.blehh-title {
+    width: 120px;
+    height: 60px;
+    font-size: 300%;
+    font-family: monospace;
+    float: left;
+}
+.blehh-clear {
+    clear: left;
+}
+table {
+    max-width: 924px;
+}
+
+
+@media (max-width: 750px) {
+    #hat {
+        float: left;
+        height: 280px;
+    }
+    img {
+        float: left;
+    }
+    .thin_clear {
+        clear: both;
+    }
+}
+@media (min-width: 751px) {
+    #hat {
+        float: right;
+        margin-left: 1em;
+    }
+    .thin_clear {
+        clear: none;
+    }
+}
+#hat{
+    color: white;
+    font-size: 2em;
+    padding-right: 20px;
+    text-align: right;
+}
+#hat form{
+    width: 252px;
+    font-size: 16px;
+    max-height: 50px;
+}
+#imageWrapper {
+    position: relative;
+}
+#plotCanvas {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 250px;
+    height: 250px;
+    max-width: 100%;
+}
+img {
+    width: 250px;
+    height: 250px;
+    border: 1px cadetblue solid;
+    z-index: -1;
+}
+.hide {
+    display: none;
+}

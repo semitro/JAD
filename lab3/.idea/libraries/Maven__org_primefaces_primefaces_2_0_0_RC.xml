@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Maven: org.primefaces:primefaces:2.0.0.RC">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/2.0.0.RC/primefaces-2.0.0.RC-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/2.0.0.RC/primefaces-2.0.0.RC-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

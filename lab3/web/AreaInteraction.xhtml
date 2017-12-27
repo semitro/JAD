@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="script" href="resources/js/jquery-min.js"/>
+    <h:outputStylesheet name="css/main.css"/>
+    <title>
+        FLAVOURLESS VICTORY
+    </title>
+</h:head>
+<h:body>
+    <div id="hat">
+        <div id="imageWrapper">
+            <canvas id="plotCanvas" width="250" height="250"></canvas>
+            <p:graphicImage library="img" name="areas-crop.png" />
+        </div>
+        <h:form>
+            <p:commandButton action="index?faces-redirect=true" value="Стартовая страница"/>
+        </h:form>
+        <h:form id="pointInputForm" class="hide">
+            <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+            <h:outputScript name="click_handler.js" library="js" target="head"/>
+            <h:inputHidden id="x_input" value="#{imageClick.point.x}">
+                <f:validateDoubleRange minimum="-20" maximum="20"/>
+            </h:inputHidden>
+            <h:inputHidden id="y_input" value="#{imageClick.point.y}">
+                <f:validateDoubleRange minimum="-20" maximum="20"/>
+            </h:inputHidden>
+            <h:inputText id="r_input" value="#{imageClick.point.r}">
+                <f:validateDoubleRange minimum="0.1" maximum="3"/>
+                <f:ajax event="change" execute="@form" listener="#{imageClick.handle_click()}"
+                        render="dataTable @form" onevent="click_handler"/>
+            </h:inputText>
+            <h:inputHidden id="x_offset" value="${imageClick.xoffset}"/>
+            <h:inputHidden id="y_offset" value="${imageClick.yoffset}"/>
+            <h:inputHidden id="hidden_hit" value="${imageClick.point.hit}"/>
+        </h:form>
+    </div>
+    <div class="thin_clear"/>
+    
+    <div id="main-container">        
+        <!-- main form !-->
+        <h:form id="inputForm">
+            <div class="blehh-wrapper">
+                <div class="blehh-container">
+                    <div class="blehh-title">
+                        <p:outputLabel value="X:" for="x_input"/>
+                    </div>
+                    <div class="knob-container ui-corner-all" >
+                        <p:knob cursor="true" backgroundColor="white" id="x_input" max="3" min="-3" step="1" value="#{areaController.point.x}" required="true" width="62" height="62">
+                            <f:validateLongRange minimum="-3" maximum="3"/>
+                        </p:knob>
+                    </div>
+                    <p:message for="x_input" display="Введите X"/>
+                </div>
+                <div class="blehh-container">
+                    <div class="blehh-title">
+                        <p:outputLabel value="Y:" for="y_input"/>
+                    </div>
+                    <p:inputText id="y_input" maxlength="50" value="#{areaController.point.y}" required="true">
+                        <f:validateDoubleRange minimum="-3" maximum="5"/>
+                    </p:inputText>
+                    <p:message for="y_input" display="Введите Y"/>
+                </div>
+                <div class="blehh-container">
+                    <div class="blehh-title">   
+                        <p:outputLabel value="R:" for="r_input"/>
+                    </div>
+                    <p:spinner id="r_input" min="0.1" max="3" value="#{areaController.point.r}" stepFactor="0.1" required="true">
+                        <f:validateDoubleRange minimum="0.1" maximum="3"/>
+                    </p:spinner>
+                </div>
+                <div class="blehh-container">
+                    <p:commandButton value="Добавить точку" update="inputForm,dataTable" action="#{areaController.handle_sususu()}" />
+                </div>
+            </div>
+            <div class="blehh-clear" />
+        </h:form>
+
+        <p:dataTable var="point" value="#{model.points}" id="dataTable">
+            <p:column headerText="X">
+                <h:outputText value="#{point.x}" />
+            </p:column>
+            <p:column headerText="Y">
+                <h:outputText value="#{point.y}" />
+            </p:column>
+            <p:column headerText="R">
+                <h:outputText value="#{point.r}" />
+            </p:column>
+            <p:column headerText="Попали?">
+                <h:outputText value="#{point.hit}" />
+            </p:column>
+        </p:dataTable>
+    </div>
+</h:body>
+</html>
